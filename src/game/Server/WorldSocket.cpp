@@ -841,21 +841,30 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
 {
     // NOTE: ATM the socket is singlethread, have this in mind ...
     uint8 digest[20];
-    uint16 clientBuild, security;
-    uint32 id, m_addonSize, clientSeed, expansion;
-    std::string accountName;
+    uint32 clientSeed, id, security;
+    uint32 m_addonSize;
+    uint16 BuiltNumberClient;
+    uint8 expansion = 0;
     LocaleConstant locale;
-
+    std::string account;
     Sha1Hash sha1;
     BigNumber v, s, g, N, K;
+    std::string os;
     WorldPacket packet;
+    bool wardenActive = (sWorld.getConfig(CONFIG_BOOL_WARDEN_WIN_ENABLED) || sWorld.getConfig(CONFIG_BOOL_WARDEN_OSX_ENABLED));
 
+    // Read the content of the packet
     recvPacket.read_skip<uint32>();
     recvPacket.read_skip<uint32>();
     recvPacket >> digest[18];
     recvPacket >> digest[14];
     recvPacket >> digest[3];
-    recvPacket >> digest[4];
+    recvPacket >> BuiltNumberClient;
+    recvPacket >> digest[8];
+    recvPacket.read_skip<uint32>();
+    recvPacket.read_skip<uint8>();
+    recvPacket >> digest[17];
+    recvPacket >> digest[6];
     recvPacket >> digest[0];
     recvPacket.read_skip<uint32>();
     recvPacket >> digest[11];
@@ -886,15 +895,21 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     addonsData.resize(m_addonSize);
     recvPacket.read((uint8*)addonsData.contents(), m_addonSize);
 
-    accountName = recvPacket.ReadString(recvPacket.ReadBits(11));
+    uint8 nameLenLow, nameLenHigh;
+    recvPacket >> nameLenHigh;
+    recvPacket >> nameLenLow;
+
+    uint8 accNameLen = (nameLenHigh << 5) | (nameLenLow >> 3);
+
+    account = recvPacket.ReadString(accNameLen);
 
     DEBUG_LOG("WorldSocket::HandleAuthSession: client build %u, account %s, clientseed %X",
-                clientBuild,
-                accountName.c_str(),
-                clientSeed);
+              BuiltNumberClient,
+              account.c_str(),
+              clientSeed);
 
     // Check the version of client trying to connect
-    if(!IsAcceptableClientBuild(clientBuild))
+    if (!IsAcceptableClientBuild(BuiltNumberClient))
     {
         SendAuthResponseError(AUTH_VERSION_MISMATCH);
         sLog.outError ("WorldSocket::HandleAuthSession: Sent Auth Response (version mismatch).");
@@ -902,7 +917,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     }
 
     // Get the account information from the realmd database
-    std::string safe_account = accountName; // Duplicate, else will screw the SHA hash verification below
+    std::string safe_account = account; // Duplicate, else will screw the SHA hash verification below
     LoginDatabase.escape_string (safe_account);
     // No SQL injection, username escaped.
 
@@ -917,7 +932,8 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
                              "`s`, "                       // 6
                              "`expansion`, "               // 7
                              "`mutetime`, "                // 8
-                             "`locale` "                   // 9
+                             "`locale`, "                  // 9
+                             "`os` "                       // 10
                              "FROM `account` "
                              "WHERE `username` = '%s'",
                              safe_account.c_str());
@@ -1017,7 +1033,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     uint32 t = 0;
     uint32 seed = m_Seed;
 
-    sha.UpdateData (accountName);
+    sha.UpdateData (account);
     sha.UpdateData((uint8*) & t, 4);
     sha.UpdateData((uint8*) & clientSeed, 4);
     sha.UpdateData((uint8*) & seed, 4);
@@ -1042,7 +1058,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     static SqlStatementID updAccount;
 
     SqlStatement stmt = LoginDatabase.CreateStatement(updAccount, "UPDATE `account` SET `last_ip` = ? WHERE `username` = ?");
-    stmt.PExecute(address.c_str(), accountName.c_str());
+    stmt.PExecute(address.c_str(), account.c_str());
 
     // NOTE ATM the socket is single-threaded, have this in mind ...
     ACE_NEW_RETURN(m_Session, WorldSession(id, this, AccountTypes(security), expansion, mutetime, locale), -1);
@@ -1054,7 +1070,11 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     m_Session->ReadAddonsInfo(addonsData);
 
     // In case needed sometime the second arg is in microseconds 1 000 000 = 1 sec
-    ACE_OS::sleep (ACE_Time_Value (0, 10000));
+    ACE_OS::sleep(ACE_Time_Value(0, 10000));
+
+    // Warden: Initialize Warden system only if it is enabled by config
+    if (wardenActive)
+        m_Session->InitWarden(uint16(BuiltNumberClient), &K, os);
 
     sWorld.AddSession(m_Session);
 
