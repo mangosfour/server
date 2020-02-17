@@ -21,7 +21,7 @@ project(MaNGOS)
 cmake_minimum_required(VERSION 3.0)
 
 set(MANGOS_VERSION 0.21)
-set(MANGOS_EXP "CATA")
+set(MANGOS_EXP "MOP")
 
 # Set the correct macro directory path
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")

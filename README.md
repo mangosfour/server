@@ -6,15 +6,15 @@
 <a href='https://www.getmangos.eu/github-activity/' target='getmangos.activity'><img src='/icons/ACTIVITY.gif' border=0></a>
 <a href='https://www.getmangos.eu/bug-tracker/mangos-three/' target='getmangos.tracker'><img src='/icons/TRACKER.gif' border=0></a>
 <br />Build Status: <br/>Linux 
-<a href='https://travis-ci.org/mangosthree/server/builds' target='MangosThree'><img src='https://travis-ci.org/mangosthree/server.png' border=0></a>
+<a href='https://travis-ci.org/mangosfour/server/builds' target='MangosFour'><img src='https://travis-ci.org/mangosfour/server.png' border=0></a>
  Windows 
-<a href='https://ci.appveyor.com/project/MaNGOS/server-wtbhv/history' target='MangosThree'><img src='https://ci.appveyor.com/api/projects/status/github/mangosthree/server?branch=develop21&svg=true' border=0></a>
-  Codacy Status <a href="https://www.codacy.com/app/MaNGOS/MangosThree?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mangosthree/server&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/58227f14b9024384a22e4e12e3cf7a89"/></a>
+<a href='https://ci.appveyor.com/project/MaNGOS/server-wtbhv/history' target='MangosFour'><img src='https://ci.appveyor.com/api/projects/status/github/mangosfour/server?branch=master&svg=true' border=0></a>
+  Codacy Status <a href="https://www.codacy.com/app/MaNGOS/MangosFour?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mangosfour/server&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/58227f14b9024384a22e4e12e3cf7a89"/></a>
 </td></tr></table>
 
 Cataclysm WOW BRANCH
 ===
-### A World of Warcraft server for the Cataclysm Expansion of WoW  
+### A World of Warcraft server for the Mists of Pandaria Expansion of WoW  
 ----
 *Mangos* is open source project, built in [C++][7], it's fast, runs on multiple
 platforms, can store game data in [MySQL][40] and [PostgreSQL][42]. It also has
@@ -78,8 +78,8 @@ inventing the wheel again.
 *Please note that Linux and Mac OS X users should install packages using
 their systems package management instead of source packages.*
 
-* **MySQL** / **PostgreSQL**: to store content, and user data, we rely on
-  [MySQL][40]/[MariaDB][41] and [PostgreSQL][42] to handle data.
+* **MySQL** / **MariaDB**: to store content, and user data, we rely on
+  [MySQL][40]/[MariaDB][41] to handle data.
 * **ACE**: the [ADAPTIVE Communication Environment][43] aka. *ACE* provides us
   with a solid cross-platform framework for abstracting operating system
   specific details.
@@ -155,10 +155,10 @@ respects for all of the code used other than [OpenSSL][48].
 [7]: http://www.cppreference.com/ "C / C++ reference"
 
 [10]: https://getmangos.eu/ "mangos · project site"
-[12]: http://github.com/mangosthree "MaNGOS Three· github organization"
-[13]: http://github.com/mangosthree/server "MaNGOS Three · server repository"
-[15]: http://github.com/mangosthree/database "MaNGOS Three · content database repository"
-[16]: https://travis-ci.org/mangosthree/server "Travis CI . MaNGOS Three build status"
+[12]: http://github.com/mangosfour "MaNGOS Four· github organization"
+[13]: http://github.com/mangosfour/server "MaNGOS Four · server repository"
+[15]: http://github.com/mangosfour/database "MaNGOS four · content database repository"
+[16]: https://travis-ci.org/mangosfour/server "Travis CI . MaNGOS Four build status"
 [17]: https://scan.coverity.com/ "Coverity Scan · Static Code Analysis"
 
 [19]: http://www.cmake.org/ "CMake · Cross Platform Make"
@@ -180,7 +180,6 @@ respects for all of the code used other than [OpenSSL][48].
 
 [40]: http://www.mysql.com/ "MySQL · The world's most popular open source database"
 [41]: http://www.mariadb.org/ "MariaDB · An enhanced, drop-in replacement for MySQL"
-[42]: http://www.postgresql.org/ "PostgreSQL · The world's most advanced open source database"
 [43]: http://www.cs.wustl.edu/~schmidt/ACE.html "ACE · The ADAPTIVE Communication Environment"
 [44]: http://github.com/memononen/recastnavigation "Recast · Navigation-mesh Toolset for Games"
 [45]: http://sourceforge.net/projects/g3d/ "G3D · G3D Innovation Engine"

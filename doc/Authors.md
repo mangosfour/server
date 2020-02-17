@@ -16,7 +16,7 @@ Additional input from other teams is acknowledged in the THANKS file.
 
 Authorship is assigned for each commit within the git history, which is stored in these git repositories:
 * github.com/mangos/mangos-svn (History from MaNGOS project from 2005-2008, originally hosted at http://mangos.svn.sourceforge.net)
-* github.com/mangos/mangosthree (History since then)
+* github.com/mangos/mangosfour (History since then)
 Unfortunately we have no detailed information of the history of the WoWD project;
 if somebody can provide information, please contact us, so that we can make this history available
 
