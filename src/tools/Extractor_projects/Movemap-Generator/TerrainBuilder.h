@@ -76,7 +76,7 @@ namespace MMAP
     // see following files:
     // src/tools/map-extractor/system.cpp
     // src/game/GridMap.cpp
-    static char const* MAP_VERSION_MAGIC = "c1.4";
+    static char const* MAP_VERSION_MAGIC = "p1.4";
     /**
      * @brief
      *

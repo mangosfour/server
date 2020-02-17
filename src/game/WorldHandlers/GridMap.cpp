@@ -39,7 +39,7 @@
 #include <mutex>
 
 char const* MAP_MAGIC         = "MAPS";
-char const* MAP_VERSION_MAGIC = "c1.4";
+char const* MAP_VERSION_MAGIC = "p1.4";
 char const* MAP_AREA_MAGIC    = "AREA";
 char const* MAP_HEIGHT_MAGIC  = "MHGT";
 char const* MAP_LIQUID_MAGIC  = "MLIQ";
