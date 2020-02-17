@@ -70,11 +70,11 @@ HANDLE LocaleMpq = NULL;
 char const* CONF_mpq_list[] =
 {
     "world.MPQ",
-    "art.MPQ",
+    "misc.MPQ",
     "expansion1.MPQ",
     "expansion2.MPQ",
     "expansion3.MPQ",
-    "world2.MPQ",
+    "expansion4.MPQ",
 };
 
 #define LAST_DBC_IN_DATA_BUILD 13623    // after this build mpqs with dbc are back to locale folder
@@ -109,7 +109,7 @@ uint32 CONF_max_build = 0;
 
 //static const char * szWorkDirMaps = ".\\Maps";
 const char* szWorkDirWmo = "./Buildings";
-const char* szRawVMAPMagic = "VMAPc06";
+const char* szRawVMAPMagic = "VMAPp06";
 
 
 
@@ -190,7 +190,7 @@ bool LoadLocaleMPQFile(int const locale)
     char filename[512];
 
     // first base old version of dbc files
-    sprintf(filename, "%s/Data/%s/locale-%s.MPQ", input_path, Locales[locale], Locales[locale]);
+    sprintf(filename, "%s/misc.MPQ", input_path);
 
     if (!OpenArchive(filename, &LocaleMpq))
     {
@@ -272,7 +272,7 @@ void LoadCommonMPQFiles(uint32 build)
     int count = sizeof(CONF_mpq_list) / sizeof(char*);
     for (int i = 1; i < count; ++i)
     {
-        if (build < 15211 && !strcmp("world2.MPQ", CONF_mpq_list[i]))   // 4.3.2 and higher MPQ
+        if (build < 15211 && !strcmp("misc.MPQ", CONF_mpq_list[i]))   // 4.3.2 and higher MPQ
             continue;
 
         _stprintf(filename, _T("%s/Data/%s"), input_path, CONF_mpq_list[i]);
