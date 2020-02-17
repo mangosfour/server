@@ -645,8 +645,8 @@ void WorldSession::HandlePlayerLoginOpcode(WorldPacket& recv_data)
 
     ObjectGuid playerGuid;
 
-    recv_data.ReadGuidMask<2, 3, 0, 6, 4, 5, 1, 7>(playerGuid);
-    recv_data.ReadGuidBytes<2, 7, 0, 3, 5, 6, 1, 4>(playerGuid);
+    recv_data.ReadGuidMask<2, 0, 4, 3, 5, 6, 1, 7>(playerGuid);
+    recv_data.ReadGuidBytes<0, 3, 7, 6, 1, 2, 4, 5>(playerGuid);
 
     DEBUG_LOG("WORLD: Received opcode Player Logon Message from %s", playerGuid.GetString().c_str());
 
