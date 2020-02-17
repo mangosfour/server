@@ -85,6 +85,9 @@ enum AuraType
      * 50 the attackspeed will increase by 50%
      */
     SPELL_AURA_MOD_ATTACKSPEED = 9,
+    //This doesn't make sense if you look at SpellAuras.cpp:2696
+    //Where a bitwise check is made, but the SpellSchools enum is just
+    //a normal enumeration, not in the style: 1 2 4 8 ...
     /**
      * Modifies the threat that the Aura does in percent,
      * the Modifier::m_miscvalue decides which of the SpellSchools
@@ -516,7 +519,49 @@ enum AuraType
     SPELL_AURA_368 = 368,
     SPELL_AURA_369 = 369,
     SPELL_AURA_370 = 370,
-    TOTAL_AURAS = 371,
+    SPELL_AURA_371 = 371,
+    SPELL_AURA_372 = 372,
+    SPELL_AURA_373 = 373,
+    SPELL_AURA_374 = 374,
+    SPELL_AURA_375 = 375,
+    SPELL_AURA_376 = 376,
+    SPELL_AURA_377 = 377,
+    SPELL_AURA_378 = 378,
+    SPELL_AURA_379 = 379,
+    SPELL_AURA_380 = 380,
+    SPELL_AURA_381 = 381,
+    SPELL_AURA_382 = 382,
+    SPELL_AURA_383 = 383,
+    SPELL_AURA_384 = 384,
+    SPELL_AURA_385 = 385,
+    SPELL_AURA_386 = 386,
+    SPELL_AURA_387 = 387,
+    SPELL_AURA_388 = 388,
+    SPELL_AURA_389 = 389,
+    SPELL_AURA_390 = 390,
+    SPELL_AURA_391 = 391,
+    SPELL_AURA_392 = 392,
+    SPELL_AURA_393 = 393,
+    SPELL_AURA_394 = 394,
+    SPELL_AURA_395 = 395,
+    SPELL_AURA_396 = 396,
+    SPELL_AURA_397 = 397,
+    SPELL_AURA_398 = 398,
+    SPELL_AURA_399 = 399,
+    SPELL_AURA_400 = 400,
+    SPELL_AURA_401 = 401,
+    SPELL_AURA_402 = 402,
+    SPELL_AURA_403 = 403,
+    SPELL_AURA_404 = 404,
+    SPELL_AURA_405 = 405,
+    SPELL_AURA_406 = 406,
+    SPELL_AURA_407 = 407,
+    SPELL_AURA_408 = 408,
+    SPELL_AURA_409 = 409,
+    SPELL_AURA_410 = 410,
+    SPELL_AURA_411 = 411,
+    SPELL_AURA_412 = 412,
+    TOTAL_AURAS = 413,
 };
 
 enum AreaAuraType

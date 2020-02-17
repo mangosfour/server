@@ -1,4 +1,4 @@
-/**
+    /**
  * MaNGOS is a full featured server for World of Warcraft, supporting
  * the following clients: 1.12.x, 2.4.3, 3.3.5a, 4.3.4a and 5.4.8
  *
@@ -103,7 +103,7 @@ float CONF_float_to_int16_limit = 2048.0f;   // Max accuracy = val/65536
 float CONF_flat_height_delta_limit = 0.005f; // If max - min less this value - surface is flat
 float CONF_flat_liquid_delta_limit = 0.001f; // If max - min less this value - liquid surface is flat
 
-#define MIN_SUPPORTED_BUILD 16357                           // code expect mpq files and mpq content files structure for this build or later
+#define MIN_SUPPORTED_BUILD 17520                           // code expect mpq files and mpq content files structure for this build or later
 #define EXPANSION_COUNT 4
 #define WORLD_COUNT 1
 
@@ -1185,7 +1185,11 @@ void ExtractMapsFromMpq(uint32 build, const int locale)
     char output_filename[1024];
     char mpq_map_name[1024];
 
-    printf("\n Extracting maps...\n");
+    printf("\nExtracting maps...\n");
+    if (build==17520)
+	{
+		build = 17538;
+	}
 
     uint32 map_count = ReadMapDBC(locale);
 
@@ -1519,6 +1523,10 @@ int main(int argc, char* arg[])
             {
                 FirstLocale = i;
                 build = ReadBuild(FirstLocale);
+                if (build==17520)
+                {
+                    build = 17538;
+                }
                 printf("Detected client build: %u\n", build);
                 break;
             }
@@ -1528,6 +1536,10 @@ int main(int argc, char* arg[])
             {
                 FirstLocale = i;
                 build = ReadBuild(FirstLocale);
+                if (build==17520)
+                {
+                    build = 17538;
+                }
                 printf("Detected client build: %u\n", build);
                 ExtractDBCFiles(i, true);
             }

@@ -42,8 +42,8 @@ bool isTransportMap(int mapID);
 bool shouldSkipMap(int mapID, bool m_skipContinents, bool m_skipJunkMaps, bool m_skipBattlegrounds);
 
 
-uint32 const Builds[] = {13164, 13205, 13287, 13329, 13596, 13623, 13914, 14007, 14333, 14480, 14545, 15005, 15050, 15211, 15354, 15595, 15890, 16016, 16048, 16057, 16309, 16357, 16516, 16650, 16769, 16844, 16965, 0};
-static uint32 CONF_TargetBuild = 17128;              // 5.3.0.17128
+uint32 const Builds[] = {13164, 13205, 13287, 13329, 13596, 13623, 13914, 14007, 14333, 14480, 14545, 15005, 15050, 15211, 15354, 15595, 15890, 16016, 16048, 16057, 16309, 16357, 16516, 16650, 16769, 16844, 16965, 17538, 0};
+static uint32 CONF_TargetBuild = 17538;              // 5.4.1.17538
 
 static char const* Locales[] = {"enGB", "enUS", "deDE", "esES", "frFR", "koKR", "zhCN", "zhTW", "enCN", "enTW", "esMX", "ruRU"};
 #define LOCALES_COUNT 12

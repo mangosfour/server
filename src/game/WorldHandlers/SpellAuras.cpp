@@ -431,9 +431,51 @@ pAuraHandler AuraHandler[TOTAL_AURAS] =
     &Aura::HandleNULL,                                      //365 1 spells in 4.3.4 Max Far Clip Plane
     &Aura::HandleOverrideSpellPowerByAp,                    //366 SPELL_AURA_OVERRIDE_SPELL_POWER_BY_AP_PCT 1 spells in 4.3.4
     &Aura::HandleNULL,                                      //367 2 spells in 4.3.4 test spells
-    &Aura::HandleUnused,                                    //368 0 spells in 4.3.4
+    &Aura::HandleNULL,                                      //368 2 spells in 5.1.0
     &Aura::HandleNULL,                                      //369 5 spells in 4.3.4 darkmoon faire related
-    &Aura::HandleNULL                                       //370 1 spells in 4.3.4 Fair Far Clip
+    &Aura::HandleNULL,                                      //370 1 spells in 4.3.4 Fair Far Clip
+    &Aura::HandleUnused,                                    //368 0 spells in 4.3.4
+    &Aura::HandleUnused,                                    //372 0 spells in 5.1.0
+    &Aura::HandleNULL,                                      //369 5 spells in 4.3.4 darkmoon faire related
+    &Aura::HandleNULL,                                      //374 3 spells in 5.1.0
+    &Aura::HandleUnused,                                    //375 0 spells in 5.1.0
+    &Aura::HandleNULL,                                      //376 2 spells in 5.1.0
+    &Aura::HandleNULL,                                      //377 2 spells in 5.1.0
+    &Aura::HandleNULL,                                      //378 1 spells in 5.1.0
+    &Aura::HandleNULL,                                      //379 6 spells in 5.1.0
+    &Aura::HandleUnused,                                    //380 0 spells in 5.1.0
+    &Aura::HandleNULL,                                      //381 1 spells in 5.1.0
+    &Aura::HandleNULL,                                      //382 6 spells in 5.1.0
+    &Aura::HandleNULL,                                      //383 2 spells in 5.1.0
+    &Aura::HandleUnused,                                    //384 0 spells in 5.1.0
+    &Aura::HandleNULL,                                      //385 3 spells in 5.1.0
+    &Aura::HandleNULL,                                      //386 1 spells in 5.1.0
+    &Aura::HandleNULL,                                      //387 1 spells in 5.1.0
+    &Aura::HandleNULL,                                      //388 1 spells in 5.1.0
+    &Aura::HandleNULL,                                      //389 1 spells in 5.1.0
+    &Aura::HandleUnused,                                    //390 0 spells in 5.1.0
+    &Aura::HandleUnused,                                    //391 0 spells in 5.1.0
+    &Aura::HandleUnused,                                    //392 0 spells in 5.1.0
+    &Aura::HandleNULL,                                      //393 7 spells in 5.1.0
+    &Aura::HandleNULL,                                      //394 2 spells in 5.1.0
+    &Aura::HandleNULL,                                      //395 16 spells in 5.1.0
+    &Aura::HandleNULL,                                      //396 6 spells in 5.1.0
+    &Aura::HandleNULL,                                      //397 2 spells in 5.1.0
+    &Aura::HandleNULL,                                      //398 7 spells in 5.1.0
+    &Aura::HandleUnused,                                    //399 0 spells in 5.1.0
+    &Aura::HandleNULL,                                      //400 4 spells in 5.1.0
+    &Aura::HandleNULL,                                      //401 3 spells in 5.1.0
+    &Aura::HandleNULL,                                      //402 2 spells in 5.1.0
+    &Aura::HandleNULL,                                      //403 18 spells in 5.1.0
+    &Aura::HandleNULL,                                      //404 1 spells in 5.1.0
+    &Aura::HandleNULL,                                      //405 4 spells in 5.1.0
+    &Aura::HandleNULL,                                      //406 5 spells in 5.1.0
+    &Aura::HandleNULL,                                      //407 11 spells in 5.1.0
+    &Aura::HandleNULL,                                      //408 14 spells in 5.1.0
+    &Aura::HandleUnused,                                    //409 0 spells in 5.1.0
+    &Aura::HandleUnused,                                    //410 0 spells in 5.1.0
+    &Aura::HandleNULL,                                      //411 3 spells in 5.1.0
+    &Aura::HandleNULL,                                      //412 2 spells in 5.1.0
 };
 
 static AuraType const frozenAuraTypes[] = { SPELL_AURA_MOD_ROOT, SPELL_AURA_MOD_STUN, SPELL_AURA_NONE };

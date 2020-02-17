@@ -408,7 +408,49 @@ pAuraProcHandler AuraProcHandler[TOTAL_AURAS] =
     &Unit::HandleNULLProc,                                  //367 2 spells in 4.3.4 test spells
     &Unit::HandleNULLProc,                                  //368 0 spells in 4.3.4
     &Unit::HandleNULLProc,                                  //369 5 spells in 4.3.4 darkmoon faire related
-    &Unit::HandleNULLProc                                   //370 1 spells in 4.3.4 Fair Far Clip
+    &Unit::HandleNULLProc,                                  //370 1 spells in 4.3.4 Fair Far Clip
+    &Unit::HandleNULLProc,                                  //371 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //372 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //373 8 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //374 3 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //375 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //376 2 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //377 2 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //378 1 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //379 6 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //380 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //381 1 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //382 6 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //383 2 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //384 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //385 3 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //386 1 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //387 1 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //388 1 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //389 1 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //390 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //391 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //392 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //393 7 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //394 2 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //395 16 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //396 6 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //397 2 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //398 7 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //399 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //400 4 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //401 3 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //402 2 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //403 18 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //404 1 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //405 4 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //406 5 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //407 11 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //408 14 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //409 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //410 0 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //411 3 spells in 5.1.0
+    &Unit::HandleNULLProc,                                  //412 2 spells in 5.1.0
 };
 
 bool Unit::IsTriggeredAtSpellProcEvent(Unit* pVictim, SpellAuraHolder* holder, SpellEntry const* procSpell, uint32 procFlag, uint32 procExtra, WeaponAttackType attType, bool isVictim, SpellProcEventEntry const*& spellProcEvent)

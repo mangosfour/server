@@ -961,7 +961,26 @@ enum SpellEffects
     SPELL_EFFECT_180                           = 180,
     SPELL_EFFECT_181                           = 181,
     SPELL_EFFECT_182                           = 182,
-    TOTAL_SPELL_EFFECTS                        = 183,
+    SPELL_EFFECT_183                           = 183,
+    SPELL_EFFECT_184                           = 184,
+    SPELL_EFFECT_185                           = 185,
+    SPELL_EFFECT_186                           = 186,
+    SPELL_EFFECT_187                           = 187,
+    SPELL_EFFECT_188                           = 188,
+    SPELL_EFFECT_189                           = 189,
+    SPELL_EFFECT_190                           = 190,
+    SPELL_EFFECT_191                           = 191,
+    SPELL_EFFECT_192                           = 192,
+    SPELL_EFFECT_193                           = 193,
+    SPELL_EFFECT_194                           = 194,
+    SPELL_EFFECT_195                           = 195,
+    SPELL_EFFECT_196                           = 196,
+    SPELL_EFFECT_197                           = 197,
+    SPELL_EFFECT_198                           = 198,
+    SPELL_EFFECT_199                           = 199,
+    SPELL_EFFECT_200                           = 200,
+    SPELL_EFFECT_201                           = 201,
+    TOTAL_SPELL_EFFECTS                        = 202,
 };
 
 enum SpellCastResult
@@ -1551,6 +1570,16 @@ enum Targets
     TARGET_125                             = 125,
     TARGET_126                             = 126,
     TARGET_127                             = 127,
+    TARGET_128                             = 128,
+    TARGET_129                             = 129,
+    TARGET_130                             = 130,
+    TARGET_131                             = 131,
+    TARGET_132                             = 132,
+    TARGET_133                             = 133,
+    TARGET_134                             = 134,
+    TARGET_135                             = 135,
+    TARGET_136                             = 136,
+    TARGET_137                             = 137,
 };
 
 /**
@@ -4064,9 +4093,9 @@ enum TrackedAuraType
 
 // we need to stick to 1 version or half of the stuff will work for someone
 // others will not and opposite
-// will only support WoW, WoW:TBC, WoW:WotLK , WoW:Cataclysm and WoW:MOP 5.3.0 client build 17128...
+// will only support WoW, WoW:TBC, WoW:WotLK , WoW:Cataclysm and WoW:MOP 5.3.0 client build 17538...
 
-#define EXPECTED_MANGOSD_CLIENT_BUILD        {17128, 0}
+#define EXPECTED_MANGOSD_CLIENT_BUILD        {17538, 0}
 
 // max supported expansion level in mangosd
 // NOTE: not set it more that supported by targeted client version with all expansions installed

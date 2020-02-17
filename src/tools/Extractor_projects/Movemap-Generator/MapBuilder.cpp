@@ -936,6 +936,8 @@ namespace MMAP
             case 1113:   // Transport: DarkmoonCarousel
             case 1132:   // Transport218599 - The Skybag (Brawl'gar Arena)
             case 1133:   // Transport218600 - Zandalari Ship (Mogu Island)
+            case 1172:   // Transport: Siege of Orgrimmar (Alliance)
+            case 1173:   // Transport: Siege of Orgrimmar (Horde)
                 return true;
             default: // no transport maps
                 return false;

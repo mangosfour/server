@@ -84,7 +84,7 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recv_data)
         case CMSG_MESSAGECHAT_EMOTE:        type = CHAT_MSG_EMOTE;          break;
         case CMSG_MESSAGECHAT_PARTY:        type = CHAT_MSG_PARTY;          break;
         case CMSG_MESSAGECHAT_RAID:         type = CHAT_MSG_RAID;           break;
-        case CMSG_MESSAGECHAT_BATTLEGROUND: type = CHAT_MSG_BATTLEGROUND;   break;
+        case CMSG_MESSAGECHAT_INSTANCE: type = CHAT_MSG_BATTLEGROUND;   break;
         case CMSG_MESSAGECHAT_RAID_WARNING: type = CHAT_MSG_RAID_WARNING;   break;
         default:
             sLog.outError("HandleMessagechatOpcode : Unknown chat opcode (0x%X)", recv_data.GetOpcode());
@@ -713,7 +713,7 @@ void WorldSession::HandleAddonMessagechatOpcode(WorldPacket& recv_data)
 
     switch (recv_data.GetOpcode())
     {
-        case CMSG_MESSAGECHAT_ADDON_BATTLEGROUND:   type = CHAT_MSG_BATTLEGROUND;   break;
+        case CMSG_MESSAGECHAT_ADDON_INSTANCE:   type = CHAT_MSG_BATTLEGROUND;   break;
         case CMSG_MESSAGECHAT_ADDON_GUILD:          type = CHAT_MSG_GUILD;          break;
         case CMSG_MESSAGECHAT_ADDON_OFFICER:        type = CHAT_MSG_OFFICER;        break;
         case CMSG_MESSAGECHAT_ADDON_PARTY:          type = CHAT_MSG_PARTY;          break;
