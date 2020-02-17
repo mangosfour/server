@@ -1615,6 +1615,8 @@ bool Player::BuildEnumData(QueryResult* result, ByteBuffer* data, ByteBuffer* bu
     std::string name = fields[1].GetCppString();
     uint8 gender = fields[4].GetUInt8();
     uint32 playerBytes = fields[5].GetUInt32();
+    uint32 playerBytes2 = fields[6].GetUInt32();
+    *buffer << uint8(playerBytes2 & 0xFF);  // facial hair
     uint8 level = fields[7].GetUInt8();
     uint32 playerFlags = fields[14].GetUInt32();
     uint32 atLoginFlags = fields[15].GetUInt32();
@@ -1624,18 +1626,19 @@ bool Player::BuildEnumData(QueryResult* result, ByteBuffer* data, ByteBuffer* bu
     uint32 petFamily  = 0;
     uint32 char_flags = 0;
 
-    data->WriteGuidMask<3>(guid);
-    data->WriteGuidMask<1, 7, 2>(guildGuid);
-    data->WriteBits(name.length(), 7);
-    data->WriteGuidMask<4, 7>(guid);
-    data->WriteGuidMask<3>(guildGuid);
-    data->WriteGuidMask<5>(guid);
-    data->WriteGuidMask<6>(guildGuid);
     data->WriteGuidMask<1>(guid);
-    data->WriteGuidMask<5, 4>(guildGuid);
+    data->WriteGuidMask<5, 6, 7>(guildGuid);
+    data->WriteGuidMask<5>(guid);
+    data->WriteGuidMask<3>(guildGuid);
+    data->WriteGuidMask<2>(guid);
+    data->WriteGuidMask<4>(guildGuid);
+    data->WriteGuidMask<7>(guid);
+    data->WriteBits(name.length(), 6);
     data->WriteBit(atLoginFlags & AT_LOGIN_FIRST);
-    data->WriteGuidMask<0, 2, 6>(guid);
-    data->WriteGuidMask<0>(guildGuid);
+    data->WriteGuidMask<1>(guildGuid);
+    data->WriteGuidMask<4>(guid);
+    data->WriteGuidMask<2, 0>(guildGuid);
+    data->WriteGuidMask<6, 3, 0>(guid);
 
     // show pet at selection character in character list only for non-ghost character
     if (result && !(playerFlags & PLAYER_FLAGS_GHOST) && (pClass == CLASS_WARLOCK || pClass == CLASS_HUNTER || pClass == CLASS_DEATH_KNIGHT))
@@ -1665,8 +1668,6 @@ bool Player::BuildEnumData(QueryResult* result, ByteBuffer* data, ByteBuffer* bu
     }
     else
         char_flags |= CHARACTER_FLAG_DECLINED;
-
-    *buffer << uint8(pClass);                                // class
 
     Tokens tdata = StrSplit(fields[19].GetCppString(), " ");
     for (uint8 slot = 0; slot < EQUIPMENT_SLOT_END; ++slot)
@@ -1701,51 +1702,68 @@ bool Player::BuildEnumData(QueryResult* result, ByteBuffer* data, ByteBuffer* bu
         *buffer << uint32(enchant ? enchant->aura_id : 0);
     }
 
-    for (int32 i = 0; i < 4; i++)
+    for (int32 i = 0; i < 23; i++)
     {
+        *buffer << uint32(0);
+        *buffer << uint32(0);
         *buffer << uint8(0);
-        *buffer << uint32(0);
-        *buffer << uint32(0);
     }
 
-    *buffer << uint32(petFamily);                           // Pet DisplayID
-    buffer->WriteGuidBytes<2>(guildGuid);
+    buffer->WriteGuidBytes<4>(guid);
+
+    *buffer << uint8(pRace);                                // Race
+
+    buffer->WriteGuidBytes<6>(guid);
+    buffer->WriteGuidBytes<1>(guildGuid);
+
     *buffer << uint8(fields[20].GetUInt8());                // char order id
     *buffer << uint8((playerBytes >> 16) & 0xFF);           // Hair style
-    buffer->WriteGuidBytes<3>(guildGuid);
-    *buffer << uint32(petDisplayId);                        // Pet DisplayID
-    *buffer << uint32(char_flags);                          // character flags
-    *buffer << uint8((playerBytes >> 24) & 0xFF);           // Hair color
-    buffer->WriteGuidBytes<4>(guid);
-    *buffer << uint32(fields[9].GetUInt32());               // map
-    buffer->WriteGuidBytes<5>(guildGuid);
-    *buffer << fields[12].GetFloat();                       // z
+
     buffer->WriteGuidBytes<6>(guildGuid);
-    *buffer << uint32(petLevel);                            // pet level
     buffer->WriteGuidBytes<3>(guid);
-    *buffer << fields[11].GetFloat();                       // y
+
+    *buffer << fields[10].GetFloat();                       // x
+    *buffer << uint32(char_flags);                          // character flags
+
+    buffer->WriteGuidBytes< 0>(guildGuid);
+
+    *buffer << uint32(petLevel);                            // pet level
+    *buffer << uint32(fields[9].GetUInt32());               // map
+
+    buffer->WriteGuidBytes<7>(guildGuid);
     // character customize flags
     *buffer << uint32(atLoginFlags & AT_LOGIN_CUSTOMIZE ? CHAR_CUSTOMIZE_FLAG_CUSTOMIZE : CHAR_CUSTOMIZE_FLAG_NONE);
 
-    uint32 playerBytes2 = fields[6].GetUInt32();
-    *buffer << uint8(playerBytes2 & 0xFF);                  // facial hair
-    buffer->WriteGuidBytes<7>(guid);
-    *buffer << uint8(gender);                               // Gender
+    buffer->WriteGuidBytes<4>(guildGuid);
+    buffer->WriteGuidBytes<2, 5>(guid);
+
+    *buffer << fields[11].GetFloat();                       // y
+    *buffer << uint32(petFamily);                           // Pet DisplayID
     buffer->append(name.c_str(), name.length());
+    *buffer << uint32(petDisplayId);                        // Pet DisplayID
+
+    buffer->WriteGuidBytes<3>(guildGuid);
+    buffer->WriteGuidBytes<7>(guid);
+
+    *buffer << uint8(level);                                // Level
+
+    buffer->WriteGuidBytes<1>(guid);
+    buffer->WriteGuidBytes<2>(guildGuid);
+
+    *buffer << fields[12].GetFloat();                       // z
+    *buffer << uint32(zone);                                // Zone id
+    *buffer << uint8(playerBytes2 & 0xFF);                  // facial hair
+    *buffer << uint8(pClass);                               // class
+
+    buffer->WriteGuidBytes<5>(guildGuid);
+
+    *buffer << uint8(playerBytes & 0xFF);                   // skin
+    *buffer << uint8(gender);                               // Gender
     *buffer << uint8((playerBytes >> 8) & 0xFF);            // face
 
-    buffer->WriteGuidBytes<0, 2>(guid);
-    buffer->WriteGuidBytes<1, 7>(guildGuid);
+    buffer->WriteGuidBytes<0>(guid);
 
-    *buffer << fields[10].GetFloat();                       // x
-    *buffer << uint8(playerBytes & 0xFF);                   // skin
-    *buffer << uint8(pRace);                                // Race
-    *buffer << uint8(level);                                // Level
-    buffer->WriteGuidBytes<6>(guid);
-    buffer->WriteGuidBytes<4, 0>(guildGuid);
-    buffer->WriteGuidBytes<5, 1>(guid);
-
-    *buffer << uint32(zone);                                // Zone id
+    *buffer << uint8((playerBytes >> 24) & 0xFF);           // Hair color
 
     return true;
 }
@@ -18187,8 +18205,10 @@ InstancePlayerBind* Player::BindToInstance(DungeonPersistentState* state, bool p
         bind.state = state;
         bind.perm = permanent;
         if (!load)
+        {
             DEBUG_LOG("Player::BindToInstance: %s(%d) is now bound to map %d, instance %d, difficulty %d",
                       GetName(), GetGUIDLow(), state->GetMapId(), state->GetInstanceId(), state->GetDifficulty());
+        }
         // Used by Eluna
 #ifdef ENABLE_ELUNA
         sEluna->OnBindToInstance(this, (Difficulty)0, state->GetMapId(), permanent);
