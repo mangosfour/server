@@ -1497,6 +1497,20 @@ void GameObject::Use(Unit* user)
                 case 37639: spellId = 36326; break;
                 case 45367: spellId = 45371; break;
                 case 45370: spellId = 45368; break;
+
+                // custom taxi flights
+                case 32059:             // south
+                    ((Player*)user)->ActivateTaxiPathTo(520,0);
+                    break;
+                case 32068:             // west
+                    ((Player*)user)->ActivateTaxiPathTo(523,0);
+                    break;
+                case 32075:             // north
+                    ((Player*)user)->ActivateTaxiPathTo(522,0);
+                    break;
+                case 32081:             // east
+                    ((Player*)user)->ActivateTaxiPathTo(524,0);
+                    break;
             }
 
             break;
@@ -1772,6 +1786,12 @@ void GameObject::Use(Unit* user)
             }
 
             spellId = info->spellcaster.spellId;
+
+            // dismount players
+            if (user && user->IsMounted())
+            {
+                user->RemoveSpellsCausingAura(SPELL_AURA_MOUNTED);
+            }
 
             AddUse();
             break;

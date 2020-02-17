@@ -2245,6 +2245,9 @@ void Player::RegenerateAll(uint32 diff)
     if (getClass() == CLASS_DEATH_KNIGHT)
         Regenerate(POWER_RUNE, diff);
 
+    if (getClass() == CLASS_MONK)
+        Regenerate(POWER_CHI, diff);
+
     if (getClass() == CLASS_HUNTER)
         Regenerate(POWER_FOCUS, diff);
 
