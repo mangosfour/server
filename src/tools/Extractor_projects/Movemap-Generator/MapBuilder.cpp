@@ -815,10 +815,11 @@ namespace MMAP
         if (m_skipContinents)
             switch (mapID)
             {
-                case 0:        // Eastern Kingdoms
-                case 1:        // Kalimdor
-                case 530:    // Outland
-                case 571:    // Northrend
+                case 0:         // Eastern Kingdoms
+                case 1:         // Kalimdor
+                case 530:       // Outland
+                case 571:       // Northrend
+                case 870:       // Pandaria
                     return true;
                 default:
                     break;
@@ -838,6 +839,12 @@ namespace MMAP
                 case 605:   // development_nonweighted.wdt
                 case 606:   // QA_DVD.wdt
                 case 627:   // unused.wdt
+                case 930:   // (UNUSED) Scenario: Alcaz Island
+                case 995:   // The Depths [UNUSED]
+                case 1014:  // (UNUSED) Peak of Serenity Scenario
+                case 1028:  // (UNUSED) Scenario: Mogu Ruins
+                case 1029:  // (UNUSED) Scenario: Mogu Crypt
+                case 1049:  // (UNUSED) Scenario: Black Ox Temple
                     return true;
                 default:
                     if (isTransportMap(mapID))
@@ -862,6 +869,10 @@ namespace MMAP
                 case 728:   // BfG
                 case 761:   // BfG2
                 case 968:   // EotS2
+                case 998:   // VOP
+                case 1010:  // CTF3
+                case 1101:  // DOTA
+                case 1105:  // GR
                     return true;
                 default:
                     break;
@@ -922,6 +933,9 @@ namespace MMAP
             case 765:    // Krazzworks Attack Zeppelin
             case 766:    // Transport: Gilneas Moving Gunship 02
             case 767:    // Transport: Gilneas Moving Gunship 03
+            case 1113:   // Transport: DarkmoonCarousel
+            case 1132:   // Transport218599 - The Skybag (Brawl'gar Arena)
+            case 1133:   // Transport218600 - Zandalari Ship (Mogu Island)
                 return true;
             default: // no transport maps
                 return false;
