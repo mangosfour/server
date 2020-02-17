@@ -65,26 +65,33 @@ enum Races
     RACE_TAUNKA             = 19,
     RACE_NORTHREND_SKELETON = 20,
     RACE_ICE_TROLL          = 21,
-    RACE_WORGEN             = 22
+    RACE_WORGEN             = 22,
+    RACE_HUMAN_GILNEAN      = 23,
+    RACE_PANDAREN_NEUTRAL   = 24,
+    RACE_PANDAREN_ALLI      = 25,
+    RACE_PANDAREN_HORDE     = 26
 };
 
 // max+1 for player race
-#define MAX_RACES         23
+#define MAX_RACES         27
 
 #define RACEMASK_ALL_PLAYABLE \
     ((1<<(RACE_HUMAN-1))    |(1<<(RACE_ORC-1))      |(1<<(RACE_DWARF-1))   | \
     (1<<(RACE_NIGHTELF-1))  |(1<<(RACE_UNDEAD-1))   |(1<<(RACE_TAUREN-1))  | \
     (1<<(RACE_GNOME-1))     |(1<<(RACE_TROLL-1))    |(1<<(RACE_BLOODELF-1))| \
-    (1<<(RACE_DRAENEI-1))   |(1<<(RACE_GOBLIN-1))   |(1<<(RACE_WORGEN-1)))
+    (1<<(RACE_DRAENEI-1))   |(1<<(RACE_GOBLIN-1))   |(1<<(RACE_WORGEN-1))  | \
+    (1<<(RACE_PANDAREN_NEUTRAL-1))|(1<<(RACE_PANDAREN_ALLI-1))|(1<<(RACE_PANDAREN_HORDE-1)))
 
 // for most cases batter use ChrRace data for team check as more safe, but when need full mask of team can be use this defines.
 #define RACEMASK_ALLIANCE \
     ((1<<(RACE_HUMAN-1))    |(1<<(RACE_DWARF-1))    |(1<<(RACE_NIGHTELF-1))| \
-    (1<<(RACE_GNOME-1))     |(1<<(RACE_DRAENEI-1))  |(1<<(RACE_WORGEN-1)))
+    (1<<(RACE_GNOME-1))     |(1<<(RACE_DRAENEI-1))  |(1<<(RACE_WORGEN-1))  | \
+    (1<<(RACE_PANDAREN_NEUTRAL-1)) | (1<<(RACE_PANDAREN_ALLI-1)))
 
 #define RACEMASK_HORDE \
-    ((1<<(RACE_ORC-1))      |(1<<(RACE_UNDEAD-1))   |(1<<(RACE_TAUREN-1))  | \
-    (1<<(RACE_TROLL-1))     |(1<<(RACE_BLOODELF-1)) |(1<<(RACE_GOBLIN-1)))
+    ((1<<(RACE_ORC-1))      |(1<<(RACE_UNDEAD-1))   |(1<<(RACE_TAUREN-1)) | \
+    (1<<(RACE_TROLL-1))     |(1<<(RACE_BLOODELF-1)) |(1<<(RACE_GOBLIN-1)) | \
+    (1<<(RACE_PANDAREN_NEUTRAL-1)) | (1<<(RACE_PANDAREN_HORDE-1)))
 
 // Class value is index in ChrClasses.dbc
 enum Classes
@@ -98,7 +105,7 @@ enum Classes
     CLASS_SHAMAN        = 7,
     CLASS_MAGE          = 8,
     CLASS_WARLOCK       = 9,
-    // CLASS_UNK2       = 10,unused
+    CLASS_MONK          = 10,
     CLASS_DRUID         = 11,
 };
 
@@ -109,7 +116,7 @@ enum Classes
     ((1<<(CLASS_WARRIOR-1))|(1<<(CLASS_PALADIN-1))|(1<<(CLASS_HUNTER-1))| \
     (1<<(CLASS_ROGUE-1))  |(1<<(CLASS_PRIEST-1)) |(1<<(CLASS_SHAMAN-1))| \
     (1<<(CLASS_MAGE-1))   |(1<<(CLASS_WARLOCK-1))|(1<<(CLASS_DRUID-1)) | \
-    (1<<(CLASS_DEATH_KNIGHT-1)) )
+    (1<<(CLASS_DEATH_KNIGHT-1)) |(1<<(CLASS_MONK-1)))
 
 #define CLASSMASK_ALL_CREATURES ((1<<(CLASS_WARRIOR-1)) | (1<<(CLASS_PALADIN-1)) | (1<<(CLASS_ROGUE-1)) | (1<<(CLASS_MAGE-1)) )
 #define MAX_CREATURE_CLASS 4
@@ -3767,10 +3774,9 @@ enum TrackedAuraType
 
 // we need to stick to 1 version or half of the stuff will work for someone
 // others will not and opposite
-// will only support WoW, WoW:TBC, WoW:WotLK and WoW:Cataclysm 4.3.4 client build 15595...
+// will only support WoW, WoW:TBC, WoW:WotLK , WoW:Cataclysm and WoW:MOP 5.1.0 client build 16357...
 
-#define EXPECTED_MANGOSD_CLIENT_BUILD        {15595, 0}
-#define EXPECTED_MANGOSD_CLIENT_VERSION      "4.3.4"
+#define EXPECTED_MANGOSD_CLIENT_BUILD        {16357, 0}
 
 // max supported expansion level in mangosd
 // NOTE: not set it more that supported by targeted client version with all expansions installed
@@ -3783,9 +3789,10 @@ enum Expansions
     EXPANSION_TBC                       = 1,                // TBC
     EXPANSION_WOTLK                     = 2,                // WotLK
     EXPANSION_CATA                      = 3,                // Cataclysm
+    EXPANSION_MOP                       = 4,                // Mists of Pandaria
 };
 
-#define MAX_EXPANSION 3
+#define MAX_EXPANSION 4
 
 // Maxlevel for expansion
 enum MaxLevel
@@ -3794,9 +3801,10 @@ enum MaxLevel
     MAX_LEVEL_TBC                       = 70,
     MAX_LEVEL_WOTLK                     = 80,
     MAX_LEVEL_CATACLYSM                 = 85,
+    MAX_LEVEL_MOP                       = 90
 };
 
-static const MaxLevel maxLevelForExpansion[MAX_EXPANSION + 1] = { MAX_LEVEL_CLASSIC, MAX_LEVEL_TBC, MAX_LEVEL_WOTLK, MAX_LEVEL_CATACLYSM };
+static const MaxLevel maxLevelForExpansion[MAX_EXPANSION + 1] = { MAX_LEVEL_CLASSIC, MAX_LEVEL_TBC, MAX_LEVEL_WOTLK, MAX_LEVEL_CATACLYSM , MAX_LEVEL_MOP };
 
 // Max creature level (included some bosses and elite)
 #define DEFAULT_MAX_CREATURE_LEVEL 90
