@@ -1693,7 +1693,7 @@ void World::showFooter()
         modules_.insert("                Warden : Disabled");
     }
 
-    std::string thisClientVersion ("17055");
+    std::string thisClientVersion ("17128");
     std::string thisClientBuilds = AcceptableClientBuildsListStr();
 
     std::string sModules;
