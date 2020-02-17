@@ -4697,18 +4697,26 @@ void Spell::EffectTriggerMissileSpell(SpellEffectEntry const* effect)
             m_caster->GetMap()->ScriptsStart(DBS_ON_SPELL, m_spellInfo->Id, m_caster, unitTarget);
         }
         else
+        {
             sLog.outError("EffectTriggerMissileSpell of spell %u (eff: %u): triggering unknown spell id %u",
                       m_spellInfo->Id, effect->EffectIndex, triggered_spell_id);
+        }
         return;
     }
 
     if (m_CastItem)
+    {
         DEBUG_FILTER_LOG(LOG_FILTER_SPELL_CAST, "WORLD: cast Item spellId - %i", spellInfo->Id);
+    }
 
     if (m_targets.m_targetMask & TARGET_FLAG_DEST_LOCATION)
+    {
         m_caster->CastSpell(m_targets.m_destX, m_targets.m_destY, m_targets.m_destZ, spellInfo, true, m_CastItem, NULL, m_originalCasterGUID, m_spellInfo);
-    else if (unitTarget)
+    }
+        else if (unitTarget)
+    {
         m_caster->CastSpell(unitTarget, spellInfo, true, m_CastItem, NULL, m_originalCasterGUID, m_spellInfo);
+    }
 }
 
 void Spell::EffectJump(SpellEffectEntry const* effect)
@@ -5024,7 +5032,9 @@ void Spell::EffectUnlearnSpecialization(SpellEffectEntry const* effect)
     _player->removeSpell(spellToUnlearn);
 
     if (WorldObject const* caster = GetCastingObject())
+    {
         DEBUG_LOG("Spell: %s has unlearned spell %u at %s", _player->GetGuidStr().c_str(), spellToUnlearn, caster->GetGuidStr().c_str());
+    }
 }
 
 void Spell::EffectPowerDrain(SpellEffectEntry const* effect)
@@ -6583,7 +6593,9 @@ void Spell::EffectLearnSpell(SpellEffectEntry const* effect)
     player->learnSpell(spellToLearn, false);
 
     if (WorldObject const* caster = GetCastingObject())
+    {
         DEBUG_LOG("Spell: %s has learned spell %u from %s", player->GetGuidStr().c_str(), spellToLearn, caster->GetGuidStr().c_str());
+    }
 }
 
 void Spell::EffectDispel(SpellEffectEntry const* effect)
@@ -6852,7 +6864,9 @@ void Spell::EffectLearnSkill(SpellEffectEntry const* effect)
     ((Player*)unitTarget)->SetSkill(skillid, skillval ? skillval : 1, damage * 75, damage);
 
     if (WorldObject const* caster = GetCastingObject())
+    {
         DEBUG_LOG("Spell: %s has learned skill %u (to maxlevel %u) from %s", unitTarget->GetGuidStr().c_str(), skillid, damage * 75, caster->GetGuidStr().c_str());
+    }
 }
 
 void Spell::EffectTradeSkill(SpellEffectEntry const* /*effect*/)
@@ -7346,7 +7360,9 @@ void Spell::EffectLearnPetSpell(SpellEffectEntry const* effect)
     _player->PetSpellInitialize();
 
     if (WorldObject const* caster = GetCastingObject())
+    {
         DEBUG_LOG("Spell: %s has learned spell %u from %s", pet->GetGuidStr().c_str(), learn_spellproto->Id, caster->GetGuidStr().c_str());
+    }
 }
 
 void Spell::EffectTaunt(SpellEffectEntry const* /*effect*/)

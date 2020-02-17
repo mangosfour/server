@@ -1437,7 +1437,9 @@ void WorldSession::HandleTimeSyncResp(WorldPacket& recv_data)
     DEBUG_LOG("WORLD: Received opcode CMSG_TIME_SYNC_RESP: counter %u, client ticks %u, time since last sync %u", counter, clientTicks, clientTicks - _player->m_timeSyncClient);
 
     if (counter != _player->m_timeSyncCounter - 1)
+    {
         DEBUG_LOG(" WORLD: Opcode CMSG_TIME_SYNC_RESP -- Wrong time sync counter from %s (cheater?)", _player->GetGuidStr().c_str());
+    }
 
     uint32 ourTicks = clientTicks + (WorldTimer::getMSTime() - _player->m_timeSyncServer);
 

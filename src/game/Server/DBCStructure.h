@@ -219,6 +219,13 @@ struct AchievementCriteriaEntry
             uint32  castCount;                              // 4
         } cast_spell;
 
+        // ACHIEVEMENT_CRITERIA_TYPE_BG_OBJECTIVE_CAPTURE = 30
+        struct
+        {
+            uint32 captureID;                               // 3
+            uint32 captureCount;                            // 4
+        } objective_capture;
+
         // ACHIEVEMENT_CRITERIA_TYPE_HONORABLE_KILL_AT_AREA = 31
         struct
         {
@@ -230,6 +237,7 @@ struct AchievementCriteriaEntry
         struct
         {
             uint32  mapID;                                  // 3 Reference to Map.dbc
+            uint32  count;                                  // 4
         } win_arena;
 
         // ACHIEVEMENT_CRITERIA_TYPE_PLAY_ARENA             = 33
@@ -1399,9 +1407,10 @@ struct MapEntry
     // Helpers
     uint32 Expansion() const { return addon; }
 
-    bool IsDungeon() const { return map_type == MAP_INSTANCE || map_type == MAP_RAID; }
-    bool IsNonRaidDungeon() const { return map_type == MAP_INSTANCE; }
-    bool Instanceable() const { return map_type == MAP_INSTANCE || map_type == MAP_RAID || map_type == MAP_BATTLEGROUND || map_type == MAP_ARENA; }
+    bool IsDungeon() const { return map_type == MAP_INSTANCE || map_type == MAP_RAID || map_type == MAP_SCENARIO; }
+    bool IsNonRaidDungeon() const { return map_type == MAP_INSTANCE || map_type == MAP_SCENARIO; }
+    bool Instanceable() const { return map_type == MAP_INSTANCE || map_type == MAP_RAID || map_type == MAP_BATTLEGROUND || map_type == MAP_ARENA || map_type == MAP_SCENARIO; }
+    bool IsScenario() const { return map_type == MAP_SCENARIO; }
     bool IsRaid() const { return map_type == MAP_RAID; }
     bool IsBattleGround() const { return map_type == MAP_BATTLEGROUND; }
     bool IsBattleArena() const { return map_type == MAP_ARENA; }
@@ -1427,6 +1436,13 @@ struct MapEntry
     bool IsContinent() const
     {
         return MapID == 0 || MapID == 1 || MapID == 530 || MapID == 571 || MapID == 870;
+    }
+
+    bool IsTransport() const
+    {
+        if (IsContinent())
+            return false;
+        return map_type == MAP_COMMON && mapFlags == MAP_FLAG_INSTANCEABLE;
     }
 };
 
@@ -2478,6 +2494,15 @@ struct VehicleSeatEntry
     //uint32 unk[6];                                        // 58-63
     //uint32 unk2;                                          // 64 4.0.0
     //uint32 unk3;                                          // 65 4.0.1
+
+    bool IsUsable() const { return
+        (m_flags & SEAT_FLAG_CAN_EXIT) ||
+        (m_flags & SEAT_FLAG_CAN_CONTROL) ||
+        (m_flags & SEAT_FLAG_UNCONTROLLED) ||
+        (m_flagsB & VEHICLE_SEAT_FLAG_B_USABLE_FORCED) ||
+        (m_flagsB & VEHICLE_SEAT_FLAG_B_USABLE_FORCED_2) ||
+        (m_flagsB & VEHICLE_SEAT_FLAG_B_USABLE_FORCED_3) ||
+        (m_flagsB & VEHICLE_SEAT_FLAG_B_USABLE_FORCED_4); }
 };
 
 struct WMOAreaTableEntry

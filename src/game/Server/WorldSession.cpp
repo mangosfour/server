@@ -1122,7 +1122,9 @@ void WorldSession::ReadAddonsInfo(ByteBuffer &data)
         addonInfo >> unk2;
 
         if (addonInfo.rpos() != addonInfo.size())
+        {
             DEBUG_LOG("packet under read!");
+        }
     }
     else
         sLog.outError("Addon packet uncompress error!");

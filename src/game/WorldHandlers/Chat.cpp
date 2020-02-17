@@ -2197,7 +2197,9 @@ bool ChatHandler::isValidChatMessage(const char* message)
 
     // check if every opened sequence was also closed properly
     if (validSequence != validSequenceIterator)
+    {
         DEBUG_LOG("ChatHandler::isValidChatMessage EOF in active sequence");
+    }
 
     return validSequence == validSequenceIterator;
 }

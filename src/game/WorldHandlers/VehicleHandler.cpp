@@ -215,7 +215,7 @@ void WorldSession::HandleEjectPassenger(WorldPacket& recvPacket)
 
     // Check for eject flag
     if (VehicleSeatEntry const* seatEntry = vehicleInfo->GetSeatEntry(passenger->GetTransportInfo()->GetTransportSeat()))
-        if (seatEntry->m_flagsB & SEAT_FLAG_B_EJECTABLE)
+        if (seatEntry->m_flagsB & VEHICLE_SEAT_FLAG_B_EJECTABLE)
             _player->RemoveSpellsCausingAura(SPELL_AURA_CONTROL_VEHICLE, passengerGuid);
 }
 

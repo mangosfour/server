@@ -539,8 +539,8 @@ bool VehicleInfo::IsUsableSeatForPlayer(uint32 seatFlags, uint32 seatFlagsB) con
     return seatFlags & SEAT_FLAG_CAN_EXIT ||
            seatFlags & SEAT_FLAG_UNCONTROLLED ||
            seatFlagsB &
-           (SEAT_FLAG_B_USABLE_FORCED   | SEAT_FLAG_B_USABLE_FORCED_2 |
-            SEAT_FLAG_B_USABLE_FORCED_3 | SEAT_FLAG_B_USABLE_FORCED_4);
+           (VEHICLE_SEAT_FLAG_B_USABLE_FORCED   | VEHICLE_SEAT_FLAG_B_USABLE_FORCED_2 |
+            VEHICLE_SEAT_FLAG_B_USABLE_FORCED_3 | VEHICLE_SEAT_FLAG_B_USABLE_FORCED_4);
 }
 
 /// Add control and such modifiers to a passenger if required
