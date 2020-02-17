@@ -209,17 +209,13 @@ void WorldSession::HandleCharEnumOpcode(WorldPacket & /*recv_data*/)
 void WorldSession::HandleCharCreateOpcode(WorldPacket& recv_data)
 {
     std::string name;
-    uint8 race_, class_;
+    uint8 race_, class_, gender, skin, face, hairStyle, hairColor, facialHair, outfitId;
 
-    recv_data >> name;
+    recv_data >> gender >> hairColor >> outfitId;
+    recv_data >> race_ >> class_ >> face>> facialHair >> skin >> hairStyle;
 
-    recv_data >> race_;
-    recv_data >> class_;
-
-    // extract other data required for player creating
-    uint8 gender, skin, face, hairStyle, hairColor, facialHair, outfitId;
-    recv_data >> gender >> skin >> face;
-    recv_data >> hairStyle >> hairColor >> facialHair >> outfitId;
+    uint8 nameLength = recv_data.ReadBits(7);
+    name = recv_data.ReadString(nameLength);
 
     WorldPacket data(SMSG_CHAR_CREATE, 1);                  // returned with diff.values in all cases
 

@@ -65,9 +65,9 @@ struct AreaTrigger;
 
 typedef std::deque<Mail*> PlayerMails;
 
-#define PLAYER_MAX_SKILLS           128
-#define PLAYER_MAX_DAILY_QUESTS     25
-#define PLAYER_EXPLORED_ZONES_SIZE  156
+#define PLAYER_MAX_SKILLS           448
+#define PLAYER_MAX_DAILY_QUESTS     750
+#define PLAYER_EXPLORED_ZONES_SIZE  200
 
 // 2^n internal values, they are never sent to the client
 enum PlayerUnderwaterState
