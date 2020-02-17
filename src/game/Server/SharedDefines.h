@@ -742,10 +742,14 @@ enum Language
     LANG_GOBLIN_BINARY  = 38,
     LANG_WORGEN         = 39,
     LANG_GOBLIN         = 40,
+    LANG_PANDAREN       = 42,
+    LANG_PANDAREN_ALLI  = 43,
+    LANG_PANDAREN_HORDE = 44,
+    LANG_RIKKITUN       = 168,
     LANG_ADDON          = 0xFFFFFFFF                        // used by addons, in 2.4.0 not exit, replaced by messagetype?
 };
 
-#define LANGUAGES_COUNT   21
+#define LANGUAGES_COUNT   25
 
 // In fact !=0 values is alliance/horde root faction ids
 enum Team
@@ -2716,7 +2720,123 @@ enum Anim
     ANIM_DEATH_STRIKE                      = 656,
     ANIM_FLY_DEATH_STRIKE                  = 657,
     ANIM_SWIM_ATTACK_UNARMED               = 658,
-    ANIM_FLY_SWIM_ATTACK_UNARMED           = 659
+    ANIM_FLY_SWIM_ATTACK_UNARMED           = 659,
+    ANIM_SPINNINGKICK                      = 660,
+    ANIM_FLYSPINNINGKICK                   = 661,
+    ANIM_ROUNDHOUSEKICK                    = 662,
+    ANIM_FLYROUNDHOUSEKICK                 = 663,
+    ANIM_ROLLSTART                         = 664,
+    ANIM_FLYROLLSTART                      = 665,
+    ANIM_ROLL                              = 666,
+    ANIM_FLYROLL                           = 667,
+    ANIM_ROLLEND                           = 668,
+    ANIM_FLYROLLEND                        = 669,
+    ANIM_PALMSTRIKE                        = 670,
+    ANIM_FLYPALMSTRIKE                     = 671,
+    ANIM_MONKOFFENSEATTACKUNARMED          = 672,
+    ANIM_FLYMONKOFFENSEATTACKUNARMED       = 673,
+    ANIM_MONKOFFENSEATTACKUNARMEDOFF       = 674,
+    ANIM_FLYMONKOFFENSEATTACKUNARMEDOFF    = 675,
+    ANIM_MONKOFFENSEPARRYUNARMED           = 676,
+    ANIM_FLYMONKOFFENSEPARRYUNARMED        = 677,
+    ANIM_MONKOFFENSEREADYUNARMED           = 678,
+    ANIM_FLYMONKOFFENSEREADYUNARMED        = 679,
+    ANIM_MONKOFFENSESPECIALUNARMED         = 680,
+    ANIM_FLYMONKOFFENSESPECIALUNARMED      = 681,
+    ANIM_MONKDEFENSEATTACKUNARMED          = 682,
+    ANIM_FLYMONKDEFENSEATTACKUNARMED       = 683,
+    ANIM_MONKDEFENSEATTACKUNARMEDOFF       = 684,
+    ANIM_FLYMONKDEFENSEATTACKUNARMEDOFF    = 685,
+    ANIM_MONKDEFENSEPARRYUNARMED           = 686,
+    ANIM_FLYMONKDEFENSEPARRYUNARMED        = 687,
+    ANIM_MONKDEFENSEREADYUNARMED           = 688,
+    ANIM_FLYMONKDEFENSEREADYUNARMED        = 689,
+    ANIM_MONKDEFENSESPECIALUNARMED         = 690,
+    ANIM_FLYMONKDEFENSESPECIALUNARMED      = 691,
+    ANIM_MONKHEALATTACKUNARMED             = 692,
+    ANIM_FLYMONKHEALATTACKUNARMED          = 693,
+    ANIM_MONKHEALATTACKUNARMEDOFF          = 694,
+    ANIM_FLYMONKHEALATTACKUNARMEDOFF       = 695,
+    ANIM_MONKHEALPARRYUNARMED              = 696,
+    ANIM_FLYMONKHEALPARRYUNARMED           = 697,
+    ANIM_MONKHEALREADYUNARMED              = 698,
+    ANIM_FLYMONKHEALREADYUNARMED           = 699,
+    ANIM_MONKHEALSPECIALUNARMED            = 700,
+    ANIM_FLYMONKHEALSPECIALUNARMED         = 701,
+    ANIM_FLYINGKICK                        = 702,
+    ANIM_FLYFLYINGKICK                     = 703,
+    ANIM_FLYINGKICKSTART                   = 704,
+    ANIM_FLYFLYINGKICKSTART                = 705,
+    ANIM_FLYINGKICKEND                     = 706,
+    ANIM_FLYFLYINGKICKEND                  = 707,
+    ANIM_CRANESTART                        = 708,
+    ANIM_FLYCRANESTART                     = 709,
+    ANIM_CRANELOOP                         = 710,
+    ANIM_FLYCRANELOOP                      = 711,
+    ANIM_CRANEEND                          = 712,
+    ANIM_FLYCRANEEND                       = 713,
+    ANIM_DESPAWNED                         = 714,
+    ANIM_FLYDESPAWNED                      = 715,
+    ANIM_THOUSANDFISTS                     = 716,
+    ANIM_FLYTHOUSANDFISTS                  = 717,
+    ANIM_MONKHEALREADYSPELLDIRECTED        = 718,
+    ANIM_FLYMONKHEALREADYSPELLDIRECTED     = 719,
+    ANIM_MONKHEALREADYSPELLOMNI            = 720,
+    ANIM_FLYMONKHEALREADYSPELLOMNI         = 721,
+    ANIM_MONKHEALSPELLCASTDIRECTED         = 722,
+    ANIM_FLYMONKHEALSPELLCASTDIRECTED      = 723,
+    ANIM_MONKHEALSPELLCASTOMNI             = 724,
+    ANIM_FLYMONKHEALSPELLCASTOMNI          = 725,
+    ANIM_MONKHEALCHANNELCASTDIRECTED       = 726,
+    ANIM_FLYMONKHEALCHANNELCASTDIRECTED    = 727,
+    ANIM_MONKHEALCHANNELCASTOMNI           = 728,
+    ANIM_FLYMONKHEALCHANNELCASTOMNI        = 729,
+    ANIM_TORPEDO                           = 730,
+    ANIM_FLYTORPEDO                        = 731,
+    ANIM_MEDITATE                          = 732,
+    ANIM_FLYMEDITATE                       = 733,
+    ANIM_BREATHOFFIRE                      = 734,
+    ANIM_FLYBREATHOFFIRE                   = 735,
+    ANIM_RISINGSUNKICK                     = 736,
+    ANIM_FLYRISINGSUNKICK                  = 737,
+    ANIM_GROUNDKICK                        = 738,
+    ANIM_FLYGROUNDKICK                     = 739,
+    ANIM_KICKBACK                          = 740,
+    ANIM_FLYKICKBACK                       = 741,
+    ANIM_PETBATTLESTAND                    = 742,
+    ANIM_FLYPETBATTLESTAND                 = 743,
+    ANIM_PETBATTLEDEATH                    = 744,
+    ANIM_FLYPETBATTLEDEATH                 = 745,
+    ANIM_PETBATTLERUN                      = 746,
+    ANIM_FLYPETBATTLERUN                   = 747,
+    ANIM_PETBATTLEWOUND                    = 748,
+    ANIM_FLYPETBATTLEWOUND                 = 749,
+    ANIM_PETBATTLEATTACK                   = 750,
+    ANIM_FLYPETBATTLEATTACK                = 751,
+    ANIM_PETBATTLEREADYSPELL               = 752,
+    ANIM_FLYPETBATTLEREADYSPELL            = 753,
+    ANIM_PETBATTLESPELLCAST                = 754,
+    ANIM_FLYPETBATTLESPELLCAST             = 755,
+    ANIM_PETBATTLECUSTOM0                  = 756,
+    ANIM_FLYPETBATTLECUSTOM0               = 757,
+    ANIM_PETBATTLECUSTOM1                  = 758,
+    ANIM_FLYPETBATTLECUSTOM1               = 759,
+    ANIM_PETBATTLECUSTOM2                  = 760,
+    ANIM_FLYPETBATTLECUSTOM2               = 761,
+    ANIM_PETBATTLECUSTOM3                  = 762,
+    ANIM_FLYPETBATTLECUSTOM3               = 763,
+    ANIM_PETBATTLEVICTORY                  = 764,
+    ANIM_FLYPETBATTLEVICTORY               = 765,
+    ANIM_PETBATTLELOSS                     = 766,
+    ANIM_FLYPETBATTLELOSS                  = 767,
+    ANIM_PETBATTLESTUN                     = 768,
+    ANIM_FLYPETBATTLESTUN                  = 769,
+    ANIM_PETBATTLEDEAD                     = 770,
+    ANIM_FLYPETBATTLEDEAD                  = 771,
+    ANIM_PETBATTLEFREEZE                   = 772,
+    ANIM_FLYPETBATTLEFREEZE                = 773,
+    ANIM_MONKOFFENSEATTACKWEAPON           = 774,
+    ANIM_FLYMONKOFFENSEATTACKWEAPON        = 775
 };
 
 enum LockKeyType
@@ -2828,7 +2948,21 @@ enum CreatureFamily
     CREATURE_FAMILY_RHINO          = 43,
     CREATURE_FAMILY_WASP           = 44,
     CREATURE_FAMILY_CORE_HOUND     = 45,
-    CREATURE_FAMILY_SPIRIT_BEAST   = 46
+    CREATURE_FAMILY_SPIRIT_BEAST   = 46,
+    CREATURE_FAMILY_FEL_IMP        = 47,
+    CREATURE_FAMILY_VOIDLORD       = 48,
+    CREATURE_FAMILY_SHIVARRA       = 49,
+    CREATURE_FAMILY_OBSERVER       = 50,
+    CREATURE_FAMILY_WRATHGUARD     = 51,
+    CREATURE_FAMILY_INFERNAL       = 52,
+    CREATURE_FAMILY_FIRE_ELEMENTAL = 53,
+    CREATURE_FAMILY_EARTH_ELEMENTAL = 54,
+    CREATURE_FAMILY_CRANE          = 55,
+    CREATURE_FAMILY_WATER_STRIDER  = 56,
+    CREATURE_FAMILY_PORCUPINE      = 57,
+    CREATURE_FAMILY_QUILEN         = 58,
+    CREATURE_FAMILY_GOAT           = 59,
+    CREATURE_FAMILY_BASILISK       = 60,
 };
 
 enum CreatureTypeFlags
@@ -2912,6 +3046,18 @@ enum HolidayIds
     HOLIDAY_CALL_TO_ARMS_RBG_25v25   = 443,
     HOLIDAY_WOW_7TH_ANNIVERSARY      = 467,
     HOLIDAY_WOW_8TH_ANNIVERSARY      = 484,
+    HOLIDAY_UNK1                     = 488,
+    HOLIDAY_UNK2                     = 489,
+    HOLIDAY_UNK3                     = 490,
+    HOLIDAY_UNK4                     = 491,
+    HOLIDAY_UNK5                     = 492,
+    HOLIDAY_UNK6                     = 493,
+    HOLIDAY_UNK7                     = 494,
+    HOLIDAY_UNK8                     = 495,
+    HOLIDAY_UNK9                     = 496,
+    HOLIDAY_UNK10                    = 497,
+    HOLIDAY_UNK11                    = 498,
+    HOLIDAY_UNK12                    = 499,
 };
 
 // values based at QuestSort.dbc
@@ -2954,7 +3100,19 @@ enum QuestSort
     QUEST_SORT_BREWFEST            = 370,
     QUEST_SORT_INSCRIPTION         = 371,
     QUEST_SORT_DEATH_KNIGHT        = 372,
-    QUEST_SORT_JEWELCRAFTING       = 373
+    QUEST_SORT_JEWELCRAFTING       = 373,
+    QUEST_SORT_NOBLEGARDEN         = 374,
+    QUEST_SORT_PILGRIMS_BOUNTY     = 375,
+    QUEST_SORT_LOVE_IS_IN_THE_AIR  = 376,
+    QUEST_SORT_ARCHAEOLOGY         = 377,
+    QUEST_SORT_CHILDRENS_WEEK      = 378,
+    QUEST_SORT_FIRELANDS_INVASION  = 379,
+    QUEST_SORT_ZANDALARI           = 380,
+    QUEST_SORT_ELEMENTAL_BONDS     = 381,
+    QUEST_SORT_PANDAREN_BREWMASTERS= 391,
+    QUEST_SORT_SCENARIO            = 392,
+    QUEST_SORT_BATTLE_PETS         = 394,
+    QUEST_SORT_MONK                = 395
 };
 
 inline uint8 ClassByQuestSort(int32 QuestSort)
@@ -2971,6 +3129,7 @@ inline uint8 ClassByQuestSort(int32 QuestSort)
         case QUEST_SORT_PRIEST:         return CLASS_PRIEST;
         case QUEST_SORT_DRUID:          return CLASS_DRUID;
         case QUEST_SORT_DEATH_KNIGHT:   return CLASS_DEATH_KNIGHT;
+        case QUEST_SORT_MONK:           return CLASS_MONK;
     }
     return 0;
 }
@@ -2979,21 +3138,12 @@ enum SkillType
 {
     SKILL_NONE                     = 0,
 
-    SKILL_FROST                    = 6,
-    SKILL_FIRE                     = 8,
-    SKILL_ARMS                     = 26,
-    SKILL_COMBAT                   = 38,
-    SKILL_SUBTLETY                 = 39,
     SKILL_SWORDS                   = 43,
     SKILL_AXES                     = 44,
     SKILL_BOWS                     = 45,
     SKILL_GUNS                     = 46,
-    SKILL_BEAST_MASTERY            = 50,
-    SKILL_SURVIVAL                 = 51,
     SKILL_MACES                    = 54,
     SKILL_2H_SWORDS                = 55,
-    SKILL_HOLY                     = 56,
-    SKILL_SHADOW                   = 78,
     SKILL_DEFENSE                  = 95,
     SKILL_LANG_COMMON              = 98,
     SKILL_RACIAL_DWARVEN           = 101,
@@ -3006,7 +3156,6 @@ enum SkillType
     SKILL_ORC_RACIAL               = 125,
     SKILL_RACIAL_NIGHT_ELF         = 126,
     SKILL_FIRST_AID                = 129,
-    SKILL_FERAL_COMBAT             = 134,
     SKILL_STAVES                   = 136,
     SKILL_LANG_THALASSIAN          = 137,
     SKILL_LANG_DRACONIC            = 138,
@@ -3021,13 +3170,11 @@ enum SkillType
     SKILL_SWIMING                  = 155,
     SKILL_2H_MACES                 = 160,
     SKILL_UNARMED                  = 162,
-    SKILL_MARKSMANSHIP             = 163,
     SKILL_BLACKSMITHING            = 164,
     SKILL_LEATHERWORKING           = 165,
     SKILL_ALCHEMY                  = 171,
     SKILL_2H_AXES                  = 172,
     SKILL_DAGGERS                  = 173,
-    SKILL_THROWN                   = 176,
     SKILL_HERBALISM                = 182,
     SKILL_GENERIC_DND              = 183,
     SKILL_RETRIBUTION              = 184,
@@ -3057,23 +3204,12 @@ enum SkillType
     SKILL_WANDS                    = 228,
     SKILL_POLEARMS                 = 229,
     SKILL_PET_SCORPID              = 236,
-    SKILL_ARCANE                   = 237,
-    SKILL_PET_TURTLE               = 251,
-    SKILL_ASSASSINATION            = 253,
-    SKILL_FURY                     = 256,
-    SKILL_PROTECTION               = 257,
-    SKILL_PROTECTION2              = 267,
     SKILL_PET_TALENTS              = 270,
     SKILL_PLATE_MAIL               = 293,
     SKILL_LANG_GNOMISH             = 313,
     SKILL_LANG_TROLL               = 315,
     SKILL_ENCHANTING               = 333,
-    SKILL_DEMONOLOGY               = 354,
-    SKILL_AFFLICTION               = 355,
     SKILL_FISHING                  = 356,
-    SKILL_ENHANCEMENT              = 373,
-    SKILL_RESTORATION              = 374,
-    SKILL_ELEMENTAL_COMBAT         = 375,
     SKILL_SKINNING                 = 393,
     SKILL_MAIL                     = 413,
     SKILL_LEATHER                  = 414,
@@ -3083,12 +3219,6 @@ enum SkillType
     SKILL_RIDING_RAPTOR            = 533,
     SKILL_RIDING_MECHANOSTRIDER    = 553,
     SKILL_RIDING_UNDEAD_HORSE      = 554,
-    SKILL_RESTORATION2             = 573,
-    SKILL_BALANCE                  = 574,
-    SKILL_DESTRUCTION              = 593,
-    SKILL_HOLY2                    = 594,
-    SKILL_DISCIPLINE               = 613,
-    SKILL_LOCKPICKING              = 633,
     SKILL_PET_BAT                  = 653,
     SKILL_PET_HYENA                = 654,
     SKILL_PET_BIRD_OF_PREY         = 655,
@@ -3112,12 +3242,8 @@ enum SkillType
     SKILL_PET_RAVAGER              = 767,
     SKILL_PET_SERPENT              = 768,
     SKILL_INTERNAL                 = 769,
-    SKILL_DK_BLOOD                 = 770,
-    SKILL_DK_FROST                 = 771,
-    SKILL_DK_UNHOLY                = 772,
     SKILL_INSCRIPTION              = 773,
     SKILL_PET_MOTH                 = 775,
-    SKILL_RUNEFORGING              = 776,
     SKILL_MOUNTS                   = 777,
     SKILL_COMPANIONS               = 778,
     SKILL_PET_EXOTIC_CHIMAERA      = 780,
@@ -3136,13 +3262,8 @@ enum SkillType
     SKILL_ARCHAEOLOGY              = 794,
     SKILL_GENERAL_HUNTER           = 795,
     SKILL_GENERAL_DEATHKNIGHT      = 796,
-    SKILL_GENERAL_ROGUE            = 797,
     SKILL_GENERAL_DRUID            = 798,
-    SKILL_GENERAL_MAGE             = 799,
     SKILL_GENERAL_PALADIN          = 800,
-    SKILL_GENERAL_SHAMAN           = 801,
-    SKILL_GENERAL_WARLOCK          = 802,
-    SKILL_GENERAL_WARRIOR          = 803,
     SKILL_GENERAL_PRIEST           = 804,
     SKILL_PET_WATER_ELEMENTAL      = 805,
     SKILL_PET_FOX                  = 808,
@@ -3153,15 +3274,49 @@ enum SkillType
     SKILL_PET_BEETLE               = 818,
     SKILL_ALL_GUILD_PERKS          = 821,
     SKILL_PET_HYDRA                = 824,
+    SKILL_GENERAL_MONK             = 829,
+    SKILL_GENERAL_WARRIOR          = 840,
+    SKILL_GENERAL_WARLOCK          = 849,
+    SKILL_PANDAREN_RACIAL          = 899,
+    SKILL_GENERAL_MAGE             = 904,
+    SKILL_PANDAREN_NEUTRAL         = 905,
+    SKILL_PANDAREN_ALLIANCE        = 906,
+    SKILL_PANDAREN_HORDE           = 907,
+    SKILL_GENERAL_ROGUE            = 921,
+    SKILL_GENERAL_SHAMAN           = 924,
+    SKILL_FEL_IMP                  = 927,
+    SKILL_VOIDLORD                 = 928,
+    SKILL_SHIVARRA                 = 929,
+    SKILL_OBSERVER                 = 930,
+    SKILL_WRATHGUARD               = 931,
+    SKILL_ALL_SPECIALIZATIONS      = 934,
+    SKILL_RUNEFORGING              = 960,
+    SKILL_PET_PRIMALFIRE_ELEMENTAL = 962,
+    SKILL_PET_PRIMALEARTH_ELEMENTAL= 963,
+    SKILL_WAYOFTHE_GRILL           = 975,
+    SKILL_WAYOFTHE_WOK             = 976,
+    SKILL_WAYOFTHE_POT             = 977,
+    SKILL_WAYOFTHE_STEAMER         = 978,
+    SKILL_WAYOFTHE_OVEN            = 979,
+    SKILL_WAYOFTHE_BREW            = 980,
+    SKILL_APPRENTICE_COOKING       = 981,
+    SKILL_JOURNEYMAN_COOKBOOK      = 982,
+    SKILL_PORCUPINE                = 983,
+    SKILL_CRANE                    = 984,
+    SKILL_WATER_STRIDER            = 985,
+    SKILL_QUILEN                   = 986,
+    SKILL_GOAT                     = 987,
+    SKILL_BASILISK                 = 988,
+    SKILL_NO_PLAYERS               = 999,
 };
 
-#define MAX_SKILL_TYPE               825
+#define MAX_SKILL_TYPE               1000
 
 inline SkillType SkillByLockType(LockType locktype)
 {
     switch (locktype)
     {
-        case LOCKTYPE_PICKLOCK:    return SkillType(MAX_SKILL_TYPE);    // no skill for such lock, 'skill' value Scales with level
+        //case LOCKTYPE_PICKLOCK:    return SkillType(MAX_SKILL_TYPE);    // no skill for such lock, 'skill' value scales with level
         case LOCKTYPE_HERBALISM:   return SKILL_HERBALISM;
         case LOCKTYPE_MINING:      return SKILL_MINING;
         case LOCKTYPE_FISHING:     return SKILL_FISHING;
@@ -3217,7 +3372,11 @@ enum TotemCategory
     TC_BLADED_PICKAXE              = 168,
     TC_FLINT_AND_TINDER            = 169,
     TC_RUNED_COBALT_ROD            = 189,
-    TC_RUNED_TITANIUM_ROD          = 190
+    TC_RUNED_TITANIUM_ROD          = 190,
+    TC_RUNED_ELEMENTIUM_ROD        = 209,
+    TC_HIGH_POWERED_BOLT_GUN       = 210,
+    TC_RUNED_COPPER_ROD            = 230,
+    TC_JEWELERS_KIT                = 238
 };
 
 enum UnitDynFlags
@@ -3774,9 +3933,9 @@ enum TrackedAuraType
 
 // we need to stick to 1 version or half of the stuff will work for someone
 // others will not and opposite
-// will only support WoW, WoW:TBC, WoW:WotLK , WoW:Cataclysm and WoW:MOP 5.1.0 client build 16357...
+// will only support WoW, WoW:TBC, WoW:WotLK , WoW:Cataclysm and WoW:MOP 5.3.0 client build 17055...
 
-#define EXPECTED_MANGOSD_CLIENT_BUILD        {16357, 0}
+#define EXPECTED_MANGOSD_CLIENT_BUILD        {17055, 0}
 
 // max supported expansion level in mangosd
 // NOTE: not set it more that supported by targeted client version with all expansions installed

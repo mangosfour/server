@@ -833,8 +833,7 @@ uint32 Item::GetSkill()
         SKILL_AXES,     SKILL_2H_AXES,  SKILL_BOWS,          SKILL_GUNS,      SKILL_MACES,
         SKILL_2H_MACES, SKILL_POLEARMS, SKILL_SWORDS,        SKILL_2H_SWORDS, 0,
         SKILL_STAVES,   0,              0,                   SKILL_UNARMED,   0,
-        SKILL_DAGGERS,  SKILL_THROWN,   SKILL_ASSASSINATION, SKILL_CROSSBOWS, SKILL_WANDS,
-        SKILL_FISHING
+        SKILL_DAGGERS,  SKILL_CROSSBOWS, SKILL_WANDS,        SKILL_FISHING
     };
 
     const static uint32 item_armor_skills[MAX_ITEM_SUBCLASS_ARMOR] =
