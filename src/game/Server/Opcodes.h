@@ -42,9 +42,9 @@
 enum Opcodes
 {
     MSG_WOW_CONNECTION                                    = 0x4F57, // 4.3.4 15595
-    SMSG_AUTH_CHALLENGE                                   = 0x4542, // 4.3.4 15595
-    CMSG_AUTH_SESSION                                     = 0x0449, // 4.3.4 15595
-    SMSG_AUTH_RESPONSE                                    = 0x5DB6, // 4.3.4 15595
+    SMSG_AUTH_CHALLENGE                                   = 0xCAF,  // 5.1.0a
+    CMSG_AUTH_SESSION                                     = 0xC07,  // 5.1.0a
+    SMSG_AUTH_RESPONSE                                    = 0xA15,  // 5.1.0a
     MSG_NULL_ACTION                                       = 0x1001,
     CMSG_BOOTME                                           = 0x1002,
     CMSG_DBLOOKUP                                         = 0x1003,
