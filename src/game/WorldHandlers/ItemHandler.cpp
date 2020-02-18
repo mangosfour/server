@@ -1609,19 +1609,19 @@ void WorldSession::HandleReforgeItemOpcode(WorldPacket& recvData)
         return;
     }
 
-    ItemReforgeEntry const* stats = sItemReforgeStore.LookupEntry(reforgeEntry);
-    if (!stats)
-    {
-        sLog.outDebug("WORLD: HandleReforgeItemOpcode - Player (Guid: %s) tried to reforge an item with invalid reforge entry (%u).", player->GetGuidStr().c_str(), reforgeEntry);
-        SendReforgeResult(false);
-        return;
-    }
+//    ItemReforgeEntry const* stats = sItemReforgeStore.LookupEntry(reforgeEntry);
+    //if (!stats)
+    //{
+    //    sLog.outDebug("WORLD: HandleReforgeItemOpcode - Player (Guid: %s) tried to reforge an item with invalid reforge entry (%u).", player->GetGuidStr().c_str(), reforgeEntry);
+    //    SendReforgeResult(false);
+    //    return;
+    //}
 
-    if (!item->GetReforgableStat(ItemModType(stats->SourceStat)) || item->GetReforgableStat(ItemModType(stats->FinalStat))) // Cheating, you cant reforge to a stat that the item already has, nor reforge from a stat that the item does not have
-    {
-        SendReforgeResult(false);
-        return;
-    }
+    //if (!item->GetReforgableStat(ItemModType(stats->SourceStat)) || item->GetReforgableStat(ItemModType(stats->FinalStat))) // Cheating, you cant reforge to a stat that the item already has, nor reforge from a stat that the item does not have
+    //{
+    //    SendReforgeResult(false);
+    //    return;
+    //}
 
     if (player->GetMoney() < uint64(item->GetSpecialPrice()))   // cheating
     {

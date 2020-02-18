@@ -2125,9 +2125,9 @@ void ObjectMgr::LoadItemPrototypes()
             }
             */
 
-            if (proto->Unk0 != dbcitem->Unk0)
+            if (proto->Unk0 != dbcitem->SoundOverrideSubclass)
             {
-                sLog.outErrorDb("Item (Entry: %u) not correct %i Unk0, must be %i (still using DB value).", i, proto->Unk0, dbcitem->Unk0);
+                sLog.outErrorDb("Item (Entry: %u) not correct %i Unk0, must be %i (still using DB value).", i, proto->Unk0, dbcitem->SoundOverrideSubclass);
                 // It safe let use Unk0 from DB
             }
 
@@ -3490,6 +3490,10 @@ void ObjectMgr::LoadPlayerInfo()
             if (sWorld.getConfig(CONFIG_UINT32_EXPANSION) < EXPANSION_CATA && (race == RACE_WORGEN || race == RACE_GOBLIN))
                 continue;
 
+            // skip expansion classes / races if not playing with expansion
+            if (sWorld.getConfig(CONFIG_UINT32_EXPANSION) < EXPANSION_MOP && (class_ == CLASS_MONK || race == RACE_PANDAREN_NEUTRAL || race == RACE_PANDAREN_ALLI || race == RACE_PANDAREN_HORDE))
+                continue;
+
             // fatal error if no level 1 data
             if (!pInfo->levelInfo || pInfo->levelInfo[0].stats[0] == 0)
             {
@@ -3699,6 +3703,16 @@ void ObjectMgr::BuildPlayerLevelInfo(uint8 race, uint8 _class, uint8 level, Play
                 info->stats[STAT_AGILITY]   += (lvl > 38 ? 2 : (lvl > 8 && (lvl % 2) ? 1 : 0));
                 info->stats[STAT_INTELLECT] += (lvl > 38 ? 3 : (lvl > 4 ? 1 : 0));
                 info->stats[STAT_SPIRIT]    += (lvl > 38 ? 3 : (lvl > 5 ? 1 : 0));
+                break;
+            case CLASS_MONK:
+                info->stats[STAT_STRENGTH]  += (lvl > 38 ? 2 : (lvl > 6 && (lvl % 2) ? 1 : 0));
+                info->stats[STAT_STAMINA]   += (lvl > 32 ? 2 : (lvl > 4 ? 1 : 0));
+                info->stats[STAT_AGILITY]   += (lvl > 38 ? 2 : (lvl > 8 && (lvl % 2) ? 1 : 0));
+                info->stats[STAT_INTELLECT] += (lvl > 38 ? 3 : (lvl > 4 ? 1 : 0));
+                info->stats[STAT_SPIRIT]    += (lvl > 38 ? 3 : (lvl > 5 ? 1 : 0));
+                break;
+            default:
+                break;
         }
     }
 }
@@ -4014,10 +4028,18 @@ void ObjectMgr::LoadQuests()
                           "DetailsEmote1, DetailsEmote2, DetailsEmote3, DetailsEmote4, DetailsEmoteDelay1, DetailsEmoteDelay2, DetailsEmoteDelay3, DetailsEmoteDelay4,"
                           //   154              155            156                157                158                159
                           "IncompleteEmote, CompleteEmote, OfferRewardEmote1, OfferRewardEmote2, OfferRewardEmote3, OfferRewardEmote4,"
-                          //   160                        161                     162                     153
+                          //   160                        161                     162                     163
                           "OfferRewardEmoteDelay1, OfferRewardEmoteDelay2, OfferRewardEmoteDelay3, OfferRewardEmoteDelay4,"
                           //   164          165         166           167
-                          "SoundAccept, SoundTurnIn, StartScript, CompleteScript"
+                          "SoundAccept, SoundTurnIn, StartScript, CompleteScript,"
+                          //   168          169            170             171                172                173                 174
+                          "ReqSpellLearned, PortraitGiver, PortraitTurnIn, PortraitGiverName, PortraitGiverText, PortraitTurnInName, PortraitTurnInText, "
+                          //   175         176             177             178             179                180                181                182
+                          "ReqCurrencyId1, ReqCurrencyId2, ReqCurrencyId3, ReqCurrencyId4, ReqCurrencyCount1, ReqCurrencyCount2, ReqCurrencyCount3, ReqCurrencyCount4, "
+                          //   183         184             185             186             187                188                189                190
+                          "RewCurrencyId1, RewCurrencyId2, RewCurrencyId3, RewCurrencyId4, RewCurrencyCount1, RewCurrencyCount2, RewCurrencyCount3, RewCurrencyCount4, "
+                          //   191   192            193          194
+                          "RewSkill, RewSkillValue, SoundAccept, SoundTurnIn "
                           " FROM quest_template");
     if (!result)
     {
@@ -8727,7 +8749,7 @@ bool PlayerCondition::Meets(Player const* player, Map const* map, WorldObject co
         {
             Unit::SpellAuraHolderMap const& auras = player->GetSpellAuraHolderMap();
             for (Unit::SpellAuraHolderMap::const_iterator itr = auras.begin(); itr != auras.end(); ++itr)
-                if ((itr->second->GetSpellProto()->HasAttribute(SPELL_ATTR_CASTABLE_WHILE_MOUNTED) || itr->second->GetSpellProto()->HasAttribute(SPELL_ATTR_UNK4)) && itr->second->GetSpellProto()->SpellVisual[0] == 3580)
+                if ((itr->second->GetSpellProto()->HasAttribute(SPELL_ATTR_CASTABLE_WHILE_MOUNTED) || itr->second->GetSpellProto()->HasAttribute(SPELL_ATTR_UNK4)) && itr->second->GetSpellProto()->GetSpellVisual(0) == 3580)
                 {
                     return true;
                 }

@@ -198,32 +198,32 @@ void LFGMgr::JoinLFG(uint32 roles, std::set<uint32> dungeons, std::string commen
     if (result == ERR_LFG_OK)
     {
         // additional checks on dungeon selection
-        for (std::set<uint32>::iterator it = dungeons.begin(); it != dungeons.end(); ++it)
-        {
-            LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(*it);
-            switch (dungeon->typeID)
-            {
-                case LFG_TYPE_RANDOM_DUNGEON:
-                    if (dungeons.size() > 1)
-                        result = ERR_LFG_INVALID_SLOT;
-                    else
-                        isRandom = true;
-                case LFG_TYPE_DUNGEON:
-                case LFG_TYPE_HEROIC_DUNGEON:
-                    if (isRaid)
-                        result = ERR_LFG_MISMATCHED_SLOTS;
-                    isDungeon = true;
-                    break;
-                case LFG_TYPE_RAID:
-                    if (isDungeon)
-                        result = ERR_LFG_MISMATCHED_SLOTS;
-                    isRaid = true;
-                    break;
-                default: // one of the other types
-                    result = ERR_LFG_INVALID_SLOT;
-                    break;
-            }
-        }
+        //for (std::set<uint32>::iterator it = dungeons.begin(); it != dungeons.end(); ++it)
+        //{
+        //    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(*it);
+        //    switch (dungeon->typeID)
+        //    {
+        //        case LFG_TYPE_RANDOM_DUNGEON:
+        //            if (dungeons.size() > 1)
+        //                result = ERR_LFG_INVALID_SLOT;
+        //            else
+        //                isRandom = true;
+        //        case LFG_TYPE_DUNGEON:
+        //        case LFG_TYPE_HEROIC_DUNGEON:
+        //            if (isRaid)
+        //                result = ERR_LFG_MISMATCHED_SLOTS;
+        //            isDungeon = true;
+        //            break;
+        //        case LFG_TYPE_RAID:
+        //            if (isDungeon)
+        //                result = ERR_LFG_MISMATCHED_SLOTS;
+        //            isRaid = true;
+        //            break;
+        //        default: // one of the other types
+        //            result = ERR_LFG_INVALID_SLOT;
+        //            break;
+        //    }
+        //}
     }
 
     // since our join result may have just changed, check it again
@@ -234,23 +234,23 @@ void LFGMgr::JoinLFG(uint32 roles, std::set<uint32> dungeons, std::string commen
             // store the current dungeon id (replaced into the dungeon set later)
             randomDungeonID = *dungeons.begin();
             // fetch all dungeons with our groupID and add to set
-            LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(*dungeons.begin());
+            //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(*dungeons.begin());
 
-            if (dungeon)
-            {
-                uint32 group = dungeon->group_id;
+            //if (dungeon)
+            //{
+            //    uint32 group = dungeon->group_id;
 
-                for (uint32 id = 0; id < sLfgDungeonsStore.GetNumRows(); ++id)
-                {
-                    LfgDungeonsEntry const* dungeonList = sLfgDungeonsStore.LookupEntry(id);
-                    if (dungeonList)
-                    {
-                        if (dungeonList->group_id == group)
-                            dungeons.insert(dungeonList->ID); // adding to set
-                    }
-                }
-            }
-            else
+            //    for (uint32 id = 0; id < sLfgDungeonsStore.GetNumRows(); ++id)
+            //    {
+            //        LfgDungeonsEntry const* dungeonList = sLfgDungeonsStore.LookupEntry(id);
+            //        if (dungeonList)
+            //        {
+            //            if (dungeonList->group_id == group)
+            //                dungeons.insert(dungeonList->ID); // adding to set
+            //        }
+            //    }
+            //}
+            //else
                 result = ERR_LFG_NO_LFG_OBJECT;
         }
     }
@@ -567,67 +567,67 @@ void LFGMgr::SetPlayerUpdateType(ObjectGuid guid, LfgUpdateType updateType)
 ItemRewards LFGMgr::GetDungeonItemRewards(uint32 dungeonId, DungeonTypes type)
 {
     ItemRewards rewards;
-    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(dungeonId);
-    if (dungeon)
-    {
-        uint32 minLevel = dungeon->minLevel;
-        uint32 maxLevel = dungeon->maxLevel;
-        uint32 avgLevel = (minLevel+maxLevel)/2; // otherwise there are issues
+    //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(dungeonId);
+    //if (dungeon)
+    //{
+    //    uint32 minLevel = dungeon->minLevel;
+    //    uint32 maxLevel = dungeon->maxLevel;
+    //    uint32 avgLevel = (minLevel+maxLevel)/2; // otherwise there are issues
 
-        DungeonFinderItemsMap const& itemBuffer = sObjectMgr.GetDungeonFinderItemsMap();
-        for (DungeonFinderItemsMap::const_iterator it = itemBuffer.begin(); it != itemBuffer.end(); ++it)
-        {
-            DungeonFinderItems itemCache = it->second;
-            if (itemCache.dungeonType == type)
-            {
-                // should only be one of this inequality in the map
-                if ((avgLevel >= itemCache.minLevel) && (avgLevel <= itemCache.maxLevel))
-                {
-                    rewards.itemId = itemCache.itemReward;
-                    rewards.itemAmount = itemCache.itemAmount;
-                    return rewards;
-                }
-            }
-        }
-    }
+    //    DungeonFinderItemsMap const& itemBuffer = sObjectMgr.GetDungeonFinderItemsMap();
+    //    for (DungeonFinderItemsMap::const_iterator it = itemBuffer.begin(); it != itemBuffer.end(); ++it)
+    //    {
+    //        DungeonFinderItems itemCache = it->second;
+    //        if (itemCache.dungeonType == type)
+    //        {
+    //            // should only be one of this inequality in the map
+    //            if ((avgLevel >= itemCache.minLevel) && (avgLevel <= itemCache.maxLevel))
+    //            {
+    //                rewards.itemId = itemCache.itemReward;
+    //                rewards.itemAmount = itemCache.itemAmount;
+    //                return rewards;
+    //            }
+    //        }
+    //    }
+    //}
     return rewards;
 }
 
 DungeonTypes LFGMgr::GetDungeonType(uint32 dungeonId)
 {
-    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(dungeonId);
-    if (dungeon)
-    {
-        switch (dungeon->expansionLevel)
-        {
-            case 0:
-                return DUNGEON_CLASSIC;
-            case 1:
-            {
-                if (dungeon->difficulty == DUNGEON_DIFFICULTY_NORMAL)
-                {
-                    return DUNGEON_TBC;
-                }
-                else if (dungeon->difficulty == DUNGEON_DIFFICULTY_HEROIC)
-                {
-                    return DUNGEON_TBC_HEROIC;
-                }
-            }
-            case 2:
-            {
-                if (dungeon->difficulty == DUNGEON_DIFFICULTY_NORMAL)
-                {
-                    return DUNGEON_WOTLK;
-                }
-                else if (dungeon->difficulty == DUNGEON_DIFFICULTY_HEROIC)
-                {
-                    return DUNGEON_WOTLK_HEROIC;
-                }
-            }
-            default:
-                return DUNGEON_UNKNOWN;
-        }
-    }
+    //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(dungeonId);
+    //if (dungeon)
+    //{
+    //    switch (dungeon->expansionLevel)
+    //    {
+    //        case 0:
+    //            return DUNGEON_CLASSIC;
+    //        case 1:
+    //        {
+    //            if (dungeon->difficulty == DUNGEON_DIFFICULTY_NORMAL)
+    //            {
+    //                return DUNGEON_TBC;
+    //            }
+    //            else if (dungeon->difficulty == DUNGEON_DIFFICULTY_HEROIC)
+    //            {
+    //                return DUNGEON_TBC_HEROIC;
+    //            }
+    //        }
+    //        case 2:
+    //        {
+    //            if (dungeon->difficulty == DUNGEON_DIFFICULTY_NORMAL)
+    //            {
+    //                return DUNGEON_WOTLK;
+    //            }
+    //            else if (dungeon->difficulty == DUNGEON_DIFFICULTY_HEROIC)
+    //            {
+    //                return DUNGEON_WOTLK_HEROIC;
+    //            }
+    //        }
+    //        default:
+    //            return DUNGEON_UNKNOWN;
+    //    }
+    //}
     return DUNGEON_UNKNOWN;
 }
 
@@ -703,18 +703,18 @@ dungeonEntries LFGMgr::FindRandomDungeonsForPlayer(uint32 level, uint8 expansion
     dungeonEntries randomDungeons;
 
     // go through the dungeon dbc and select the applicable dungeons
-    for (uint32 id = 0; id < sLfgDungeonsStore.GetNumRows(); ++id)
-    {
-        LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(id);
-        if (dungeon)
-        {
-            if ( (dungeon->typeID == LFG_TYPE_RANDOM_DUNGEON)
-                || (IsSeasonal(dungeon->flags) && IsSeasonActive(dungeon->ID)) )
-                if ((uint8)dungeon->expansionLevel <= expansion && dungeon->minLevel <= level
-                    && dungeon->maxLevel >= level)
-                    randomDungeons[dungeon->ID] = dungeon->Entry();
-        }
-    }
+    //for (uint32 id = 0; id < sLfgDungeonsStore.GetNumRows(); ++id)
+    //{
+    //    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(id);
+    //    if (dungeon)
+    //    {
+    //        if ( (dungeon->typeID == LFG_TYPE_RANDOM_DUNGEON)
+    //            || (IsSeasonal(dungeon->flags) && IsSeasonActive(dungeon->ID)) )
+    //            if ((uint8)dungeon->expansionLevel <= expansion && dungeon->minLevel <= level
+    //                && dungeon->maxLevel >= level)
+    //                randomDungeons[dungeon->ID] = dungeon->Entry();
+    //    }
+    //}
     return randomDungeons;
 }
 
@@ -725,47 +725,47 @@ dungeonForbidden LFGMgr::FindRandomDungeonsNotForPlayer(Player* plr)
 
     dungeonForbidden randomDungeons;
 
-    for (uint32 id = 0; id < sLfgDungeonsStore.GetNumRows(); ++id)
-    {
-        LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(id);
-        if (dungeon)
-        {
-            uint32 forbiddenReason = 0;
+    //for (uint32 id = 0; id < sLfgDungeonsStore.GetNumRows(); ++id)
+    //{
+    //    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(id);
+    //    if (dungeon)
+    //    {
+    //        uint32 forbiddenReason = 0;
 
-            if ((uint8)dungeon->expansionLevel > expansion)
-                forbiddenReason = (uint32)LFG_FORBIDDEN_EXPANSION;
-            else if (dungeon->typeID == LFG_TYPE_RAID)
-                forbiddenReason = (uint32)LFG_FORBIDDEN_RAID;
-            else if (dungeon->minLevel > level)
-                forbiddenReason = (uint32)LFG_FORBIDDEN_LOW_LEVEL;
-            else if (dungeon->maxLevel < level)
-                forbiddenReason = (uint32)LFG_FORBIDDEN_HIGH_LEVEL;
-            else if (IsSeasonal(dungeon->flags) && !IsSeasonActive(dungeon->ID)) // check pointers/function args
-                forbiddenReason = (uint32)LFG_FORBIDDEN_NOT_IN_SEASON;
-            else if (DungeonFinderRequirements const* req = sObjectMgr.GetDungeonFinderRequirements((uint32)dungeon->mapID, dungeon->difficulty))
-            {
-                if (req->minItemLevel && (plr->GetEquipGearScore(false,false) < req->minItemLevel))
-                    forbiddenReason = (uint32)LFG_FORBIDDEN_LOW_GEAR_SCORE;
-                else if (req->achievement && !plr->GetAchievementMgr().HasAchievement(req->achievement))
-                    forbiddenReason = (uint32)LFG_FORBIDDEN_MISSING_ACHIEVEMENT;
-                else if (plr->GetTeam() == ALLIANCE && req->allianceQuestId && !plr->GetQuestRewardStatus(req->allianceQuestId))
-                    forbiddenReason = (uint32)LFG_FORBIDDEN_QUEST_INCOMPLETE;
-                else if (plr->GetTeam() == HORDE && req->hordeQuestId && !plr->GetQuestRewardStatus(req->hordeQuestId))
-                    forbiddenReason = (uint32)LFG_FORBIDDEN_QUEST_INCOMPLETE;
-                else
-                    if (req->item)
-                    {
-                        if (!plr->HasItemCount(req->item, 1) && (!req->item2 || !plr->HasItemCount(req->item2, 1)))
-                            forbiddenReason = LFG_FORBIDDEN_MISSING_ITEM;
-                    }
-                    else if (req->item2 && !plr->HasItemCount(req->item2, 1))
-                        forbiddenReason = LFG_FORBIDDEN_MISSING_ITEM;
-            }
+    //        if ((uint8)dungeon->expansionLevel > expansion)
+    //            forbiddenReason = (uint32)LFG_FORBIDDEN_EXPANSION;
+    //        else if (dungeon->typeID == LFG_TYPE_RAID)
+    //            forbiddenReason = (uint32)LFG_FORBIDDEN_RAID;
+    //        else if (dungeon->minLevel > level)
+    //            forbiddenReason = (uint32)LFG_FORBIDDEN_LOW_LEVEL;
+    //        else if (dungeon->maxLevel < level)
+    //            forbiddenReason = (uint32)LFG_FORBIDDEN_HIGH_LEVEL;
+    //        else if (IsSeasonal(dungeon->flags) && !IsSeasonActive(dungeon->ID)) // check pointers/function args
+    //            forbiddenReason = (uint32)LFG_FORBIDDEN_NOT_IN_SEASON;
+    //        else if (DungeonFinderRequirements const* req = sObjectMgr.GetDungeonFinderRequirements((uint32)dungeon->mapID, dungeon->difficulty))
+    //        {
+    //            if (req->minItemLevel && (plr->GetEquipGearScore(false,false) < req->minItemLevel))
+    //                forbiddenReason = (uint32)LFG_FORBIDDEN_LOW_GEAR_SCORE;
+    //            else if (req->achievement && !plr->GetAchievementMgr().HasAchievement(req->achievement))
+    //                forbiddenReason = (uint32)LFG_FORBIDDEN_MISSING_ACHIEVEMENT;
+    //            else if (plr->GetTeam() == ALLIANCE && req->allianceQuestId && !plr->GetQuestRewardStatus(req->allianceQuestId))
+    //                forbiddenReason = (uint32)LFG_FORBIDDEN_QUEST_INCOMPLETE;
+    //            else if (plr->GetTeam() == HORDE && req->hordeQuestId && !plr->GetQuestRewardStatus(req->hordeQuestId))
+    //                forbiddenReason = (uint32)LFG_FORBIDDEN_QUEST_INCOMPLETE;
+    //            else
+    //                if (req->item)
+    //                {
+    //                    if (!plr->HasItemCount(req->item, 1) && (!req->item2 || !plr->HasItemCount(req->item2, 1)))
+    //                        forbiddenReason = LFG_FORBIDDEN_MISSING_ITEM;
+    //                }
+    //                else if (req->item2 && !plr->HasItemCount(req->item2, 1))
+    //                    forbiddenReason = LFG_FORBIDDEN_MISSING_ITEM;
+    //        }
 
-            if (forbiddenReason)
-                randomDungeons[dungeon->Entry()] = forbiddenReason;
-        }
-    }
+    //        if (forbiddenReason)
+    //            randomDungeons[dungeon->Entry()] = forbiddenReason;
+    //    }
+    //}
     return randomDungeons;
 }
 
@@ -793,18 +793,18 @@ void LFGMgr::UpdateNeededRoles(ObjectGuid guid, LFGPlayers* information)
 
     std::set<uint32>::iterator itr = information->dungeonList.begin();
 
-    // check dungeon type for max of each role [normal heroic etc.]
-    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(*itr);
-    if (dungeon)
-    {
-        // atm we're just handling DUNGEON_DIFFICULTY_NORMAL
-        if (dungeon->difficulty == DUNGEON_DIFFICULTY_NORMAL)
-        {
-            information->neededTanks = NORMAL_TANK_OR_HEALER_COUNT - tankCount;
-            information->neededHealers = NORMAL_TANK_OR_HEALER_COUNT - healCount;
-            information->neededDps = NORMAL_DAMAGE_COUNT - dpsCount;
-        }
-    }
+    //// check dungeon type for max of each role [normal heroic etc.]
+    //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(*itr);
+    //if (dungeon)
+    //{
+    //    // atm we're just handling DUNGEON_DIFFICULTY_NORMAL
+    //    if (dungeon->difficulty == DUNGEON_DIFFICULTY_NORMAL)
+    //    {
+    //        information->neededTanks = NORMAL_TANK_OR_HEALER_COUNT - tankCount;
+    //        information->neededHealers = NORMAL_TANK_OR_HEALER_COUNT - healCount;
+    //        information->neededDps = NORMAL_DAMAGE_COUNT - dpsCount;
+    //    }
+    //}
 
     m_playerData[guid] = *information;
 }
@@ -1112,12 +1112,12 @@ void LFGMgr::SendQueueStatus()
 
 uint32 LFGMgr::GetDungeonEntry(uint32 ID)
 {
-    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(ID);
-    if (dungeon)
-    {
-        return dungeon->Entry();
-    }
-    else
+    //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(ID);
+    //if (dungeon)
+    //{
+    //    return dungeon->Entry();
+    //}
+    //else
     {
         return 0;
     }
@@ -1524,21 +1524,21 @@ void LFGMgr::CreateDungeonGroup(LFGProposal* proposal)
     }
 
     // set dungeon difficulty for group
-    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(proposal->dungeonID);
-    if (!dungeon)
-    {
-        return;
-    }
+    //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(proposal->dungeonID);
+    //if (!dungeon)
+    //{
+    //    return;
+    //}
 
-    pGroup->SetDungeonDifficulty(Difficulty(dungeon->difficulty)); //todo: check for raids and if so call setraiddifficulty
+    //pGroup->SetDungeonDifficulty(Difficulty(dungeon->difficulty)); //todo: check for raids and if so call setraiddifficulty
 
-    // Add group to our group set and group map, then teleport to the dungeon
-    ObjectGuid groupGuid = pGroup->GetObjectGuid();
-    LFGGroupStatus groupStatus(LFG_STATE_IN_DUNGEON, dungeon->ID, proposal->currentRoles, pGroup->GetLeaderGuid());
+    //// Add group to our group set and group map, then teleport to the dungeon
+    //ObjectGuid groupGuid = pGroup->GetObjectGuid();
+    //LFGGroupStatus groupStatus(LFG_STATE_IN_DUNGEON, dungeon->ID, proposal->currentRoles, pGroup->GetLeaderGuid());
 
-    m_groupSet.insert(groupGuid);
-    m_groupStatusMap[groupGuid] = groupStatus;
-    TeleportToDungeon(dungeon->ID, pGroup);
+    //m_groupSet.insert(groupGuid);
+    //m_groupStatusMap[groupGuid] = groupStatus;
+    //TeleportToDungeon(dungeon->ID, pGroup);
 
     pGroup->SendUpdate();
 }
@@ -1547,38 +1547,38 @@ void LFGMgr::TeleportToDungeon(uint32 dungeonID, Group* pGroup)
 {
     // if the group's leader is already in the dungeon, teleport anyone not in dungeon to them
     // if nobody is in the dungeon, teleport all to beginning of dungeon (sObjectMgr.GetMapEntranceTrigger(mapid [not dungeonid]))
-    LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(dungeonID);
-    if (!dungeon || !pGroup)
-    {
-        return;
-    }
+    //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(dungeonID);
+    //if (!dungeon || !pGroup)
+    //{
+    //    return;
+    //}
 
-    uint32 mapID = (uint32)dungeon->mapID;
-    float x, y, z, o;
-    LFGTeleportError err = LFG_TELEPORTERROR_OK;
+    //uint32 mapID = (uint32)dungeon->mapID;
+    //float x, y, z, o;
+    //LFGTeleportError err = LFG_TELEPORTERROR_OK;
 
-    Player* pGroupLeader = ObjectAccessor::FindPlayer(pGroup->GetLeaderGuid());
+    //Player* pGroupLeader = ObjectAccessor::FindPlayer(pGroup->GetLeaderGuid());
 
-    if (pGroupLeader && pGroupLeader->GetMapId() == mapID) // Already in the dungeon
-    {
-        // set teleport location to that of the group leader
-        x = pGroupLeader->GetPositionX();
-        y = pGroupLeader->GetPositionY();
-        z = pGroupLeader->GetPositionZ();
-        o = pGroupLeader->GetOrientation();
-    }
-    else
-    {
-        if (AreaTrigger const* at = sObjectMgr.GetMapEntranceTrigger(mapID))
-        {
-            x = at->target_X;
-            y = at->target_Y;
-            z = at->target_Z;
-            o = at->target_Orientation;
-        }
-        else
-            err = LFG_TELEPORTERROR_INVALID_LOCATION;
-    }
+    //if (pGroupLeader && pGroupLeader->GetMapId() == mapID) // Already in the dungeon
+    //{
+    //    // set teleport location to that of the group leader
+    //    x = pGroupLeader->GetPositionX();
+    //    y = pGroupLeader->GetPositionY();
+    //    z = pGroupLeader->GetPositionZ();
+    //    o = pGroupLeader->GetOrientation();
+    //}
+    //else
+    //{
+    //    if (AreaTrigger const* at = sObjectMgr.GetMapEntranceTrigger(mapID))
+    //    {
+    //        x = at->target_X;
+    //        y = at->target_Y;
+    //        z = at->target_Z;
+    //        o = at->target_Orientation;
+    //    }
+    //    else
+    //        err = LFG_TELEPORTERROR_INVALID_LOCATION;
+    //}
 
     dungeonForbidden lockedDungeons;
     for (GroupReference* itr = pGroup->GetFirstMember(); itr != NULL; itr = itr->next())
@@ -1596,23 +1596,23 @@ void LFGMgr::TeleportToDungeon(uint32 dungeonID, Group* pGroup)
                 plrErr = LFG_TELEPORTERROR_IN_VEHICLE;
 
             lockedDungeons = FindRandomDungeonsNotForPlayer(pGroupPlr);
-            if (lockedDungeons.find(dungeon->Entry()) != lockedDungeons.end())
-                plrErr = LFG_TELEPORTERROR_INVALID_LOCATION;
+            //if (lockedDungeons.find(dungeon->Entry()) != lockedDungeons.end())
+            //    plrErr = LFG_TELEPORTERROR_INVALID_LOCATION;
 
-            if (err == LFG_TELEPORTERROR_OK && plrErr == LFG_TELEPORTERROR_OK && pGroupPlr->GetMapId() != mapID)
-            {
-                if (pGroupPlr->GetMap() && !pGroupPlr->GetMap()->IsDungeon() && !pGroupPlr->GetMap()->IsRaid() && !pGroupPlr->InBattleGround())
-                    pGroupPlr->SetBattleGroundEntryPoint(); // store current position and such
+            //if (err == LFG_TELEPORTERROR_OK && plrErr == LFG_TELEPORTERROR_OK && pGroupPlr->GetMapId() != mapID)
+            //{
+            //    if (pGroupPlr->GetMap() && !pGroupPlr->GetMap()->IsDungeon() && !pGroupPlr->GetMap()->IsRaid() && !pGroupPlr->InBattleGround())
+            //        pGroupPlr->SetBattleGroundEntryPoint(); // store current position and such
 
-                if (!pGroupPlr->TeleportTo(mapID, x, y, z, o))
-                    plrErr = LFG_TELEPORTERROR_INVALID_LOCATION;
-            }
+            //    if (!pGroupPlr->TeleportTo(mapID, x, y, z, o))
+            //        plrErr = LFG_TELEPORTERROR_INVALID_LOCATION;
+            //}
 
-            if (err != LFG_TELEPORTERROR_OK)
-                pGroupPlr->GetSession()->SendLfgTeleportError(err);
-            else if (plrErr != LFG_TELEPORTERROR_OK)
-                pGroupPlr->GetSession()->SendLfgTeleportError(plrErr);
-            else
+            //if (err != LFG_TELEPORTERROR_OK)
+            //    pGroupPlr->GetSession()->SendLfgTeleportError(err);
+            //else if (plrErr != LFG_TELEPORTERROR_OK)
+            //    pGroupPlr->GetSession()->SendLfgTeleportError(plrErr);
+            //else
                 SetPlayerState(pGroupPlr->GetObjectGuid(), LFG_STATE_IN_DUNGEON);
         }
     }
@@ -1633,9 +1633,9 @@ void LFGMgr::TeleportPlayer(Player* pPlayer, bool out)
     // Get dungeon info and then teleport the player out if applicable
     if (out)
     {
-        LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(status->dungeonID);
-        if (dungeon && pPlayer->GetMapId() == dungeon->mapID)
-            pPlayer->TeleportToBGEntryPoint();
+        //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(status->dungeonID);
+        //if (dungeon && pPlayer->GetMapId() == dungeon->mapID)
+        //    pPlayer->TeleportToBGEntryPoint();
     }
 }
 
@@ -1806,9 +1806,9 @@ void LFGMgr::HandleBossKilled(Player* pPlayer)
 
             // check if player did a random dungeon
             uint32 randomDungeonId = 0;
-            LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(status->dungeonID);
-            if (dungeon->typeID == LFG_TYPE_RANDOM_DUNGEON || IsSeasonal(dungeon->flags))
-                randomDungeonId = dungeon->ID;
+            //LfgDungeonsEntry const* dungeon = sLfgDungeonsStore.LookupEntry(status->dungeonID);
+            //if (dungeon->typeID == LFG_TYPE_RANDOM_DUNGEON || IsSeasonal(dungeon->flags))
+            //    randomDungeonId = dungeon->ID;
 
             // get rewards
             uint32 groupPlrLevel = pGroupPlr->getLevel();

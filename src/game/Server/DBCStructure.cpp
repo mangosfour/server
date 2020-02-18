@@ -25,6 +25,7 @@
 #include "Common.h"
 #include "DBCStructure.h"
 #include "DBCStores.h"
+#include "DB2Stores.h"
 #include "SharedDefines.h"
 
 int32 SpellEntry::CalculateSimpleValue(SpellEffectIndex eff) const
@@ -96,7 +97,7 @@ SpellLevelsEntry const* SpellEntry::GetSpellLevels() const
 
 SpellPowerEntry const* SpellEntry::GetSpellPower() const
 {
-    return SpellPowerId ? sSpellPowerStore.LookupEntry(SpellPowerId) : NULL;
+    return sSpellPowerStore.LookupEntry(Id);
 }
 
 SpellReagentsEntry const* SpellEntry::GetSpellReagents() const
@@ -122,6 +123,11 @@ SpellTargetRestrictionsEntry const* SpellEntry::GetSpellTargetRestrictions() con
 SpellTotemsEntry const* SpellEntry::GetSpellTotems() const
 {
     return SpellTotemsId ? sSpellTotemsStore.LookupEntry(SpellTotemsId) : NULL;
+}
+
+SpellMiscEntry const* SpellEntry::GetSpellMisc() const
+{
+    return SpellMiscId ? sSpellMiscStore.LookupEntry(SpellMiscId) : NULL;
 }
 
 uint32 SpellEntry::GetManaCost() const
@@ -356,4 +362,136 @@ uint32 SpellEntry::GetEffectApplyAuraNameByIndex(SpellEffectIndex index) const
 {
     SpellEffectEntry const* effect = GetSpellEffect(index);
     return effect ? effect->EffectApplyAuraName : 0;
+}
+
+uint32 SpellEntry::GetAttributes() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->Attributes : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx2() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx2 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx3() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx3 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx4() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx4 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx5() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx5 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx6() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx6 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx7() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx7 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx8() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx8 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx9() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx9 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx10() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx10 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx11() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx11 : 0;
+}
+
+uint32 SpellEntry::GetAttributesEx12() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->AttributesEx12 : 0;
+}
+
+uint32 SpellEntry::GetCastingTimeIndex() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->CastingTimeIndex : 0;
+}
+
+uint32 SpellEntry::GetDurationIndex() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->DurationIndex : 0;
+}
+
+uint32 SpellEntry::GetRangeIndex() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->rangeIndex : 0;
+}
+
+float SpellEntry::GetSpeed() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->speed : 0.0f;
+}
+
+uint32 SpellEntry::GetSpellVisual(int idx) const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->SpellVisual[idx] : 0;
+}
+
+uint32 SpellEntry::GetSpellIconID() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->SpellIconID : 0;
+}
+
+uint32 SpellEntry::GetActiveIconID() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->activeIconID : 0;
+}
+
+uint32 SpellEntry::GetSchoolMask() const
+{
+    SpellMiscEntry const* misc = GetSpellMisc();
+    return misc ? misc->SchoolMask : 0;
+}
+
+uint32 SpellEntry::GetPowerType() const
+{
+    SpellPowerEntry const* power = GetSpellPower();
+    return power ? power->powerType : 0;
 }

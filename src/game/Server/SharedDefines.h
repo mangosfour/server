@@ -684,6 +684,76 @@ enum SpellAttributesEx10
     SPELL_ATTR_EX10_UNK31                          = 0x80000000,// 31 not used
 };
 
+enum SpellAttributesEx11
+{
+    SPELL_ATTR_EX11_UNK0                       = 0x00000001,// 0
+    SPELL_ATTR_EX11_UNK1                       = 0x00000002,// 1
+    SPELL_ATTR_EX11_UNK2                       = 0x00000004,// 2
+    SPELL_ATTR_EX11_UNK3                       = 0x00000008,// 3
+    SPELL_ATTR_EX11_UNK4                       = 0x00000010,// 4
+    SPELL_ATTR_EX11_UNK5                       = 0x00000020,// 5
+    SPELL_ATTR_EX11_UNK6                       = 0x00000040,// 6
+    SPELL_ATTR_EX11_UNK7                       = 0x00000080,// 7
+    SPELL_ATTR_EX11_UNK8                       = 0x00000100,// 8
+    SPELL_ATTR_EX11_UNK9                       = 0x00000200,// 9
+    SPELL_ATTR_EX11_UNK10                      = 0x00000400,// 10
+    SPELL_ATTR_EX11_UNK11                      = 0x00000800,// 11
+    SPELL_ATTR_EX11_UNK12                      = 0x00001000,// 12
+    SPELL_ATTR_EX11_UNK13                      = 0x00002000,// 13
+    SPELL_ATTR_EX11_UNK14                      = 0x00004000,// 14
+    SPELL_ATTR_EX11_UNK15                      = 0x00008000,// 15
+    SPELL_ATTR_EX11_UNK16                      = 0x00010000,// 16
+    SPELL_ATTR_EX11_UNK17                      = 0x00020000,// 17
+    SPELL_ATTR_EX11_UNK18                      = 0x00040000,// 18
+    SPELL_ATTR_EX11_UNK19                      = 0x00080000,// 19
+    SPELL_ATTR_EX11_UNK20                      = 0x00100000,// 20
+    SPELL_ATTR_EX11_UNK21                      = 0x00200000,// 21
+    SPELL_ATTR_EX11_UNK22                      = 0x00400000,// 22
+    SPELL_ATTR_EX11_UNK23                      = 0x00800000,// 23
+    SPELL_ATTR_EX11_UNK24                      = 0x01000000,// 24
+    SPELL_ATTR_EX11_UNK25                      = 0x02000000,// 25
+    SPELL_ATTR_EX11_UNK26                      = 0x04000000,// 26
+    SPELL_ATTR_EX11_UNK27                      = 0x08000000,// 27
+    SPELL_ATTR_EX11_UNK28                      = 0x10000000,// 28
+    SPELL_ATTR_EX11_UNK29                      = 0x20000000,// 29
+    SPELL_ATTR_EX11_UNK30                      = 0x40000000,// 30
+    SPELL_ATTR_EX11_UNK31                      = 0x80000000,// 31
+};
+enum SpellAttributesEx12
+{
+    SPELL_ATTR_EX12_UNK0                       = 0x00000001,// 0
+    SPELL_ATTR_EX12_UNK1                       = 0x00000002,// 1
+    SPELL_ATTR_EX12_UNK2                       = 0x00000004,// 2
+    SPELL_ATTR_EX12_UNK3                       = 0x00000008,// 3
+    SPELL_ATTR_EX12_UNK4                       = 0x00000010,// 4
+    SPELL_ATTR_EX12_UNK5                       = 0x00000020,// 5
+    SPELL_ATTR_EX12_UNK6                       = 0x00000040,// 6
+    SPELL_ATTR_EX12_UNK7                       = 0x00000080,// 7
+    SPELL_ATTR_EX12_UNK8                       = 0x00000100,// 8
+    SPELL_ATTR_EX12_UNK9                       = 0x00000200,// 9
+    SPELL_ATTR_EX12_UNK10                      = 0x00000400,// 10
+    SPELL_ATTR_EX12_UNK11                      = 0x00000800,// 11
+    SPELL_ATTR_EX12_UNK12                      = 0x00001000,// 12
+    SPELL_ATTR_EX12_UNK13                      = 0x00002000,// 13
+    SPELL_ATTR_EX12_UNK14                      = 0x00004000,// 14
+    SPELL_ATTR_EX12_UNK15                      = 0x00008000,// 15
+    SPELL_ATTR_EX12_UNK16                      = 0x00010000,// 16
+    SPELL_ATTR_EX12_UNK17                      = 0x00020000,// 17
+    SPELL_ATTR_EX12_UNK18                      = 0x00040000,// 18
+    SPELL_ATTR_EX12_UNK19                      = 0x00080000,// 19
+    SPELL_ATTR_EX12_UNK20                      = 0x00100000,// 20
+    SPELL_ATTR_EX12_UNK21                      = 0x00200000,// 21
+    SPELL_ATTR_EX12_UNK22                      = 0x00400000,// 22
+    SPELL_ATTR_EX12_UNK23                      = 0x00800000,// 23
+    SPELL_ATTR_EX12_UNK24                      = 0x01000000,// 24
+    SPELL_ATTR_EX12_UNK25                      = 0x02000000,// 25
+    SPELL_ATTR_EX12_UNK26                      = 0x04000000,// 26
+    SPELL_ATTR_EX12_UNK27                      = 0x08000000,// 27
+    SPELL_ATTR_EX12_UNK28                      = 0x10000000,// 28
+    SPELL_ATTR_EX12_UNK29                      = 0x20000000,// 29
+    SPELL_ATTR_EX12_UNK30                      = 0x40000000,// 30
+    SPELL_ATTR_EX12_UNK31                      = 0x80000000,// 31
+};
 #define MAX_TALENT_SPEC_COUNT   2
 #define MAX_GLYPH_SLOT_INDEX    6
 #define REQ_PRIMARY_TREE_TALENTS 31

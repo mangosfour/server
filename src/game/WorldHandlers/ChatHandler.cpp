@@ -246,12 +246,10 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recv_data)
 
         case CHAT_MSG_WHISPER:
         {
-            std::string to, msg;
-            uint32 toLength = recv_data.ReadBits(10);
             uint32 msgLength = recv_data.ReadBits(9);
-            to = recv_data.ReadString(toLength);
-            msg = recv_data.ReadString(msgLength);
-
+            uint32 toLength = recv_data.ReadBits(10);
+            std::string msg = recv_data.ReadString(msgLength);
+            std::string to = recv_data.ReadString(toLength);
             if (msg.empty())
             {
                 break;
@@ -266,6 +264,8 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recv_data)
             {
                 return;
             }
+            if (msg.empty())
+                break;
 
             if (!normalizePlayerName(to))
             {

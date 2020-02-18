@@ -13357,8 +13357,8 @@ void Player::ApplyReforgeEnchantment(Item* item, bool apply)
         return;
     }
 
-    ItemReforgeEntry const* reforge = sItemReforgeStore.LookupEntry(item->GetEnchantmentId(REFORGE_ENCHANTMENT_SLOT));
-    if (!reforge)
+//    ItemReforgeEntry const* reforge = sItemReforgeStore.LookupEntry(item->GetEnchantmentId(REFORGE_ENCHANTMENT_SLOT));
+/*    if (!reforge)
     {
         return;
     }
@@ -13584,7 +13584,7 @@ void Player::ApplyReforgeEnchantment(Item* item, bool apply)
         case ITEM_MOD_MASTERY_RATING:
             ApplyRatingMod(CR_MASTERY, int32(addValue), apply);
             break;
-    }
+    }*/
 }
 
 void Player::SendEnchantmentDurations()
@@ -22528,7 +22528,7 @@ uint32 Player::GetResurrectionSpellId()
     for (AuraList::const_iterator itr = dummyAuras.begin(); itr != dummyAuras.end(); ++itr)
     {
         // Soulstone Resurrection                           // prio: 3 (max, non death persistent)
-        if (prio < 2 && (*itr)->GetSpellProto()->SpellVisual[0] == 99 && (*itr)->GetSpellProto()->SpellIconID == 92)
+        if (prio < 2 && (*itr)->GetSpellProto()->GetSpellVisual(0) == 99 && (*itr)->GetSpellProto()->Id == 92)
         {
             switch ((*itr)->GetId())
             {
@@ -26026,11 +26026,11 @@ float Player::GetCollisionHeight(bool mounted) const
             return GetCollisionHeight(false);
         }
 
-        CreatureModelDataEntry const* mountModelData = sCreatureModelDataStore.LookupEntry(mountDisplayInfo->ModelId);
-        if (!mountModelData)
-        {
-            return GetCollisionHeight(false);
-        }
+        //CreatureModelDataEntry const* mountModelData = sCreatureModelDataStore.LookupEntry(mountDisplayInfo->ModelId);
+        //if (!mountModelData)
+        //{
+        //    return GetCollisionHeight(false);
+        //}
 
         CreatureDisplayInfoEntry const* displayInfo = sCreatureDisplayInfoStore.LookupEntry(GetNativeDisplayId());
         if (!displayInfo)
@@ -26038,16 +26038,16 @@ float Player::GetCollisionHeight(bool mounted) const
             sLog.outError("GetCollisionHeight::Unable to find CreatureDisplayInfoEntry for %u", GetNativeDisplayId());
             return 0;
         }
-        CreatureModelDataEntry const* modelData = sCreatureModelDataStore.LookupEntry(displayInfo->ModelId);
-        if (!modelData)
-        {
-            sLog.outError("GetCollisionHeight::Unable to find CreatureModelDataEntry for %u", displayInfo->ModelId);
-            return 0;
-        }
+        //CreatureModelDataEntry const* modelData = sCreatureModelDataStore.LookupEntry(displayInfo->ModelId);
+        //if (!modelData)
+        //{
+        //    sLog.outError("GetCollisionHeight::Unable to find CreatureModelDataEntry for %u", displayInfo->ModelId);
+        //    return 0;
+        //}
 
-        float scaleMod = GetObjectScale(); // 99% sure about this
+        //float scaleMod = GetObjectScale(); // 99% sure about this
 
-        return scaleMod * mountModelData->MountHeight + modelData->CollisionHeight * 0.5f;
+        //return scaleMod * mountModelData->MountHeight + modelData->CollisionHeight * 0.5f;
     }
     else
     {
@@ -26058,14 +26058,15 @@ float Player::GetCollisionHeight(bool mounted) const
             sLog.outError("GetCollisionHeight::Unable to find CreatureDisplayInfoEntry for %u", GetNativeDisplayId());
             return 0;
         }
-        CreatureModelDataEntry const* modelData = sCreatureModelDataStore.LookupEntry(displayInfo->ModelId);
-        if (!modelData)
-        {
-            sLog.outError("GetCollisionHeight::Unable to find CreatureModelDataEntry for %u", displayInfo->ModelId);
-            return 0;
-        }
+        //CreatureModelDataEntry const* modelData = sCreatureModelDataStore.LookupEntry(displayInfo->ModelId);
+        //if (!modelData)
+        //{
+        //    sLog.outError("GetCollisionHeight::Unable to find CreatureModelDataEntry for %u", displayInfo->ModelId);
+        //    return 0;
+        //}
 
-        return modelData->CollisionHeight;
+        //return modelData->CollisionHeight;
+        return 0;
     }
 }
 

@@ -28,5 +28,6 @@
 const char Itemfmt[]="niiiiiii";
 const char ItemCurrencyCostfmt[]="di";
 const char ItemExtendedCostEntryfmt[]="nxxiiiiiiiiiiiixiiiiiiiiiixxixx";
+const char SpellReagentsEntryfmt[]="diiiiiiiiiiiiiiiixx";
 
 #endif

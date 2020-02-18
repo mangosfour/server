@@ -76,8 +76,8 @@ enum AchievementFlags
     ACHIEVEMENT_FLAG_REALM_FIRST_KILL       = 0x00000200,   //
     ACHIEVEMENT_FLAG_UNK3                   = 0x00000400,   // ACHIEVEMENT_FLAG_HIDE_NAME_IN_TIE
     ACHIEVEMENT_FLAG_REALM_FIRST_GUILD      = 0x00000800,   // first guild on realm done something
-    ACHIEVEMENT_FLAG_UNK4                   = 0x00001000,   // as guild group?
-    ACHIEVEMENT_FLAG_UNK5                   = 0x00002000,   // as guild group?
+    ACHIEVEMENT_FLAG_SHOW_IN_GUILD_NEWS    = 0x00001000,    // Shows in guild news
+    ACHIEVEMENT_FLAG_SHOW_IN_GUILD_HEADER  = 0x00002000,    // Shows in guild news header
     ACHIEVEMENT_FLAG_GUILD                  = 0x00004000,   //
     ACHIEVEMENT_FLAG_SHOW_GUILD_MEMBERS     = 0x00008000,   //
     ACHIEVEMENT_FLAG_SHOW_CRITERIA_MEMBERS  = 0x00010000,   //
@@ -109,12 +109,12 @@ enum AchievementCriteriaTypes
 {
     ACHIEVEMENT_CRITERIA_TYPE_KILL_CREATURE = 0,
     ACHIEVEMENT_CRITERIA_TYPE_WIN_BG = 1,
+    ACHIEVEMENT_CRITERIA_TYPE_COMPLETE_ARCHAEOLOGY_PROJECTS = 3, // struct { uint32 itemCount; }
     ACHIEVEMENT_CRITERIA_TYPE_REACH_LEVEL = 5,
     ACHIEVEMENT_CRITERIA_TYPE_REACH_SKILL_LEVEL = 7,
     ACHIEVEMENT_CRITERIA_TYPE_COMPLETE_ACHIEVEMENT = 8,
     ACHIEVEMENT_CRITERIA_TYPE_COMPLETE_QUEST_COUNT = 9,
-    // you have to complete a daily quest x times in a row
-    ACHIEVEMENT_CRITERIA_TYPE_COMPLETE_DAILY_QUEST_DAILY = 10,
+    ACHIEVEMENT_CRITERIA_TYPE_COMPLETE_DAILY_QUEST_DAILY    = 10, // you have to complete a daily quest x times in a row
     ACHIEVEMENT_CRITERIA_TYPE_COMPLETE_QUESTS_IN_ZONE = 11,
     ACHIEVEMENT_CRITERIA_TYPE_CURRENCY_EARNED = 12,
     ACHIEVEMENT_CRITERIA_TYPE_DAMAGE_DONE = 13,
@@ -566,10 +566,36 @@ enum SpellEffectIndex
 {
     EFFECT_INDEX_0     = 0, ///< The first spell effect
     EFFECT_INDEX_1     = 1, ///< The second spell effect
-    EFFECT_INDEX_2     = 2  ///< The third spell effect
+    EFFECT_INDEX_2     = 2,
+    EFFECT_INDEX_3     = 3,
+    EFFECT_INDEX_4     = 4,
+    EFFECT_INDEX_5     = 5,
+    EFFECT_INDEX_6     = 6,
+    EFFECT_INDEX_7     = 7,
+    EFFECT_INDEX_8     = 8,
+    EFFECT_INDEX_9     = 9,
+    EFFECT_INDEX_10    = 10,
+    EFFECT_INDEX_11    = 11,
+    EFFECT_INDEX_12    = 12,
+    EFFECT_INDEX_13    = 13,
+    EFFECT_INDEX_14    = 14,
+    EFFECT_INDEX_15    = 15,
+    EFFECT_INDEX_16    = 16,
+    EFFECT_INDEX_17    = 17,
+    EFFECT_INDEX_18    = 18,
+    EFFECT_INDEX_19    = 19,
+    EFFECT_INDEX_20    = 20,
 };
 
-#define MAX_EFFECT_INDEX 3
+#define EFFECT_MASK_ALL \
+    ((1 << EFFECT_INDEX_0) | (1 << EFFECT_INDEX_1) | (1 << EFFECT_INDEX_2) | \
+    (1 << EFFECT_INDEX_3) | (1 << EFFECT_INDEX_4) | (1 << EFFECT_INDEX_5) | \
+    (1 << EFFECT_INDEX_6) | (1 << EFFECT_INDEX_7) | (1 << EFFECT_INDEX_8) | \
+    (1 << EFFECT_INDEX_9) | (1 << EFFECT_INDEX_10) | (1 << EFFECT_INDEX_11) | \
+    (1 << EFFECT_INDEX_12) | (1 << EFFECT_INDEX_13) | (1 << EFFECT_INDEX_14) | \
+    (1 << EFFECT_INDEX_15) | (1 << EFFECT_INDEX_16) | (1 << EFFECT_INDEX_17) | \
+    (1 << EFFECT_INDEX_18) | (1 << EFFECT_INDEX_19) | (1 << EFFECT_INDEX_20))
+#define MAX_EFFECT_INDEX 21
 
 enum SpellFamily
 {

@@ -40,7 +40,7 @@ struct ItemEntry
    uint32   ID;                                             // 0
    uint32   Class;                                          // 1
    uint32   SubClass;                                       // 2
-   int32    Unk0;                                           // 3
+   int32    SoundOverrideSubclass;                          // 3
    int32    Material;                                       // 4
    uint32   DisplayId;                                      // 5
    uint32   InventoryType;                                  // 6
@@ -91,6 +91,18 @@ struct ItemExtendedCostEntry
         // start from ITEM_EXTENDED_COST_FLAG_SEASON_IN_INDEX_0
         return flags & 1 << (i + 1);
     }
+};
+
+#define MAX_SPELL_REAGENTS 8
+
+// SpellReagents.dbc
+struct SpellReagentsEntry
+{
+    //uint32    Id;                                         // 0        m_ID
+    int32     Reagent[MAX_SPELL_REAGENTS];                  // 1-8      m_reagent
+    uint32    ReagentCount[MAX_SPELL_REAGENTS];             // 9-16     m_reagentCount
+                                                            // 17       5.x
+                                                            // 18       5.x
 };
 
 #endif

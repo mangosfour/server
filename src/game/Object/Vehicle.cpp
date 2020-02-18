@@ -165,12 +165,12 @@ void VehicleInfo::Initialize()
     if (vehicleFlags & VEHICLE_FLAG_FIXED_POSITION)
         pVehicle->SetRoot(true);
 
-    // Initialize power type based on DBC values (creatures only)
-    if (pVehicle->GetTypeId() == TYPEID_UNIT)
-    {
-        if (PowerDisplayEntry const* powerEntry = sPowerDisplayStore.LookupEntry(GetVehicleEntry()->m_powerDisplayID))
-            pVehicle->SetPowerType(Powers(powerEntry->power));
-    }
+//    // Initialize power type based on DBC values (creatures only)
+//    if (pVehicle->GetTypeId() == TYPEID_UNIT)
+//    {
+//        if (PowerDisplayEntry const* powerEntry = sPowerDisplayStore.LookupEntry(GetVehicleEntry()->m_powerDisplayID))
+//            pVehicle->SetPowerType(Powers(powerEntry->power));
+//    }
 
     m_isInitialized = true;
 }

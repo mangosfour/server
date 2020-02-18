@@ -102,7 +102,7 @@ bool DynamicObject::Create(uint32 guidlow, Unit* caster, uint32 spellId, SpellEf
     bytes |= 0x00 << 16;
     bytes |= 0x00 << 24;
     */
-    SetUInt32Value(DYNAMICOBJECT_BYTES, spellProto->SpellVisual[0] | (type << 28));
+    SetUInt32Value(DYNAMICOBJECT_BYTES, spellProto->GetSpellVisual(0) | (type << 28));
 
     SetUInt32Value(DYNAMICOBJECT_SPELLID, spellId);
     SetFloatValue(DYNAMICOBJECT_RADIUS, radius);

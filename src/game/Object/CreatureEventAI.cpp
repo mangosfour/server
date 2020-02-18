@@ -810,9 +810,9 @@ void CreatureEventAI::ProcessAction(CreatureEventAI_Action const& action, uint32
                     {
                         SpellEntry const* spellInfo = sSpellStore.LookupEntry(spellId);
 
-                        if (spellInfo && !(spellInfo->rangeIndex == SPELL_RANGE_IDX_COMBAT || spellInfo->rangeIndex == SPELL_RANGE_IDX_SELF_ONLY) && target != m_creature)
+                        if (spellInfo && !(spellInfo->GetRangeIndex() == SPELL_RANGE_IDX_COMBAT || spellInfo->GetRangeIndex() == SPELL_RANGE_IDX_SELF_ONLY) && target != m_creature)
                         {
-                            SpellRangeEntry const* spellRange = sSpellRangeStore.LookupEntry(spellInfo->rangeIndex);
+                            SpellRangeEntry const* spellRange = sSpellRangeStore.LookupEntry(spellInfo->GetRangeIndex());
                             if (spellRange)
                                 m_LastSpellMaxRange = spellRange->maxRange;
                         }
@@ -1586,7 +1586,7 @@ void CreatureEventAI::SpellHit(Unit* pUnit, const SpellEntry* pSpell)
         if (i->Event.event_type == EVENT_T_SPELLHIT)
             // If spell id matches (or no spell id) & if spell school matches (or no spell school)
             if (!i->Event.spell_hit.spellId || pSpell->Id == i->Event.spell_hit.spellId)
-                if (pSpell->SchoolMask & i->Event.spell_hit.schoolMask)
+                if (pSpell->GetSchoolMask() & i->Event.spell_hit.schoolMask)
                 {
                     ProcessEvent(*i, pUnit);
                 }

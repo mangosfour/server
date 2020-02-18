@@ -83,7 +83,10 @@ bool LoginQueryHolder::Initialize()
         "health, power1, power2, power3, power4, power5, specCount, activeSpec, exploredZones, equipmentCache, knownTitles, actionBars, slot FROM characters WHERE guid = '%u'", m_guid.GetCounter());
     res &= SetPQuery(PLAYER_LOGIN_QUERY_LOADGROUP,           "SELECT groupId FROM group_member WHERE memberGuid ='%u'", m_guid.GetCounter());
     res &= SetPQuery(PLAYER_LOGIN_QUERY_LOADBOUNDINSTANCES,  "SELECT id, permanent, map, difficulty, resettime FROM character_instance LEFT JOIN instance ON instance = id WHERE guid = '%u'", m_guid.GetCounter());
-    res &= SetPQuery(PLAYER_LOGIN_QUERY_LOADAURAS,           "SELECT caster_guid,item_guid,spell,stackcount,remaincharges,basepoints0,basepoints1,basepoints2,periodictime0,periodictime1,periodictime2,maxduration,remaintime,effIndexMask FROM character_aura WHERE guid = '%u'", m_guid.GetCounter());
+    res &= SetPQuery(PLAYER_LOGIN_QUERY_LOADAURAS,           "SELECT caster_guid,item_guid,spell,stackcount,remaincharges,"
+        "basepoints0,basepoints1,basepoints2,basepoints3,basepoints4,basepoints5,basepoints6,basepoints7,basepoints8,basepoints9,basepoints10,basepoints11,basepoints12,basepoints13,basepoints14,basepoints15,basepoints16,basepoints17,basepoints18,basepoints19,basepoints20,"
+        "periodictime0,periodictime1,periodictime2,periodictime3,periodictime4,periodictime5,periodictime6,periodictime7,periodictime8,periodictime9,periodictime10,periodictime11,periodictime12,periodictime13,periodictime14,periodictime15,periodictime16,periodictime17,periodictime18,periodictime19,periodictime20,"
+        "maxduration,remaintime,effIndexMask FROM character_aura WHERE guid = '%u'", m_guid.GetCounter());
     res &= SetPQuery(PLAYER_LOGIN_QUERY_LOADSPELLS,          "SELECT spell,active,disabled FROM character_spell WHERE guid = '%u'", m_guid.GetCounter());
     res &= SetPQuery(PLAYER_LOGIN_QUERY_LOADQUESTSTATUS,     "SELECT quest,status,rewarded,explored,timer,mobcount1,mobcount2,mobcount3,mobcount4,itemcount1,itemcount2,itemcount3,itemcount4,itemcount5,itemcount6 FROM character_queststatus WHERE guid = '%u'", m_guid.GetCounter());
     res &= SetPQuery(PLAYER_LOGIN_QUERY_LOADDAILYQUESTSTATUS, "SELECT quest FROM character_queststatus_daily WHERE guid = '%u'", m_guid.GetCounter());
@@ -151,9 +154,7 @@ void WorldSession::HandleCharEnum(QueryResult* result)
 
     ByteBuffer buffer;
 
-    data.WriteBits(0, 23);
-    data.WriteBit(1);
-    data.WriteBits(result ? result->GetRowCount() : 0, 17);
+    data.WriteBits(result ? result->GetRowCount() : 0, 16);
 
     if (result)
     {
@@ -168,7 +169,13 @@ void WorldSession::HandleCharEnum(QueryResult* result)
             }
         }
         while (result->NextRow());
+    }
 
+    data.WriteBit(1);
+    data.WriteBits(0, 21);
+
+    if (!buffer.empty())
+    {
         data.FlushBits();
         data.append(buffer);
     }
@@ -208,14 +215,14 @@ void WorldSession::HandleCharEnumOpcode(WorldPacket & /*recv_data*/)
 
 void WorldSession::HandleCharCreateOpcode(WorldPacket& recv_data)
 {
+    // extract other data required for player creating
+    uint8 gender, skin, face, hairStyle, hairColor, facialHair, outfitId;
     std::string name;
-    uint8 race_, class_, gender, skin, face, hairStyle, hairColor, facialHair, outfitId;
+    uint8 race_, class_;
 
-    recv_data >> gender >> hairColor >> outfitId;
-    recv_data >> race_ >> class_ >> face>> facialHair >> skin >> hairStyle;
-
-    uint8 nameLength = recv_data.ReadBits(7);
-    name = recv_data.ReadString(nameLength);
+    recv_data >> class_ >> hairStyle >> facialHair >> race_;
+    recv_data >> face >> skin >> gender >> hairColor >> outfitId;
+    name = recv_data.ReadString(recv_data.ReadBits(8));
 
     WorldPacket data(SMSG_CHAR_CREATE, 1);                  // returned with diff.values in all cases
 
@@ -253,23 +260,25 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket& recv_data)
         return;
     }
 
+    // FIXME
     // prevent character creating Expansion race without Expansion account
-    if (raceEntry->expansion > Expansion())
-    {
-        data << (uint8)CHAR_CREATE_EXPANSION;
-        sLog.outError("Expansion %u account:[%d] tried to Create character with expansion %u race (%u)", Expansion(), GetAccountId(), raceEntry->expansion, race_);
-        SendPacket(&data);
-        return;
-    }
+    //if (raceEntry->expansion > Expansion())
+    //{
+    //    data << (uint8)CHAR_CREATE_EXPANSION;
+    //    sLog.outError("Expansion %u account:[%d] tried to Create character with expansion %u race (%u)", Expansion(), GetAccountId(), raceEntry->expansion, race_);
+    //    SendPacket(&data);
+    //    return;
+    //}
 
+    // FIXME
     // prevent character creating Expansion class without Expansion account
-    if (classEntry->expansion > Expansion())
-    {
-        data << (uint8)CHAR_CREATE_EXPANSION_CLASS;
-        sLog.outError("Expansion %u account:[%d] tried to Create character with expansion %u class (%u)", Expansion(), GetAccountId(), classEntry->expansion, class_);
-        SendPacket(&data);
-        return;
-    }
+    //if (classEntry->expansion > Expansion())
+    //{
+    //    data << (uint8)CHAR_CREATE_EXPANSION_CLASS;
+    //    sLog.outError("Expansion %u account:[%d] tried to Create character with expansion %u class (%u)", Expansion(), GetAccountId(), classEntry->expansion, class_);
+    //    SendPacket(&data);
+    //    return;
+    //}
 
     // prevent character creating with invalid name
     if (!normalizePlayerName(name))
@@ -631,6 +640,13 @@ void WorldSession::HandleCharDeleteOpcode(WorldPacket& recv_data)
 
 void WorldSession::HandlePlayerLoginOpcode(WorldPacket& recv_data)
 {
+    ObjectGuid playerGuid;
+
+    recv_data.ReadGuidMask<1, 5, 0, 2, 7, 6, 3, 4>(playerGuid);
+    recv_data.ReadGuidBytes<6, 4, 3, 5, 0, 2, 7, 1>(playerGuid);
+    float unk = recv_data.ReadSingle();
+
+    DEBUG_LOG("WORLD: Received opcode Player Logon Message from %s, unk float: %f", playerGuid.GetString().c_str(), unk);
     if (PlayerLoading() || GetPlayer() != NULL)
     {
         sLog.outError("Player tryes to login again, AccountId = %d", GetAccountId());
@@ -638,13 +654,6 @@ void WorldSession::HandlePlayerLoginOpcode(WorldPacket& recv_data)
     }
 
     m_playerLoading = true;
-
-    ObjectGuid playerGuid;
-
-    recv_data.ReadGuidMask<2, 0, 4, 3, 5, 6, 1, 7>(playerGuid);
-    recv_data.ReadGuidBytes<0, 3, 7, 6, 1, 2, 4, 5>(playerGuid);
-
-    DEBUG_LOG("WORLD: Received opcode Player Logon Message from %s", playerGuid.GetString().c_str());
 
     LoginQueryHolder* holder = new LoginQueryHolder(GetAccountId(), playerGuid);
     if (!holder->Initialize())
@@ -691,21 +700,20 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     SendAccountDataTimes(PER_CHARACTER_CACHE_MASK);
 
     data.Initialize(SMSG_FEATURE_SYSTEM_STATUS, 34);        // added in 2.2.0
-    data << uint8(2);                                       // status
     data << uint32(1);                                      // Scrolls of Ressurection?
     data << uint32(1);
     data << uint32(2);
     data << uint32(0);
-    data.WriteBit(true);
-    data.WriteBit(true);
+    data << uint8(2);                                       // complain system status
     data.WriteBit(false);
+    data.WriteBit(false);                                   // session time alert
     data.WriteBit(true);
-    data.WriteBit(false);
-    data.WriteBit(false);                                   // enable(1)/disable(0) voice chat interface in client
+    data.WriteBit(false);                                   // enable(1)/disable(0) voice chat interface in client ?
+    data.WriteBit(true);                                    // quick ticket?
+    data << uint32(60);
+    data << uint32(10);
     data << uint32(1);
     data << uint32(0);
-    data << uint32(10);
-    data << uint32(60);
     SendPacket(&data);
 
     // Send MOTD
@@ -1076,7 +1084,7 @@ void WorldSession::HandleChangePlayerNameOpcodeCallBack(QueryResult* result, uin
     WorldSession* session = sWorld.FindSession(accountId);
     if (!session)
     {
-        delete result;
+        if (result) delete result;
         return;
     }
 
