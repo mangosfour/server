@@ -19958,8 +19958,8 @@ template float Player::ApplySpellMod<float>(uint32 spellId, SpellModOp op, float
 // send Proficiency
 void Player::SendProficiency(ItemClass itemClass, uint32 itemSubclassMask)
 {
-    WorldPacket data(SMSG_SET_PROFICIENCY, 1 + 4);
-    data << uint8(itemClass) << uint32(itemSubclassMask);
+    WorldPacket data(SMSG_SET_PROFICIENCY, 4 + 1);
+    data << uint32(itemSubclassMask) << uint8(itemClass) ;
     GetSession()->SendPacket(&data);
 }
 

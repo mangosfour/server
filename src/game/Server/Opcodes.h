@@ -285,7 +285,7 @@ enum Opcodes
     MSG_MOVE_TOGGLE_COLLISION_CHEAT                       = 0x10DA,
     CMSG_MOVE_SET_FACING                                  = 0x7914, // 4.3.4 15595
     CMSG_MOVE_SET_PITCH                                   = 0x7312, // 4.3.4 15595
-    MSG_MOVE_WORLDPORT_ACK                                = 0x2411, // 4.3.4 15595
+    MSG_MOVE_WORLDPORT_ACK                                = 0x00e0, // 5.4.1 17538
     SMSG_MONSTER_MOVE                                     = 0x6E17, // 4.3.4 15595
     SMSG_MOVE_WATER_WALK                                  = 0x75B1, // 4.3.4 15595
     SMSG_MOVE_LAND_WALK                                   = 0x34B7, // 4.3.4 15595
@@ -349,7 +349,7 @@ enum Opcodes
     CMSG_IGNORE_TRADE                                     = 0x7112, // 4.3.4 15595
     CMSG_ACCEPT_TRADE                                     = 0x7110, // 4.3.4 15595
     CMSG_UNACCEPT_TRADE                                   = 0x391A, // 4.3.4 15595
-    CMSG_CANCEL_TRADE                                     = 0x731E, // 4.3.4 15595
+    CMSG_CANCEL_TRADE                                     = 0x12CC, // 5.4.1 17538
     CMSG_SET_TRADE_ITEM                                   = 0x7B0C, // 4.3.4 15595
     CMSG_CLEAR_TRADE_ITEM                                 = 0x7018, // 4.3.4 15595
     CMSG_SET_TRADE_GOLD                                   = 0x3008, // 4.3.4 15595
