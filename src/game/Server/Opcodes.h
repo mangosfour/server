@@ -93,6 +93,7 @@ enum Opcodes
     CMSG_SEND_EVENT                                       = 0x102E,
     CMSG_DEBUG_AISTATE                                    = 0x102F,
     SMSG_DEBUG_AISTATE                                    = 0x1030,
+    CMSG_DESTROY_ITEM                                     = 0x16CF, // 5.4.1 17538
     CMSG_DISABLE_PVP_CHEAT                                = 0x1031,
     CMSG_ADVANCE_SPAWN_TIME                               = 0x1032,
     SMSG_DESTRUCTIBLE_BUILDING_DAMAGE                     = 0x4825, // 4.3.4 15595
