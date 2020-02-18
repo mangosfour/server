@@ -259,6 +259,19 @@ class ByteBuffer
             return value;
         }
 
+        // Reads a byte (if needed) in-place
+        void ReadByteSeq(uint8& b)
+        {
+            if (b != 0)
+                b ^= read<uint8>();
+        }
+
+        void WriteByteSeq(uint8 b)
+        {
+            if (b != 0)
+                append<uint8>(b ^ 1);
+        }
+
         BitStream ReadBitStream(uint32 len)
         {
             BitStream b;
