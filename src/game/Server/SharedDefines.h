@@ -189,6 +189,7 @@ enum Powers
     POWER_DEMONIC_FURY                      = 15,
     POWER_ARCANE_CHARGES                    = 16,
     MAX_POWERS                              = 17,
+    POWER_ALL                               = 127,
     POWER_HEALTH                            = 0xFFFFFFFE    // (-2 as signed value)
 };
 
@@ -3424,6 +3425,7 @@ enum SkillType
     SKILL_WANDS                        = 228,
     SKILL_POLEARMS                     = 229,
     SKILL_PET_SCORPID                  = 236,
+    SKILL_PET_TURTLE                   = 251,
     SKILL_PET_TALENTS                  = 270,
     SKILL_PLATE_MAIL                   = 293,
     SKILL_LANG_GNOMISH                 = 313,
@@ -3698,6 +3700,13 @@ enum ChatMsg
     CHAT_MSG_BN_WISPER                  = 0x35,     // 4.0.1
     CHAT_MSG_BN_WISPER_INFORM           = 0x36,     // 4.0.1
     CHAT_MSG_BN_CONVERSATION            = 0x37,     // 4.0.1
+    CHAT_MSG_BN_FRIEND              = 0x38,     // 4.0.1
+    CHAT_MSG_BN_UNK_57              = 0x39,     // 4.0.1
+    CHAT_MSG_BN_UNK_58              = 0x3A,     // 4.0.1
+    CHAT_MSG_BN_UNK_59              = 0x3B,     // 4.0.1
+    CHAT_MSG_BN_UNK_60              = 0x3C,     // 4.0.1
+    CHAT_MSG_GUILD_XP               = 0x3D,     // 4.0.1
+    CHAT_MSG_CURRENCY               = 0x3E,     // 4.0.1
     CHAT_MSG_QUEST_BOSS_EMOTE           = 0x3F,     // 5.x
     CHAT_MSG_PET_BATTLE_COMBAT_LOG      = 0x40,     // 5.x
     CHAT_MSG_PET_BATTLE_INFO            = 0x41,     // 5.x
@@ -3997,9 +4006,11 @@ enum BattleGroundTypeId
     BATTLEGROUND_CTF               = 706,                       // 5.x CTF3
     BATTLEGROUND_SM                = 708,                       // 5.x Silvershard Mines
     BATTLEGROUND_TA                = 719,                       // 5.x Tol'Vir Arena
+	BATTLEGROUND_DG                = 754,                       // 5.x Deepwind Gorge
+    BATTLEGROUND_TTP               = 757,                       // 5.x The Tiger's Peak
 };
 
-#define MAX_BATTLEGROUND_TYPE_ID 720
+#define MAX_BATTLEGROUND_TYPE_ID 758
 
 enum ArenaType
 {
