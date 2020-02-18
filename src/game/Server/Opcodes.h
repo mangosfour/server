@@ -287,7 +287,7 @@ enum Opcodes
     CMSG_MOVE_SET_FACING                                  = 0x7914, // 4.3.4 15595
     CMSG_MOVE_SET_PITCH                                   = 0x7312, // 4.3.4 15595
     MSG_MOVE_WORLDPORT_ACK                                = 0x00e0, // 5.4.1 17538
-    SMSG_MONSTER_MOVE                                     = 0x6E17, // 4.3.4 15595
+    SMSG_MONSTER_MOVE                                     = 0x0216, // 5.4.1 17538
     SMSG_MOVE_WATER_WALK                                  = 0x75B1, // 4.3.4 15595
     SMSG_MOVE_LAND_WALK                                   = 0x34B7, // 4.3.4 15595
     CMSG_MOVE_CHARM_PORT_CHEAT                            = 0x10E1,
@@ -1184,7 +1184,7 @@ enum Opcodes
     SMSG_DANCE_QUERY_RESPONSE                             = 0x2F06, // 4.3.4 15595
     SMSG_INVALIDATE_DANCE                                 = 0x0E27, // 4.3.4 15595
     CMSG_DELETE_DANCE                                     = 0x1455,
-    SMSG_LEARNED_DANCE_MOVES                              = 0x0E05, // 4.3.4 15595
+    SMSG_LEARNED_DANCE_MOVES                              = 0x041F, // 5.4.1 17538
     CMSG_LEARN_DANCE_MOVE                                 = 0x1457,
     CMSG_UNLEARN_DANCE_MOVE                               = 0x1458,
     CMSG_SET_RUNE_COUNT                                   = 0x1459,
