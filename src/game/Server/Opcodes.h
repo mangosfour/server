@@ -1438,7 +1438,7 @@ enum Opcodes
     CMSG_OBJECT_UPDATE_FAILED                             = 0x0882, // 5.4.7 18019
     CMSG_REFORGE_ITEM                                     = 0x331A, // 4.3.4 15595
     SMSG_REFORGE_RESULT                                   = 0x58A4, // 4.3.4 15595
-    CMSG_LOAD_SCREEN                                      = 0x2422, // 4.3.4 15595
+    CMSG_LOAD_SCREEN                                      = 0x1DBD, // 5.4.8 18414
     SMSG_START_TIMER                                      = 0x0988, // 5.3.0 17128
 };
 
