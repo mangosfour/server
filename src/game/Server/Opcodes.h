@@ -102,7 +102,7 @@ enum Opcodes
     CMSG_AUTH_SRP6_RECODE                                 = 0x1036,
 	CMSG_CHAR_CREATE                                      = 0x08CD, // 5.4.1 17538
     CMSG_CHAR_ENUM                                        = 0x0848, // 5.4.1 17538
-	CMSG_CHAR_DELETE                                      = 0x09C0, // 5.4.1 17538
+	CMSG_CHAR_DELETE                                      = 0x113B, // 5.4.7 18019
     SMSG_AUTH_SRP6_RESPONSE                               = 0x103A,
     SMSG_CHAR_CREATE                                      = 0x2D05, // 4.3.4 15595
     SMSG_CHAR_ENUM                                        = 0x10B0, // 4.3.4 15595
