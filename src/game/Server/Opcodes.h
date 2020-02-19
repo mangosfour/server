@@ -376,7 +376,7 @@ enum Opcodes
     SMSG_SPELL_FAILURE                                    = 0x0C34, // 4.3.4 15595
     SMSG_SPELL_COOLDOWN                                   = 0x4B16, // 4.3.4 15595
     SMSG_COOLDOWN_EVENT                                   = 0x4F26, // 4.3.4 15595
-    CMSG_CANCEL_AURA                                      = 0x0E26, // 4.3.4 15595
+    CMSG_CANCEL_AURA                                      = 0x16E1, // 5.4.7 18019
     SMSG_EQUIPMENT_SET_ID                                 = 0x2216, // 4.3.4 15595
     SMSG_PET_CAST_FAILED                                  = 0x2B15, // 4.3.4 15595
     SMSG_CHANNEL_START                                    = 0x0A15, // 4.3.4 15595
