@@ -257,8 +257,8 @@ enum Opcodes
     MSG_MOVE_START_TURN_LEFT                              = 0x01D0, // 5.4.8 18414
     MSG_MOVE_START_TURN_RIGHT                             = 0x107B, // 5.4.8 18414
     MSG_MOVE_STOP_TURN                                    = 0x1170, // 5.4.8 18414
-    CMSG_MOVE_START_PITCH_UP                              = 0x0FE1, // 5.4.1 17538
-    CMSG_MOVE_START_PITCH_DOWN                            = 0x16E8, // 5.4.1 17538
+    MSG_MOVE_START_PITCH_UP                               = 0x00D8, // 5.4.8 18414
+    MSG_MOVE_START_PITCH_DOWN                             = 0x08D8, // 5.4.8 18414
     MSG_MOVE_STOP_PITCH                                   = 0x007A, // 5.4.8 18414
     CMSG_MOVE_SET_RUN_MODE                                = 0x0748, // 5.4.1 17538
     CMSG_MOVE_SET_WALK_MODE                               = 0x0BE1, // 5.4.1 17538
