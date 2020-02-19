@@ -106,7 +106,7 @@ enum Opcodes
     SMSG_AUTH_SRP6_RESPONSE                               = 0x103A,
     SMSG_CHAR_CREATE                                      = 0x11C3, // 5.4.8 18414
     SMSG_CHAR_ENUM                                        = 0x10B0, // 4.3.4 15595
-    SMSG_CHAR_DELETE                                      = 0x0304, // 4.3.4 15595
+    SMSG_CHAR_DELETE                                      = 0x0C9F, // 5.4.8 18414
 	CMSG_PLAYER_LOGIN                                     = 0x17D3, // 5.4.7 18019
     SMSG_NEW_WORLD                                        = 0x04D9, // 5.3.0
     SMSG_TRANSFER_PENDING                                 = 0x18A6, // 4.3.4 15595
