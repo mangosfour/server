@@ -407,7 +407,7 @@ enum Opcodes
     SMSG_BREAK_TARGET                                     = 0x0105, // 4.3.4 15595
     CMSG_SAVE_PLAYER                                      = 0x1154,
     CMSG_SETDEATHBINDPOINT                                = 0x1155,
-    SMSG_BINDPOINTUPDATE                                  = 0x04CC, // 5.3.0 17128
+    SMSG_BINDPOINTUPDATE                                  = 0x0E3B, // 5.4.8 18414
     CMSG_GETDEATHBINDZONE                                 = 0x1157,
     SMSG_BINDZONEREPLY                                    = 0x1158,
     SMSG_PLAYERBOUND                                      = 0x12DD, // 5.3.0 17128
