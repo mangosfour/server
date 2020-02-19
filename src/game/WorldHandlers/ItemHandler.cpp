@@ -550,7 +550,7 @@ void WorldSession::HandleBuyItemOpcode(WorldPacket& recv_data)
     }
 }
 
-void WorldSession::HandleListInventoryOpcode(WorldPacket& recvdata)
+void WorldSession::HandleListInventoryOpcode(WorldPacket& recvData)
 {
     ObjectGuid guid;
 
