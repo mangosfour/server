@@ -115,12 +115,31 @@ void WorldSession::HandleQuestgiverHelloOpcode(WorldPacket& recv_data)
     _player->SendPreparedGossip(pCreature);
 }
 
-void WorldSession::HandleQuestgiverAcceptQuestOpcode(WorldPacket& recv_data)
+void WorldSession::HandleQuestgiverAcceptQuestOpcode(WorldPacket& recvData)
 {
     ObjectGuid guid;
     uint32 quest;
-    uint32 unk1;
-    recv_data >> guid >> quest >> unk1;
+
+    recvData >> quest;
+
+    guid[3] = recvData.ReadBit();
+    guid[2] = recvData.ReadBit();
+    guid[7] = recvData.ReadBit();
+    recvData.ReadBit();
+    guid[5] = recvData.ReadBit();
+    guid[0] = recvData.ReadBit();
+    guid[6] = recvData.ReadBit();
+    guid[1] = recvData.ReadBit();
+    guid[4] = recvData.ReadBit();
+
+    recvData.ReadByteSeq(guid[3]);
+    recvData.ReadByteSeq(guid[4]);
+    recvData.ReadByteSeq(guid[7]);
+    recvData.ReadByteSeq(guid[2]);
+    recvData.ReadByteSeq(guid[5]);
+    recvData.ReadByteSeq(guid[1]);
+    recvData.ReadByteSeq(guid[6]);
+    recvData.ReadByteSeq(guid[0]);
 
     if (!CanInteractWithQuestGiver(guid, "CMSG_QUESTGIVER_ACCEPT_QUEST"))
     {
