@@ -267,7 +267,7 @@ enum Opcodes
     MSG_MOVE_TELEPORT_CHEAT                               = 0x10C7,
     CMSG_MOVE_TELEPORT_ACK                                = 0x390C, // 4.3.4 15595
     MSG_MOVE_TOGGLE_FALL_LOGGING                          = 0x10C9,
-    CMSG_MOVE_FALL_LAND                                   = 0x17E9, // 5.4.1 17538
+    MSG_MOVE_FALL_LAND                                    = 0x08FA, // 5.4.8 18414
     CMSG_MOVE_START_SWIM                                  = 0x0FC8, // 5.4.1 17538
     CMSG_MOVE_STOP_SWIM                                   = 0x0FC9, // 5.4.1 17538
     MSG_MOVE_SET_RUN_SPEED_CHEAT                          = 0x10CD,

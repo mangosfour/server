@@ -3328,7 +3328,9 @@ MeleeHitOutcome Unit::RollMeleeOutcomeAgainst(const Unit* pVictim, WeaponAttackT
     bool from_behind = !pVictim->HasInArc(M_PI_F, this);
 
     if (from_behind)
+    {
         DEBUG_FILTER_LOG(LOG_FILTER_COMBAT, "RollMeleeOutcomeAgainst: attack came from behind.");
+    }
 
     // Dodge chance
 
