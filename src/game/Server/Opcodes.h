@@ -284,7 +284,7 @@ enum Opcodes
     MSG_MOVE_SET_TURN_RATE_CHEAT                          = 0x10D8,
     SMSG_MOVE_SET_TURN_RATE                               = 0x30A5, // 4.3.4 15595
     MSG_MOVE_TOGGLE_COLLISION_CHEAT                       = 0x0BC8, // 5.4.1 17538
-    CMSG_MOVE_SET_FACING                                  = 0x7914, // 4.3.4 15595
+    MSG_MOVE_SET_FACING                                   = 0x1050, // 5.4.8 18414
     CMSG_MOVE_SET_PITCH                                   = 0x0261, // 5.4.1 17538
     MSG_MOVE_WORLDPORT_ACK                                = 0x00e0, // 5.4.1 17538
     SMSG_MONSTER_MOVE                                     = 0x0216, // 5.4.1 17538

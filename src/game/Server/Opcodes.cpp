@@ -291,7 +291,7 @@ void InitializeOpcodes()
     //OPCODE(MSG_MOVE_SET_TURN_RATE_CHEAT,                 STATUS_NEVER,    PROCESS_INPLACE,      &WorldSession::Handle_NULL                     );
     OPCODE(SMSG_MOVE_SET_TURN_RATE,                      STATUS_NEVER,    PROCESS_INPLACE,      &WorldSession::Handle_NULL                     );
     //OPCODE(MSG_MOVE_TOGGLE_COLLISION_CHEAT,              STATUS_NEVER,    PROCESS_INPLACE,      &WorldSession::Handle_NULL                     );
-    OPCODE(CMSG_MOVE_SET_FACING,                         STATUS_LOGGEDIN, PROCESS_THREADSAFE,   &WorldSession::HandleMovementOpcodes           );
+    OPCODE(MSG_MOVE_SET_FACING,                          STATUS_LOGGEDIN, PROCESS_THREADSAFE,   &WorldSession::HandleMovementOpcodes           );
     OPCODE(CMSG_MOVE_SET_PITCH,                          STATUS_LOGGEDIN, PROCESS_THREADSAFE,   &WorldSession::HandleMovementOpcodes           );
     OPCODE(MSG_MOVE_WORLDPORT_ACK,                       STATUS_TRANSFER, PROCESS_THREADUNSAFE, &WorldSession::HandleMoveWorldportAckOpcode    );
     OPCODE(SMSG_MONSTER_MOVE,                            STATUS_NEVER,    PROCESS_INPLACE,      &WorldSession::Handle_ServerSide               );
