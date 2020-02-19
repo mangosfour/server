@@ -452,10 +452,19 @@ void WorldSession::HandleCastSpellOpcode(WorldPacket& recvPacket)
 
 void WorldSession::HandleCancelCastOpcode(WorldPacket& recvPacket)
 {
-    uint32 spellId;
+    uint32 spellId = 0;
+    uint8 counter = 0;
 
-    recvPacket.read_skip<uint8>();                          // counter, increments with every CANCEL packet, don't use for now
-    recvPacket >> spellId;
+    bool hasCounter = !recvPacket.ReadBit();
+    bool hasSpellId = !recvPacket.ReadBit();
+
+    recvPacket.FlushBits();
+
+    if (hasCounter)
+        recvPacket >> counter;
+
+    if (hasSpellId)
+        recvPacket >> spellId;
 
     // ignore for remote control state (for player case)
     Unit* mover = _player->GetMover();
