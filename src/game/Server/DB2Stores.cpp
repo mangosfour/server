@@ -38,6 +38,7 @@ DB2Storage <ItemEntry>                    sItemStore(Itemfmt);
 DB2Storage <ItemCurrencyCostEntry>        sItemCurrencyCostStore(ItemCurrencyCostfmt);
 DB2Storage <ItemExtendedCostEntry>        sItemExtendedCostStore(ItemExtendedCostEntryfmt);
 DB2Storage <SpellReagentsEntry>           sSpellReagentsStore(SpellReagentsEntryfmt);
+DB2Storage <SceneScriptEntry>             sSceneScriptStore(SceneScriptfmt);
 
 typedef std::list<std::string> StoreProblemList1;
 uint32 DB2FileCount = 0;
@@ -114,6 +115,7 @@ void LoadDB2Stores(const std::string& dataPath)
     LoadDB2(availableDb2Locales,bad_db2_files,sItemCurrencyCostStore,    db2Path,"ItemCurrencyCost.db2");
     LoadDB2(availableDb2Locales,bad_db2_files,sItemExtendedCostStore,    db2Path,"ItemExtendedCost.db2");
     LoadDB2(availableDb2Locales,bad_db2_files,sSpellReagentsStore,       db2Path,"SpellReagents.db2");
+    LoadDB2(availableDb2Locales,bad_db2_files,sSceneScriptStore,         db2Path, "SceneScript.db2");
 
     // error checks
     if (bad_db2_files.size() >= DB2FileCount)
@@ -135,7 +137,8 @@ void LoadDB2Stores(const std::string& dataPath)
 
     // Check loaded DB2 files proper version
     if (!sItemStore.LookupEntry(109014)            ||       // last item added in 5.4.7 (18019)
-        !sItemExtendedCostStore.LookupEntry(5268)  )        // last item extended cost added in 5.4.7 (18019)
+        !sItemExtendedCostStore.LookupEntry(5268)  ||       // last item extended cost added in 5.4.7 (18019)
+        !sSceneScriptStore.LookupEntry(11156)      )        // last scene script added in 5.4.7 (18019)
     {
         sLog.outString("");
         sLog.outError("Please extract correct db2 files from build %s", AcceptableClientBuildsListStr().c_str());
