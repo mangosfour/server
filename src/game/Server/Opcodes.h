@@ -259,7 +259,7 @@ enum Opcodes
     MSG_MOVE_STOP_TURN                                    = 0x1170, // 5.4.8 18414
     CMSG_MOVE_START_PITCH_UP                              = 0x0FE1, // 5.4.1 17538
     CMSG_MOVE_START_PITCH_DOWN                            = 0x16E8, // 5.4.1 17538
-    CMSG_MOVE_STOP_PITCH                                  = 0x1A48, // 5.4.1 17538
+    MSG_MOVE_STOP_PITCH                                   = 0x007A, // 5.4.8 18414
     CMSG_MOVE_SET_RUN_MODE                                = 0x0748, // 5.4.1 17538
     CMSG_MOVE_SET_WALK_MODE                               = 0x0BE1, // 5.4.1 17538
     MSG_MOVE_TOGGLE_LOGGING                               = 0x10C5,
@@ -269,7 +269,7 @@ enum Opcodes
     MSG_MOVE_TOGGLE_FALL_LOGGING                          = 0x10C9,
     MSG_MOVE_FALL_LAND                                    = 0x08FA, // 5.4.8 18414
     MSG_MOVE_START_SWIM                                   = 0x1858, // 5.4.8 18414
-    CMSG_MOVE_STOP_SWIM                                   = 0x0FC9, // 5.4.1 17538
+    MSG_MOVE_STOP_SWIM                                    = 0x0950, // 5.4.8 18414
     MSG_MOVE_SET_RUN_SPEED_CHEAT                          = 0x10CD,
     SMSG_MOVE_SET_RUN_SPEED                               = 0x0758, // 5.3.0 17128
     MSG_MOVE_SET_RUN_BACK_SPEED_CHEAT                     = 0x10CF,
@@ -927,7 +927,7 @@ enum Opcodes
     SMSG_ARENA_TEAM_EVENT                                 = 0x0617, // 4.3.4 15595
     CMSG_BATTLEMASTER_JOIN_ARENA                          = 0x701C, // 4.3.4 15595
     MSG_MOVE_START_ASCEND                                 = 0x11FA, // 5.4.8 18414
-    CMSG_MOVE_STOP_ASCEND                                 = 0x7B00, // 4.3.4 15595
+    MSG_MOVE_STOP_ASCEND                                  = 0x115A, // 5.4.8 18414
     SMSG_ARENA_TEAM_STATS                                 = 0x4425, // 4.3.4 15595
     CMSG_LFG_JOIN                                         = 0x2430, // 4.3.4 15595
     CMSG_LFG_LEAVE                                        = 0x135E,
