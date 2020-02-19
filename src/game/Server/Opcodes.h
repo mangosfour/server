@@ -459,7 +459,7 @@ enum Opcodes
     SMSG_QUESTGIVER_STATUS                                = 0x2115, // 4.3.4 15595
     CMSG_QUESTGIVER_HELLO                                 = 0x0D17, // 4.3.4 15595
     SMSG_QUESTGIVER_QUEST_LIST                            = 0x0134, // 4.3.4 15595
-    CMSG_QUESTGIVER_QUERY_QUEST                           = 0x2F14, // 4.3.4 15595
+	CMSG_QUESTGIVER_QUERY_QUEST                           = 0x0474, // 5.4.7 18019
     CMSG_QUESTGIVER_QUEST_AUTOLAUNCH                      = 0x1188,
     SMSG_QUESTGIVER_QUEST_DETAILS                         = 0x2425, // 4.3.4 15595
     CMSG_QUESTGIVER_ACCEPT_QUEST                          = 0x6B37, // 4.3.4 15595
