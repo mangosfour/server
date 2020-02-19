@@ -453,13 +453,31 @@ void WorldSession::HandleSellItemOpcode(WorldPacket& recv_data)
     return;
 }
 
-void WorldSession::HandleBuybackItem(WorldPacket& recv_data)
+void WorldSession::HandleBuybackItem(WorldPacket& recvData)
 {
     DEBUG_LOG("WORLD: Received opcode CMSG_BUYBACK_ITEM");
     ObjectGuid vendorGuid;
     uint32 slot;
 
-    recv_data >> vendorGuid >> slot;
+    recvData >> slot;
+
+    vendorGuid[3] = recvData.ReadBit();
+    vendorGuid[5] = recvData.ReadBit();
+    vendorGuid[0] = recvData.ReadBit();
+    vendorGuid[7] = recvData.ReadBit();
+    vendorGuid[2] = recvData.ReadBit();
+    vendorGuid[6] = recvData.ReadBit();
+    vendorGuid[1] = recvData.ReadBit();
+    vendorGuid[4] = recvData.ReadBit();
+
+    recvData.ReadByteSeq(vendorGuid[1]);
+    recvData.ReadByteSeq(vendorGuid[7]);
+    recvData.ReadByteSeq(vendorGuid[6]);
+    recvData.ReadByteSeq(vendorGuid[0]);
+    recvData.ReadByteSeq(vendorGuid[5]);
+    recvData.ReadByteSeq(vendorGuid[3]);
+    recvData.ReadByteSeq(vendorGuid[4]);
+    recvData.ReadByteSeq(vendorGuid[2]);
 
     Creature* pCreature = GetPlayer()->GetNPCIfCanInteractWith(vendorGuid, UNIT_NPC_FLAG_VENDOR);
     if (!pCreature)
@@ -497,13 +515,50 @@ void WorldSession::HandleBuybackItem(WorldPacket& recv_data)
         _player->SendBuyError(BUY_ERR_CANT_FIND_ITEM, pCreature, 0, 0);
 }
 
-void WorldSession::HandleBuyItemOpcode(WorldPacket& recv_data)
+void WorldSession::HandleBuyItemOpcode(WorldPacket& recvData)
 {
     ObjectGuid vendorGuid, bagGuid;
-    uint32 item, slot, count;
-    uint8 type, bagSlot;
+    uint32 item, slot, count, bagSlot;
+    uint8 type;
 
-    recv_data >> vendorGuid >> type >> item >> slot >> count >> bagGuid >> bagSlot;
+    recvData >> bagSlot >> item >> count >> slot;
+
+    bagGuid[2] = recvData.ReadBit();
+    vendorGuid[0] = recvData.ReadBit();
+    bagGuid[5] = recvData.ReadBit();
+    vendorGuid[7] = recvData.ReadBit();
+    bagGuid[0] = recvData.ReadBit();
+    type = recvData.ReadBits(2);
+    bagGuid[6] = recvData.ReadBit();
+    bagGuid[4] = recvData.ReadBit();
+    vendorGuid[2] = recvData.ReadBit();
+    vendorGuid[1] = recvData.ReadBit();
+    bagGuid[3] = recvData.ReadBit();
+    vendorGuid[5] = recvData.ReadBit();
+    bagGuid[7] = recvData.ReadBit();
+    vendorGuid[4] = recvData.ReadBit();
+    bagGuid[1] = recvData.ReadBit();
+    vendorGuid[3] = recvData.ReadBit();
+    vendorGuid[6] = recvData.ReadBit();
+    recvData.FlushBits();
+
+    recvData.ReadByteSeq(bagGuid[1]);
+    recvData.ReadByteSeq(bagGuid[3]);
+    recvData.ReadByteSeq(vendorGuid[2]);
+    recvData.ReadByteSeq(vendorGuid[0]);
+    recvData.ReadByteSeq(bagGuid[2]);
+    recvData.ReadByteSeq(vendorGuid[4]);
+    recvData.ReadByteSeq(vendorGuid[3]);
+    recvData.ReadByteSeq(vendorGuid[1]);
+    recvData.ReadByteSeq(bagGuid[6]);
+    recvData.ReadByteSeq(vendorGuid[6]);
+    recvData.ReadByteSeq(vendorGuid[5]);
+    recvData.ReadByteSeq(bagGuid[5]);
+    recvData.ReadByteSeq(bagGuid[7]);
+    recvData.ReadByteSeq(bagGuid[4]);
+    recvData.ReadByteSeq(bagGuid[0]);
+    recvData.ReadByteSeq(vendorGuid[7]);
+
     DEBUG_LOG("WORLD: Received opcode CMSG_BUY_ITEM, vendorguid: %s, type: %u, item: %u, slot: %u, count: %u, bagGuid: %s, bagSlog: %u",
         vendorGuid.GetString().c_str(), type, item, slot, count, bagGuid.GetString().c_str(), bagSlot);
 
@@ -809,12 +864,29 @@ bool WorldSession::CheckBanker(ObjectGuid guid)
     return true;
 }
 
-void WorldSession::HandleBuyBankSlotOpcode(WorldPacket& recvPacket)
+void WorldSession::HandleBuyBankSlotOpcode(WorldPacket& recvData)
 {
     DEBUG_LOG("WORLD: CMSG_BUY_BANK_SLOT");
 
     ObjectGuid guid;
-    recvPacket >> guid;
+
+    guid[7] = recvData.ReadBit();
+    guid[2] = recvData.ReadBit();
+    guid[3] = recvData.ReadBit();
+    guid[1] = recvData.ReadBit();
+    guid[5] = recvData.ReadBit();
+    guid[4] = recvData.ReadBit();
+    guid[0] = recvData.ReadBit();
+    guid[6] = recvData.ReadBit();
+
+    recvData.ReadByteSeq(guid[7]);
+    recvData.ReadByteSeq(guid[0]);
+    recvData.ReadByteSeq(guid[3]);
+    recvData.ReadByteSeq(guid[1]);
+    recvData.ReadByteSeq(guid[6]);
+    recvData.ReadByteSeq(guid[2]);
+    recvData.ReadByteSeq(guid[4]);
+    recvData.ReadByteSeq(guid[5]);
 
     if (!CheckBanker(guid))
     {

@@ -487,7 +487,7 @@ enum Opcodes
     SMSG_LIST_INVENTORY                                   = 0x7CB0, // 4.3.4 15595
     CMSG_SELL_ITEM                                        = 0x0B7D, // 5.4.1 17538
     SMSG_SELL_ITEM                                        = 0x6105, // 4.3.4 15595
-    CMSG_BUY_ITEM                                         = 0x0B66, // 5.4.1 17538
+    CMSG_BUY_ITEM                                         = 0x1077, // 5.4.7 18019
     SMSG_BUY_ITEM                                         = 0x0F26, // 4.3.4 15595
     SMSG_BUY_FAILED                                       = 0x6435, // 4.3.4 15595
     CMSG_TAXICLEARALLNODES                                = 0x11A7,
@@ -509,7 +509,7 @@ enum Opcodes
     SMSG_PLAYERBINDERROR                                  = 0x6A24, // 4.3.4 15595
     CMSG_BANKER_ACTIVATE                                  = 0x0005, // 4.3.4 15595
     SMSG_SHOW_BANK                                        = 0x2627, // 4.3.4 15595
-    CMSG_BUY_BANK_SLOT                                    = 0x0425, // 4.3.4 15595
+    CMSG_BUY_BANK_SLOT                                    = 0x00FE, // 5.4.7 18019
     CMSG_PETITION_SHOWLIST                                = 0x4617, // 4.3.4 15595
     SMSG_PETITION_SHOWLIST                                = 0x6405, // 4.3.4 15595
     CMSG_PETITION_BUY                                     = 0x4E05, // 4.3.4 15595
@@ -719,7 +719,7 @@ enum Opcodes
     CMSG_GROUP_RAID_CONVERT                               = 0x6E27, // 4.3.4 15595
     CMSG_GROUP_REQUEST_JOIN_UPDATES                       = 0x2583, // 4.3.4 15595
     CMSG_GROUP_ASSISTANT_LEADER                           = 0x6025, // 4.3.4 15595
-    CMSG_BUYBACK_ITEM                                     = 0x6C17, // 4.3.4 15595
+    CMSG_BUYBACK_ITEM                                     = 0x07D7, // 5.4.7 18019
     SMSG_SERVER_MESSAGE                                   = 0x6C04, // 4.3.4 15595
     CMSG_SET_SAVED_INSTANCE_EXTEND                        = 0x6706, // 4.3.4 15595
     SMSG_LFG_OFFER_CONTINUE                               = 0x12C4, // 5.3.0 17128
