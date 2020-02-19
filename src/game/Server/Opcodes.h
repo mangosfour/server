@@ -584,7 +584,7 @@ enum Opcodes
     SMSG_GMTICKET_CREATE                                  = 0x2107, // 4.3.4 15595
     CMSG_GMTICKET_UPDATETEXT                              = 0x0636, // 4.3.4 15595
     SMSG_GMTICKET_UPDATETEXT                              = 0x6535, // 4.3.4 15595
-    SMSG_ACCOUNT_DATA_TIMES                               = 0x4B05, // 4.3.4 15595
+    SMSG_ACCOUNT_DATA_TIMES                               = 0x0F40, // 5.4.7 18019
     CMSG_REQUEST_ACCOUNT_DATA                             = 0x6505, // 4.3.4 15595
     CMSG_UPDATE_ACCOUNT_DATA                              = 0x4736, // 4.3.4 15595
     SMSG_UPDATE_ACCOUNT_DATA                              = 0x0684, // 5.3.0 17128
