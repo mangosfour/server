@@ -249,14 +249,14 @@ enum Opcodes
 	CMSG_AREATRIGGER                                      = 0x155A, // 5.4.7 18019
     MSG_MOVE_START_FORWARD                                = 0x095A, // 5.4.8 18414
     MSG_MOVE_START_BACKWARD                               = 0x09D8, // 5.4.8 18414
-    CMSG_MOVE_STOP                                        = 0x0649, // 5.4.1 17538
+    MSG_MOVE_STOP                                         = 0x08F1, // 5.4.8 18414
     MSG_MOVE_START_STRAFE_LEFT                            = 0x01F8, // 5.4.8 18414
     MSG_MOVE_START_STRAFE_RIGHT                           = 0x1058, // 5.4.8 18414
-    CMSG_MOVE_STOP_STRAFE                                 = 0x12C9, // 5.4.1 17538
+    MSG_MOVE_STOP_STRAFE                                  = 0x0171, // 5.4.8 18414
     MSG_MOVE_JUMP                                         = 0x1153, // 5.4.8 18414
     MSG_MOVE_START_TURN_LEFT                              = 0x01D0, // 5.4.8 18414
     MSG_MOVE_START_TURN_RIGHT                             = 0x107B, // 5.4.8 18414
-    CMSG_MOVE_STOP_TURN                                   = 0x1749, // 5.4.1 17538
+    MSG_MOVE_STOP_TURN                                    = 0x1170, // 5.4.8 18414
     CMSG_MOVE_START_PITCH_UP                              = 0x0FE1, // 5.4.1 17538
     CMSG_MOVE_START_PITCH_DOWN                            = 0x16E8, // 5.4.1 17538
     CMSG_MOVE_STOP_PITCH                                  = 0x1A48, // 5.4.1 17538
