@@ -1739,32 +1739,35 @@ void WorldSession::HandleObjectUpdateFailedOpcode(WorldPacket& recvPacket)
 {
     ObjectGuid guid;
 
-    guid[2] = recvPacket.ReadBit();
-    guid[3] = recvPacket.ReadBit();
-    guid[5] = recvPacket.ReadBit();
-    guid[0] = recvPacket.ReadBit();
     guid[4] = recvPacket.ReadBit();
-    guid[7] = recvPacket.ReadBit();
     guid[6] = recvPacket.ReadBit();
+    guid[3] = recvPacket.ReadBit();
+    guid[0] = recvPacket.ReadBit();
+    guid[7] = recvPacket.ReadBit();
+    guid[5] = recvPacket.ReadBit();
     guid[1] = recvPacket.ReadBit();
+    guid[2] = recvPacket.ReadBit();
 
-    recvPacket.ReadByteSeq(guid[1]);
-    recvPacket.ReadByteSeq(guid[2]);
-    recvPacket.ReadByteSeq(guid[5]);
-    recvPacket.ReadByteSeq(guid[0]);
-    recvPacket.ReadByteSeq(guid[3]);
     recvPacket.ReadByteSeq(guid[4]);
-    recvPacket.ReadByteSeq(guid[6]);
     recvPacket.ReadByteSeq(guid[7]);
+    recvPacket.ReadByteSeq(guid[0]);
+    recvPacket.ReadByteSeq(guid[6]);
+    recvPacket.ReadByteSeq(guid[5]);
+    recvPacket.ReadByteSeq(guid[2]);
+    recvPacket.ReadByteSeq(guid[1]);
+    recvPacket.ReadByteSeq(guid[3]);
 
 
     DEBUG_LOG("WORLD: Received CMSG_OBJECT_UPDATE_FAILED from %s (%u) guid: %s", GetPlayerName(), GetAccountId(), guid.GetString().c_str());
+
     if (_player->IsInWorld())
     {
         if (WorldObject* obj = _player->GetMap()->GetWorldObject(guid))
             obj->SendCreateUpdateToPlayer(_player);
     }
     else
+    {
         sLog.outError("WorldSession::HandleObjectUpdateFailedOpcode: received from player not in map");
+    }
 }
 
