@@ -896,7 +896,7 @@ enum Opcodes
     SMSG_CHARACTER_PROFILE                                = 0x1339,
     SMSG_CHARACTER_PROFILE_REALM_CONNECTED                = 0x133A,
     SMSG_DEFENSE_MESSAGE                                  = 0x0314, // 4.3.4 15595
-    SMSG_WORLD_SERVER_INFO                                = 0x31A2, // 4.3.4 15595
+    SMSG_WORLD_SERVER_INFO                                = 0x0427, // 5.4.1 17538
     MSG_GM_RESETINSTANCELIMIT                             = 0x133D,
     SMSG_MOTD                                             = 0x12DC, // 5.3.0 17128
     SMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY     = 0x133F,

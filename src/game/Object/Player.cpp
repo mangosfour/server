@@ -21627,18 +21627,81 @@ void Player::SetGroup(Group* group, int8 subgroup)
 
 void Player::SendInitialPacketsBeforeAddToMap()
 {
+    //GetSocial()->SendSocialList();
+
+    //// Homebind
+    //WorldPacket data(SMSG_BINDPOINTUPDATE, 5 * 4);
+    //data << m_homebindX << m_homebindY << m_homebindZ;
+    //data << (uint32) m_homebindMapId;
+    //data << (uint32) m_homebindAreaId;
+    //GetSession()->SendPacket(&data);
+
+    //// SMSG_SET_PROFICIENCY
+    //// SMSG_SET_PCT_SPELL_MODIFIER
+    //// SMSG_SET_FLAT_SPELL_MODIFIER
+
+    //SendTalentsInfoData(false);
+
+    //data.Initialize(SMSG_INSTANCE_DIFFICULTY, 4 + 4);
+    //data << uint32(GetMap()->GetDifficulty());
+    //GetSession()->SendPacket(&data);
+
+    //SendInitialSpells();
+
+    //data.Initialize(SMSG_SEND_UNLEARN_SPELLS, 4);
+    //data << uint32(0);                                      // count, for(count) uint32;
+    //GetSession()->SendPacket(&data);
+
+    //SendInitialActionButtons();
+    //m_reputationMgr.SendInitialReputations();
+
+    //if (!isAlive())
+    //    SendCorpseReclaimDelay(true);
+
+    //SendInitWorldStates(GetZoneId(), GetAreaId());
+
+    //SendEquipmentSetList();
+
+    //m_achievementMgr.SendAllAchievementData();
+
+    //data.Initialize(SMSG_LOGIN_SETTIMESPEED, 4 + 4 + 4);
+    //data << uint32(secsToTimeBitFields(sWorld.GetGameTime()));
+    //data << uint32(secsToTimeBitFields(sWorld.GetGameTime()));
+    //data << (float)0.01666667f;                             // game speed
+    //data << uint32(0);                                      // added in 3.1.2
+    //data << uint32(0);                                      // added in 3.1.2
+    //GetSession()->SendPacket(&data);
+
+    //// SMSG_TALENTS_INFO x 2 for pet (unspent points and talents in separate packets...)
+    //// SMSG_PET_GUIDS
+    //// SMSG_POWER_UPDATE
+
+    //// set fly flag if in fly form or taxi flight to prevent visually drop at ground in showup moment
+    //if (IsFreeFlying() || IsTaxiFlying())
+    //    m_movementInfo.AddMovementFlag(MOVEFLAG_FLYING);
+
+    //SendCurrencies();
+
+    //SetMover(this);
+
+	    /// Pass 'this' as argument because we're not stored in ObjectAccessor yet
     GetSocial()->SendSocialList();
 
+    // guild bank list wtf?
+
     // Homebind
-    WorldPacket data(SMSG_BINDPOINTUPDATE, 5 * 4);
-    data << m_homebindX << m_homebindY << m_homebindZ;
+    WorldPacket data(SMSG_BINDPOINTUPDATE, 5*4);
+    data << m_homebindZ;
+    data << m_homebindX;
     data << (uint32) m_homebindMapId;
+    data << m_homebindY;
     data << (uint32) m_homebindAreaId;
     GetSession()->SendPacket(&data);
 
     // SMSG_SET_PROFICIENCY
     // SMSG_SET_PCT_SPELL_MODIFIER
     // SMSG_SET_FLAT_SPELL_MODIFIER
+    // SMSG_UPDATE_AURA_DURATION
 
     SendTalentsInfoData(false);
 
@@ -21646,25 +21709,24 @@ void Player::SendInitialPacketsBeforeAddToMap()
     data.WriteBit(0);                                               // HasRestrictedLevel
     data.WriteBit(0);                                               // HasRestrictedMoney
     data.WriteBit(0);                                               // IneligibleForLoot
-
+    data.FlushBits();
     //if (IneligibleForLoot)
     //    data << uint32(0);                                        // EncounterMask
 
     data << uint8(0);                                               // IsOnTournamentRealm
-
     //if (HasRestrictedMoney)
     //    data << uint32(100000);                                   // RestrictedMoney (starter accounts)
     //if (HasRestrictedLevel)
     //    data << uint32(20);                                       // RestrictedLevel (starter accounts)
 
-    data << uint32(sWorld.GetNextWeeklyQuestsResetTime() - WEEK);   // LastWeeklyReset (not instance reset)
+    data << uint32(sWorld.GetNextWeeklyQuestsResetTime() - WEEK);  // LastWeeklyReset (not instance reset)
     data << uint32(GetMap()->GetDifficulty());
     GetSession()->SendPacket(&data);
 
     SendInitialSpells();
 
     data.Initialize(SMSG_SEND_UNLEARN_SPELLS, 4);
-    data << uint32(0);                                      // count, for(count) uint32;
+    data << uint32(0);                                      // count, for (count) uint32;
     GetSession()->SendPacket(&data);
 
     SendInitialActionButtons();
@@ -21679,14 +21741,21 @@ void Player::SendInitialPacketsBeforeAddToMap()
 
     m_achievementMgr.SendAllAchievementData();
 
-    data.Initialize(SMSG_LOGIN_SETTIMESPEED, 4 + 4 + 4);
+    data.Initialize(SMSG_LOGIN_SETTIMESPEED, 20);
+
+    data << uint32(1);
+    data << uint32(1);
+    data << float(0.01666667f);                             // game speed
     data << uint32(secsToTimeBitFields(sWorld.GetGameTime()));
-    data << (float)0.01666667f;                             // game speed
-    data << uint32(0);                                      // added in 3.1.2
+    data << uint32(secsToTimeBitFields(sWorld.GetGameTime()));
+
     GetSession()->SendPacket(&data);
+
+    GetReputationMgr().SendForceReactions();                // SMSG_SET_FORCED_REACTIONS
 
     // SMSG_TALENTS_INFO x 2 for pet (unspent points and talents in separate packets...)
     // SMSG_PET_GUIDS
+    // SMSG_UPDATE_WORLD_STATE
     // SMSG_POWER_UPDATE
 
     // set fly flag if in fly form or taxi flight to prevent visually drop at ground in showup moment
@@ -25837,7 +25906,7 @@ const uint32 armorSpecToClass[MAX_CLASSES] =
     86529,  // CLASS_SHAMAN
     0,      // CLASS_MAGE
     0,      // CLASS_WARLOCK
-    0,      // CLASS_UNK2
+    0,      // CLASS_MONK
     86530,  // CLASS_DRUID
 };
 
