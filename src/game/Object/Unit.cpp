@@ -107,11 +107,11 @@ void MovementInfo::Read(ByteBuffer& data, uint16 opcode)
             continue;
         }
 
-        if (element >= MSEGuid2Bit0 && element <= MSEGuid2Bit7)
-        {
-            guid2[element - MSEGuid2Bit0] = data.ReadBit();
-            continue;
-        }
+        //if (element >= MSEGuid2Bit0 && element <= MSEGuid2Bit7)
+        //{
+        //    guid2[element - MSEGuid2Bit0] = data.ReadBit();
+        //    continue;
+        //}
 
         if (element >= MSETransportGuidBit0 && element <= MSETransportGuidBit7)
         {
@@ -127,12 +127,12 @@ void MovementInfo::Read(ByteBuffer& data, uint16 opcode)
             continue;
         }
 
-        if (element >= MSEGuid2Byte0 && element <= MSEGuid2Byte7)
-        {
-            if (guid2[element - MSEGuid2Byte0])
-                guid2[element - MSEGuid2Byte0] ^= data.ReadUInt8();
-            continue;
-        }
+        //if (element >= MSEGuid2Byte0 && element <= MSEGuid2Byte7)
+        //{
+        //    if (guid2[element - MSEGuid2Byte0])
+        //        guid2[element - MSEGuid2Byte0] ^= data.ReadUInt8();
+        //    continue;
+        //}
 
         if (element >= MSETransportGuidByte0 && element <= MSETransportGuidByte7)
         {
@@ -273,9 +273,9 @@ void MovementInfo::Read(ByteBuffer& data, uint16 opcode)
             case MSEMovementCounter:
                 data.read_skip<uint32>();
                 break;
-            case MSEByteParam:
-                 data >> byteParam;
-                 break;
+            //case MSEByteParam:
+            //     data >> byteParam;
+            //     break;
             default:
                 MANGOS_ASSERT(false && "Wrong movement status element");
                 break;

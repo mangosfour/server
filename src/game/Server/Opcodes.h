@@ -1409,7 +1409,7 @@ enum Opcodes
     UMSG_UNKNOWN_1332                                     = 0x1535,
     UMSG_UNKNOWN_1333                                     = 0x1536,
     UMSG_UNKNOWN_1334                                     = 0x1537,
-    SMSG_PLAYER_MOVE                                      = 0x79A2, // 4.3.4 15595
+    SMSG_PLAYER_MOVE                                      = 0x1A32, // 5.4.8 18414
     SMSG_SPLINE_MOVE_SET_FLIGHT_BACK_SPEED                = 0x38B3, // 4.3.4 15595
     SMSG_SPLINE_MOVE_SET_FLIGHT_SPEED                     = 0x39A0, // 4.3.4 15595
     SMSG_SPLINE_MOVE_SET_PITCH_RATE                       = 0x14B0, // 4.3.4 15595
