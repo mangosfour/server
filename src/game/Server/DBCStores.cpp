@@ -673,6 +673,7 @@ void LoadDBCStores(const std::string& dataPath)
                     break;
             }
 
+            if (spellEffect->EffectSpellId < MAX_EFFECT_INDEX && spellEffect->Difficulty == 0)
             sSpellEffectMap[spellEffect->EffectSpellId].effects[spellEffect->EffectIndex] = spellEffect;
         }
     }
@@ -906,11 +907,11 @@ void LoadDBCStores(const std::string& dataPath)
     }
 
     // Check loaded DBC files proper version
-    if (!sAreaStore.LookupEntry(5491)              ||       // last area (areaflag) added in 5.4.1 17538
-        !sCharTitlesStore.LookupEntry(389)         ||       // last char title added in 5.4.1 17538
-        !sGemPropertiesStore.LookupEntry(2467)     ||       // last gem property added in 5.4.1 17538
-        !sMapStore.LookupEntry(1173)               ||       // last map added in 5.4.1 17538
-        !sSpellStore.LookupEntry(152028)           )        // last added spell in 5.4.1 17538
+    if (!sAreaStore.LookupEntry(5491)              ||       // last area (areaflag) added in 5.4.7 (18019)
+        !sCharTitlesStore.LookupEntry(389)         ||       // last char title added in 5.4.7 (18019)
+        !sGemPropertiesStore.LookupEntry(2467)     ||       // last gem property added in 5.4.7 (18019)
+        !sMapStore.LookupEntry(1173)               ||       // last map added in 5.4.7 (18019)
+        !sSpellStore.LookupEntry(155748)           )        // last added spell in 5.4.7 (18019)
     {
         sLog.outError("\nYou have mixed version DBC files. Please re-extract DBC files for one from client build: %s", AcceptableClientBuildsListStr().c_str());
         Log::WaitBeforeContinueIfNeed();
@@ -1196,6 +1197,7 @@ ContentLevels GetContentLevelsForMapAndZone(uint32 mapId, uint32 zoneId)
         case 1:  return CONTENT_61_70;
         case 2:  return CONTENT_71_80;
         case 3:  return CONTENT_81_85;
+        case 4:  return CONTENT_86_90;
     }
 }
 
