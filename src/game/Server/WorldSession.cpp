@@ -846,22 +846,113 @@ void WorldSession::SendAuthWaitQue(uint32 position)
 {
     if (position == 0)
     {
-        WorldPacket packet( SMSG_AUTH_RESPONSE, 2 );
-        packet.WriteBit(false);
-        packet.WriteBit(false);
-        packet << uint8( AUTH_OK );
+        WorldPacket packet(SMSG_AUTH_RESPONSE, 1);
+        packet.WriteBit(false);     // no account data
+        packet.WriteBit(false);     // no queue
+        packet << uint8(AUTH_OK);
         SendPacket(&packet);
     }
     else
     {
-        WorldPacket packet( SMSG_AUTH_RESPONSE, 1+4+1 );
+        WorldPacket packet(SMSG_AUTH_RESPONSE, 6);
+        packet.WriteBit(false);     // has account data
         packet.WriteBit(true);      // has queue
         packet.WriteBit(false);     // unk queue-related
-        packet.WriteBit(false);     // has account info
         packet << uint8(AUTH_WAIT_QUEUE);
         packet << uint32(position);
         SendPacket(&packet);
     }
+}
+
+struct ExpansionInfoStrunct
+{
+    uint8 raceOrClass;
+    uint8 expansion;
+};
+
+ExpansionInfoStrunct classExpansionInfo[MAX_CLASSES - 1] =
+{
+    { 1, 0 },
+    { 2, 0 },
+    { 3, 0 },
+    { 4, 0 },
+    { 5, 0 },
+    { 6, 2 },
+    { 7, 0 },
+    { 8, 0 },
+    { 9, 0 },
+    { 10, 4 },
+    { 11, 0 }
+};
+
+ExpansionInfoStrunct raceExpansionInfo[MAX_PLAYABLE_RACES] =
+{
+    { 1, 0 },
+    { 2, 0 },
+    { 3, 0 },
+    { 4, 0 },
+    { 5, 0 },
+    { 6, 0 },
+    { 7, 0 },
+    { 8, 0 },
+    { 9, 3 },
+    { 10, 1 },
+    { 11, 1 },
+    { 22, 3 },
+    { 24, 4 },
+    { 25, 4 },
+    { 26, 4 }
+};
+
+void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
+{
+    bool hasAccountData = true;
+
+    WorldPacket packet(SMSG_AUTH_RESPONSE, 1 /*bits*/ + 4 + 1 + 4 + 1 + 4 + 1 + 1 + (queued ? 4 : 0));
+    packet << uint8(code);
+    packet.WriteBit(queued);                            // IsInQueue
+    if (queued)
+        packet.WriteBit(1);                             // unk
+
+    packet.WriteBit(hasAccountData);
+    if (hasAccountData)
+    {
+        packet.WriteBit(0);
+        packet.WriteBits(0, 21);
+        packet.WriteBits(0, 21);
+        packet.WriteBits(MAX_PLAYABLE_RACES, 23);
+        packet.WriteBit(0);
+        packet.WriteBit(0);
+        packet.WriteBit(0);
+        packet.WriteBits(MAX_CLASSES - 1, 23);
+
+        packet << uint32(0);
+        packet << uint32(0);
+        packet << uint8(5); //TODO: FIXME uint8(Expansion());                   // Unknown, these two show the same
+
+        for (uint8 i = 0; i < MAX_PLAYABLE_RACES; ++i)
+        {
+            packet << uint8(raceExpansionInfo[i].expansion);
+            packet << uint8(raceExpansionInfo[i].raceOrClass);
+        }
+
+        packet << uint8(5); //TODO: FIXME uint8(Expansion());                   // Unknown, these two show the same
+        packet << uint32(0);
+
+        for (uint8 i = 0; i < MAX_CLASSES - 1; ++i)
+        {
+            packet << uint8(classExpansionInfo[i].raceOrClass);
+            packet << uint8(classExpansionInfo[i].expansion);
+        }
+
+        packet << uint32(0);
+        packet << uint32(0);
+    }
+
+    if (queued)
+        packet << uint32(queuePos);
+
+    SendPacket(&packet);
 }
 
 void WorldSession::LoadGlobalAccountData()
