@@ -342,7 +342,7 @@ enum Opcodes
     CMSG_DESTROYITEM                                      = 0x4A27, // 4.3.4 15595
     SMSG_INVENTORY_CHANGE_FAILURE                         = 0x2236, // 4.3.4 15595
     SMSG_OPEN_CONTAINER                                   = 0x4714, // 4.3.4 15595
-    CMSG_INSPECT                                          = 0x0927, // 4.3.4 15595
+    CMSG_INSPECT                                          = 0x01D4, // 5.4.7 18019
     SMSG_INSPECT_RESULTS_UPDATE                           = 0x0B98, // 5.3.0 17128
     CMSG_INITIATE_TRADE                                   = 0x7916, // 4.3.4 15595
     CMSG_BEGIN_TRADE                                      = 0x721E, // 4.3.4 15595
