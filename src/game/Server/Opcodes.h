@@ -382,7 +382,7 @@ enum Opcodes
     SMSG_CHANNEL_START                                    = 0x0A15, // 4.3.4 15595
     SMSG_CHANNEL_UPDATE                                   = 0x2417, // 4.3.4 15595
     CMSG_CANCEL_CHANNELLING                               = 0x6C25, // 4.3.4 15595
-    SMSG_AI_REACTION                                      = 0x0637, // 4.3.4 15595
+	SMSG_AI_REACTION                                      = 0x06AF, // 5.4.8 18414
     CMSG_SET_SELECTION                                    = 0x07CD, // 5.4.1 17538
     CMSG_EQUIPMENT_SET_DELETE                              = 0x4D07, // 4.3.4 15595
     CMSG_INSTANCE_LOCK_RESPONSE                           = 0x1140,
