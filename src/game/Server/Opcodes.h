@@ -268,7 +268,7 @@ enum Opcodes
     CMSG_MOVE_TELEPORT_ACK                                = 0x390C, // 4.3.4 15595
     MSG_MOVE_TOGGLE_FALL_LOGGING                          = 0x10C9,
     MSG_MOVE_FALL_LAND                                    = 0x08FA, // 5.4.8 18414
-    CMSG_MOVE_START_SWIM                                  = 0x0FC8, // 5.4.1 17538
+    MSG_MOVE_START_SWIM                                   = 0x1858, // 5.4.8 18414
     CMSG_MOVE_STOP_SWIM                                   = 0x0FC9, // 5.4.1 17538
     MSG_MOVE_SET_RUN_SPEED_CHEAT                          = 0x10CD,
     SMSG_MOVE_SET_RUN_SPEED                               = 0x0758, // 5.3.0 17128
@@ -926,7 +926,7 @@ enum Opcodes
     CMSG_ARENA_TEAM_LEADER                                = 0x4204, // 4.3.4 15595
     SMSG_ARENA_TEAM_EVENT                                 = 0x0617, // 4.3.4 15595
     CMSG_BATTLEMASTER_JOIN_ARENA                          = 0x701C, // 4.3.4 15595
-    CMSG_MOVE_START_ASCEND                                = 0x390A,
+    MSG_MOVE_START_ASCEND                                 = 0x11FA, // 5.4.8 18414
     CMSG_MOVE_STOP_ASCEND                                 = 0x7B00, // 4.3.4 15595
     SMSG_ARENA_TEAM_STATS                                 = 0x4425, // 4.3.4 15595
     CMSG_LFG_JOIN                                         = 0x2430, // 4.3.4 15595
@@ -1004,7 +1004,7 @@ enum Opcodes
     SMSG_SET_EXTRA_AURA_INFO_OBSOLETE                     = 0x13A5,
     SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE_OBSOLETE         = 0x13A6,
     SMSG_CLEAR_EXTRA_AURA_INFO_OBSOLETE                   = 0x13A7,
-    CMSG_MOVE_START_DESCEND                               = 0x3800, // 4.3.4 15595
+    MSG_MOVE_START_DESCEND                                = 0x01D1, // 5.4.8 18414
     CMSG_IGNORE_REQUIREMENTS_CHEAT                        = 0x13A9,
     SMSG_IGNORE_REQUIREMENTS_CHEAT                        = 0x13AA,
     SMSG_SPELL_CHANCE_PROC_LOG                            = 0x13AB,
