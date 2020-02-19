@@ -505,7 +505,7 @@ enum Opcodes
     CMSG_TRAINER_BUY_SPELL                                = 0x4415, // 4.3.4 15595
     SMSG_TRAINER_SERVICE                                  = 0x6A05, // 4.3.4 15595
     SMSG_TRAINER_BUY_FAILED                               = 0x0004, // 4.3.4 15595
-    CMSG_BINDER_ACTIVATE                                  = 0x4006, // 4.3.4 15595
+    CMSG_BINDER_ACTIVATE                                  = 0x1248, // 5.4.8 18414
     SMSG_PLAYERBINDERROR                                  = 0x6A24, // 4.3.4 15595
     CMSG_BANKER_ACTIVATE                                  = 0x0005, // 4.3.4 15595
     SMSG_SHOW_BANK                                        = 0x2627, // 4.3.4 15595
