@@ -1188,7 +1188,7 @@ void ExtractMapsFromMpq(uint32 build, const int locale)
     printf("\nExtracting maps...\n");
     if (build==17520)
 	{
-		build = 17538;
+		build = 18273;
 	}
 
     uint32 map_count = ReadMapDBC(locale);
@@ -1525,7 +1525,7 @@ int main(int argc, char* arg[])
                 build = ReadBuild(FirstLocale);
                 if (build==17520)
                 {
-                    build = 17538;
+                    build = 18273;
                 }
                 printf("Detected client build: %u\n", build);
                 break;
@@ -1538,7 +1538,7 @@ int main(int argc, char* arg[])
                 build = ReadBuild(FirstLocale);
                 if (build==17520)
                 {
-                    build = 17538;
+                    build = 18273;
                 }
                 printf("Detected client build: %u\n", build);
                 ExtractDBCFiles(i, true);
