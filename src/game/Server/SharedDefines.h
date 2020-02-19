@@ -4175,9 +4175,9 @@ enum TrackedAuraType
 
 // we need to stick to 1 version or half of the stuff will work for someone
 // others will not and opposite
-// will only support WoW, WoW:TBC, WoW:WotLK , WoW:Cataclysm and WoW:MOP 5.3.0 client build 17538...
+// will only support WoW:MOP 5.4.8 client build 18414...
 
-#define EXPECTED_MANGOSD_CLIENT_BUILD        {18273, 0}
+#define EXPECTED_MANGOSD_CLIENT_BUILD        {18414, 0}
 
 // max supported expansion level in mangosd
 // NOTE: not set it more that supported by targeted client version with all expansions installed
