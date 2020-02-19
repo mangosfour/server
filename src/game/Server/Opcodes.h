@@ -246,7 +246,7 @@ enum Opcodes
     CMSG_GAMEOBJ_USE                                      = 0x4E17, // 4.3.4 15595
     CMSG_DESTROY_ITEMS                                    = 0x10B3,
     SMSG_GAMEOBJECT_CUSTOM_ANIM                           = 0x4936, // 4.3.4 15595
-    CMSG_AREATRIGGER                                      = 0x0937, // 4.3.4 15595
+	CMSG_AREATRIGGER                                      = 0x155A, // 5.4.7 18019
     CMSG_MOVE_START_FORWARD                               = 0x13C9, // 5.4.1 17538
     CMSG_MOVE_START_BACKWARD                              = 0x12C0, // 5.4.1 17538
     CMSG_MOVE_STOP                                        = 0x0649, // 5.4.1 17538
