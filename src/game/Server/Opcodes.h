@@ -254,8 +254,8 @@ enum Opcodes
     MSG_MOVE_START_STRAFE_RIGHT                           = 0x1058, // 5.4.8 18414
     CMSG_MOVE_STOP_STRAFE                                 = 0x12C9, // 5.4.1 17538
     MSG_MOVE_JUMP                                         = 0x1153, // 5.4.8 18414
-    CMSG_MOVE_START_TURN_LEFT                             = 0x0760, // 5.4.1 17538
-    CMSG_MOVE_START_TURN_RIGHT                            = 0x17C9, // 5.4.1 17538
+    MSG_MOVE_START_TURN_LEFT                              = 0x01D0, // 5.4.8 18414
+    MSG_MOVE_START_TURN_RIGHT                             = 0x107B, // 5.4.8 18414
     CMSG_MOVE_STOP_TURN                                   = 0x1749, // 5.4.1 17538
     CMSG_MOVE_START_PITCH_UP                              = 0x0FE1, // 5.4.1 17538
     CMSG_MOVE_START_PITCH_DOWN                            = 0x16E8, // 5.4.1 17538
