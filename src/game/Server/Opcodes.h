@@ -387,8 +387,8 @@ enum Opcodes
     CMSG_EQUIPMENT_SET_DELETE                              = 0x4D07, // 4.3.4 15595
     CMSG_INSTANCE_LOCK_RESPONSE                           = 0x1140,
     CMSG_DEBUG_PASSIVE_AURA                               = 0x1141,
-    CMSG_ATTACKSWING                                      = 0x0926, // 4.3.4 15595
-    CMSG_ATTACKSTOP                                       = 0x4106, // 4.3.4 15595
+	CMSG_ATTACKSWING                                      = 0x1513, // 5.4.7 18019
+	CMSG_ATTACKSTOP                                       = 0x1E13, // 5.4.7 18019
     SMSG_ATTACKSTART                                      = 0x11D5, // 5.3.0 17128
     SMSG_ATTACKSTOP                                       = 0x0690, // 5.3.0 17128
     SMSG_ATTACKSWING_NOTINRANGE                           = 0x0B36, // 4.3.4 15595
