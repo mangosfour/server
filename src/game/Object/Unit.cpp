@@ -86,7 +86,9 @@ void MovementInfo::Read(ByteBuffer& data, uint16 opcode)
 {
     bool hasTransportData = false,
         hasMovementFlags = false,
-        hasMovementFlags2 = false;
+        hasMovementFlags2 = false,
+        hasUnkTime = false;
+    uint32 counterCount = 0;
 
     MovementStatusElements* sequence = GetMovementStatusElementsSequence(opcode);
     if(!sequence)
@@ -127,13 +129,6 @@ void MovementInfo::Read(ByteBuffer& data, uint16 opcode)
             continue;
         }
 
-        //if (element >= MSEGuid2Byte0 && element <= MSEGuid2Byte7)
-        //{
-        //    if (guid2[element - MSEGuid2Byte0])
-        //        guid2[element - MSEGuid2Byte0] ^= data.ReadUInt8();
-        //    continue;
-        //}
-
         if (element >= MSETransportGuidByte0 && element <= MSETransportGuidByte7)
         {
             if (hasTransportData && t_guid[element - MSETransportGuidByte0])
@@ -154,6 +149,12 @@ void MovementInfo::Read(ByteBuffer& data, uint16 opcode)
             case MSEHasUnknownBit:
                 data.ReadBit();
                 break;
+            //case MSEHasUnknownBit2:
+            //    si.unkBit2 = data.ReadBit();
+            //    break;
+            //case MSEHasUnkInt32:
+            //    si.hasUnkInt32 = !data.ReadBit();
+            //    break;
             case MSETimestamp:
                 if (si.hasTimeStamp)
                     data >> time;
@@ -270,12 +271,31 @@ void MovementInfo::Read(ByteBuffer& data, uint16 opcode)
                 if (hasTransportData && si.hasTransportTime3)
                     data >> fallTime;
                 break;
-            case MSEMovementCounter:
-                data.read_skip<uint32>();
+            case MSECounterCount:
+                counterCount = data.ReadBits(22);
                 break;
-            //case MSEByteParam:
-            //     data >> byteParam;
-            //     break;
+            case MSEMovementCounter:
+                for (int i = 0; i < counterCount; i++)
+                    data.read_skip<uint32>();
+                break;
+            //case MSEUnknownCount:
+            //    unkArray.resize(data.ReadBits(24));
+            //    break;
+            //case MSEUnknownArray:
+            //    for (std::list<uint32>::iterator itr = unkArray.begin(); itr != unkArray.end(); ++itr)
+            //        data >> *itr;
+            //    break;
+            //case MSEUnkInt32:
+            //    if (si.hasUnkInt32)
+            //        data >> unkInt32;
+            //    break;
+            case MSEHasUnkTime:
+                hasUnkTime = !data.ReadBit();
+                break;
+            case MSEUnkTime:
+                if (hasUnkTime)
+                    data.read_skip<uint32>();
+                  break;
             default:
                 MANGOS_ASSERT(false && "Wrong movement status element");
                 break;
@@ -357,6 +377,12 @@ void MovementInfo::Write(ByteBuffer& data, uint16 opcode) const
             case MSEHasUnknownBit:
                 data.WriteBit(false);
                 break;
+            //case MSEHasUnknownBit2:
+            //    data.WriteBit(si.unkBit2);
+            //    break;
+            //case MSEHasUnkInt32:
+            //    data.WriteBit(!si.hasUnkInt32);
+            //    break;
             case MSEHasFallData:
                 data.WriteBit(si.hasFallData);
                 break;
@@ -457,7 +483,24 @@ void MovementInfo::Write(ByteBuffer& data, uint16 opcode) const
                 if (hasTransportData && si.hasTransportTime3)
                     data << uint32(fallTime);
                 break;
+            case MSECounterCount:
+                data.WriteBits(0, 22);
+                break;
             case MSEMovementCounter:
+                data << uint32(0);
+                break;
+            //case MSEUnknownCount:
+            //    data.WriteBits(unkArray.size(), 24);
+            //    break;
+            //case MSEUnknownArray:
+            //    for (std::list<uint32>::const_iterator itr = unkArray.begin(); itr != unkArray.end(); ++itr)
+            //        data << uint32(*itr);
+            //    break;
+            //case MSEUnkInt32:
+            //    if (si.hasUnkInt32)
+            //        data << int32(unkInt32);
+            //    break;
+            case MSEUintCount:
                 data << uint32(0);
                 break;
             default:
