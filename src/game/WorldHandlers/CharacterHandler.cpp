@@ -638,13 +638,29 @@ void WorldSession::HandleCharDeleteOpcode(WorldPacket& recv_data)
     SendPacket(&data);
 }
 
-void WorldSession::HandlePlayerLoginOpcode(WorldPacket& recv_data)
+void WorldSession::HandlePlayerLoginOpcode(WorldPacket& recvData)
 {
     ObjectGuid playerGuid;
 
-    recv_data.ReadGuidMask<1, 5, 0, 2, 7, 6, 3, 4>(playerGuid);
-    recv_data.ReadGuidBytes<6, 4, 3, 5, 0, 2, 7, 1>(playerGuid);
-    float unk = recv_data.ReadSingle();
+    playerGuid[7] = recvData.ReadBit();
+    playerGuid[6] = recvData.ReadBit();
+    playerGuid[0] = recvData.ReadBit();
+    playerGuid[4] = recvData.ReadBit();
+    playerGuid[5] = recvData.ReadBit();
+    playerGuid[2] = recvData.ReadBit();
+    playerGuid[3] = recvData.ReadBit();
+    playerGuid[1] = recvData.ReadBit();
+
+    recvData.ReadByteSeq(playerGuid[5]);
+    recvData.ReadByteSeq(playerGuid[0]);
+    recvData.ReadByteSeq(playerGuid[1]);
+    recvData.ReadByteSeq(playerGuid[6]);
+    recvData.ReadByteSeq(playerGuid[7]);
+    recvData.ReadByteSeq(playerGuid[2]);
+    recvData.ReadByteSeq(playerGuid[3]);
+    recvData.ReadByteSeq(playerGuid[4]);
+
+    float unk = recvData.ReadSingle();
 
     DEBUG_LOG("WORLD: Received opcode Player Logon Message from %s, unk float: %f", playerGuid.GetString().c_str(), unk);
     if (PlayerLoading() || GetPlayer() != NULL)
