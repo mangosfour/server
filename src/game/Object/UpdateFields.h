@@ -527,7 +527,7 @@ enum EPlayerFields
 
 enum EContainerFields	// Auto generated for version 5, 4, 1, 17538
 {
-    CONTAINER_FIELD_SLOT_1                           = ITEM_END + 0x0000, // Size: 72, Type: LONG, Flags: PUBLIC
+    CONTAINER_FIELD_SLOT                             = ITEM_END + 0x0000, // Size: 72, Type: LONG, Flags: PUBLIC
     CONTAINER_FIELD_NUM_SLOTS                        = ITEM_END + 0x0048, // Size: 1, Type: INT, Flags: PUBLIC
     CONTAINER_END                                    = ITEM_END + 0x0049
 };
