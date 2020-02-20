@@ -844,6 +844,10 @@ class MovementInfo
         JumpInfo jump;
         // spline
         float    splineElevation;
+        // unknown array
+        std::list<uint32> unkArray;
+        // unknown int32
+        int32 unkInt32;
         // status info
         StatusInfo si;
         int8 byteParam;
