@@ -910,36 +910,36 @@ void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
 {
     bool hasAccountData = true;
 
-    WorldPacket packet(SMSG_AUTH_RESPONSE, 1 /*bits*/ + 4 + 1 + 4 + 1 + 4 + 1 + 1 + (queued ? 4 : 0));
-    packet << uint8(code);
-    packet.WriteBit(queued);                            // IsInQueue
-    if (queued)
-        packet.WriteBit(1);                             // unk
+    WorldPacket packet(SMSG_AUTH_RESPONSE, 80);
 
     packet.WriteBit(hasAccountData);
+
     if (hasAccountData)
     {
+        packet.WriteBits(MAX_CLASSES - 1, 23);
+        packet.WriteBits(0, 21);
         packet.WriteBit(0);
-        packet.WriteBits(0, 21);
-        packet.WriteBits(0, 21);
+        packet.WriteBit(0);
+        packet.WriteBit(0);
+        packet.WriteBit(0);
         packet.WriteBits(MAX_PLAYABLE_RACES, 23);
         packet.WriteBit(0);
-        packet.WriteBit(0);
-        packet.WriteBit(0);
-        packet.WriteBits(MAX_CLASSES - 1, 23);
 
-        packet << uint32(0);
-        packet << uint32(0);
-        packet << uint8(5); //TODO: FIXME uint8(Expansion());                   // Unknown, these two show the same
+        packet.WriteBit(queued);
+
+        if (queued)
+            packet.WriteBit(1);
+
+        packet.FlushBits();
+
+        if (queued)
+            packet << uint32(queuePos);
 
         for (uint8 i = 0; i < MAX_PLAYABLE_RACES; ++i)
         {
             packet << uint8(raceExpansionInfo[i].expansion);
             packet << uint8(raceExpansionInfo[i].raceOrClass);
         }
-
-        packet << uint8(5); //TODO: FIXME uint8(Expansion());                   // Unknown, these two show the same
-        packet << uint32(0);
 
         for (uint8 i = 0; i < MAX_CLASSES - 1; ++i)
         {
@@ -948,11 +948,16 @@ void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
         }
 
         packet << uint32(0);
+        packet << uint8(Expansion());
+        packet << uint32(Expansion());
+        packet << uint32(0);
+        packet << uint8(Expansion());
+        packet << uint32(0);
+        packet << uint32(0);
         packet << uint32(0);
     }
 
-    if (queued)
-        packet << uint32(queuePos);
+    packet << uint8(code);
 
     SendPacket(&packet);
 }
