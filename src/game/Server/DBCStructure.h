@@ -634,7 +634,7 @@ struct BattlemasterListEntry
     uint32  id;                                             // 0        m_ID
     int32   mapid[16];                                      // 1-16     m_mapID[10]
     uint32  type;                                           // 17       m_instanceType
-    //uint32 canJoinAsGroup;                                // 18       m_groupsAllowed
+    //uint32 unkName;                                       // 18
     DBCString name;                                         // 19       m_name_lang
     uint32 maxGroupSize;                                    // 20       m_maxGroupSize
     uint32 HolidayWorldStateId;                             // 21       m_holidayWorldState
@@ -644,8 +644,8 @@ struct BattlemasterListEntry
     uint32 minPlayers;                                      // 25       4.0.6.13596
     uint32 maxPlayers;                                      // 26       4.0.1
     uint32 rated;                                           // 27       4.0.3, value 2 for Rated Battlegrounds
-    //uint32                                                // 28       5.4.1
-    //uint32                                                // 29       5.4.1
+    //uint32                                                // 28       5.4.x
+    //uint32                                                // 29       5.4.x
 };
 
 /*struct Cfg_CategoriesEntry
@@ -1407,26 +1407,25 @@ struct MailTemplateEntry
 
 struct MapEntry
 {
-    uint32  MapID;                                          // 0        m_ID
-    DBCString   internalname;                                   // 1        m_Directory
-    uint32  map_type;                                       // 2        m_InstanceType
+    uint32      MapID;                                          // 0        m_ID
+    DBCString   internalname;                                   // 1        unused
+    uint32      map_type;                                       // 2        m_InstanceType
     uint32      mapFlags;                                       // 3        m_Flags (0x100 - CAN_CHANGE_PLAYER_DIFFICULTY)
-    uint32      unk4;                                           // 4 4.0.1
-    uint32      isPvP;                                          // 5        m_PVP 0 or 1 for battlegrounds (not arenas)
-    DBCString   name;                                           // 6        m_MapName_lang
-    uint32      linked_zone;                                    // 7        m_areaTableID
-    DBCString   hordeIntro;                                     // 8        m_MapDescription0_lang
-    DBCString   allianceIntro;                                  // 9        m_MapDescription1_lang
-    uint32      multimap_id;                                    // 10       m_LoadingScreenID (LoadingScreens.dbc)
-    float       BattlefieldMapIconScale;                        // 11       m_minimapIconScale
-    int32       ghost_entrance_map;                             // 12       m_corpseMapID map_id of entrance map in ghost mode (continent always and in most cases = normal entrance)
-    float       ghost_entrance_x;                               // 13       m_corpseX entrance x coordinate in ghost mode  (in most cases = normal entrance)
-    float       ghost_entrance_y;                               // 14       m_corpseY entrance y coordinate in ghost mode  (in most cases = normal entrance)
-    uint32      timeOfDayOverride;                              // 15       m_timeOfDayOverride
-    uint32      addon;                                          // 16       m_expansionID
-    uint32      unkTime;                                        // 17       m_raidOffset
-    uint32      maxPlayers;                                     // 18       m_maxPlayers
-    int32       rootPhaseMap;                                   // 19       map with base phasing
+    uint32      isPvP;                                          // 4        m_PVP 0 or 1 for battlegrounds (not arenas)
+    DBCString   name;                                           // 5        m_MapName_lang
+    uint32      linked_zone;                                    // 6        m_areaTableID
+    DBCString   hordeIntro;                                     // 7        m_MapDescription0_lang
+    DBCString   allianceIntro;                                  // 8        m_MapDescription1_lang
+    uint32      multimap_id;                                    // 9        m_LoadingScreenID (LoadingScreens.dbc)
+    float       BattlefieldMapIconScale;                        // 10       m_minimapIconScale
+    int32       ghost_entrance_map;                             // 11       m_corpseMapID map_id of entrance map in ghost mode (continent always and in most cases = normal entrance)
+    float       ghost_entrance_x;                               // 12       m_corpseX entrance x coordinate in ghost mode  (in most cases = normal entrance)
+    float       ghost_entrance_y;                               // 13       m_corpseY entrance y coordinate in ghost mode  (in most cases = normal entrance)
+    uint32      timeOfDayOverride;                              // 14       m_timeOfDayOverride
+    uint32      addon;                                          // 15       m_expansionID
+    uint32      unkTime;                                        // 16       m_raidOffset
+    uint32      maxPlayers;                                     // 17       m_maxPlayers
+    int32       rootPhaseMap;                                   // 18       map with base phasing
 
     // Helpers
     uint32 Expansion() const { return addon; }
@@ -1459,7 +1458,7 @@ struct MapEntry
 
     bool IsContinent() const
     {
-        return MapID == 0 || MapID == 1 || MapID == 530 || MapID == 571 || MapID == 870;
+        return MapID == 0 || MapID == 1 || MapID == 530 || MapID == 571 || MapID == 860 || MapID == 870;
     }
 
     bool IsTransport() const
