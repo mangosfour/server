@@ -908,7 +908,11 @@ void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
 {
     bool hasAccountData = true;
 
-    WorldPacket packet(SMSG_AUTH_RESPONSE, 80);
+    WorldPacket packet(SMSG_AUTH_RESPONSE, 1 /*bits*/ + 4 + 1 + 4 + 1 + 4 + 1 + 1 + (queued ? 4 : 0));
+    packet << uint8(code);
+    packet.WriteBit(queued);                            // IsInQueue
+    if (queued)
+        packet.WriteBit(1);                             // unk
 
     packet.WriteBit(hasAccountData);
 
@@ -922,14 +926,6 @@ void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
         packet.WriteBit(0);
         packet.WriteBits(MAX_PLAYABLE_RACES, 23);
         packet.WriteBit(0);
-
-        packet.WriteBit(queued);
-
-        if (queued)
-            packet.WriteBit(1);
-
-        if (queued)
-            packet << uint32(queuePos);
 
         for (uint8 i = 0; i < MAX_PLAYABLE_RACES; ++i)
         {
@@ -953,7 +949,8 @@ void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
         packet << uint32(0);
     }
 
-    packet << uint8(code);
+    if (queued)
+        packet << uint32(queuePos);
 
     SendPacket(&packet);
 }
@@ -1052,13 +1049,14 @@ void WorldSession::SetAccountData(AccountDataType type, time_t time_, const std:
 void WorldSession::SendAccountDataTimes(uint32 mask)
 {
     WorldPacket data(SMSG_ACCOUNT_DATA_TIMES, 4 + 1 + 4 + NUM_ACCOUNT_DATA_TYPES * 4);
-    data << uint32(mask);                                   // type mask
-    data << uint32(time(NULL));                             // unix time of something
+
+    data.WriteBit(1);
 
     for (uint32 i = 0; i < NUM_ACCOUNT_DATA_TYPES; ++i)
         data << uint32(GetAccountData(AccountDataType(i))->Time);// also unix time
 
-    data.WriteBit(1);
+    data << uint32(mask);                                   // type mask
+    data << uint32(time(NULL));                             // unix time of something
 
     SendPacket(&data);
 }
@@ -1192,6 +1190,7 @@ void WorldSession::ReadAddonsInfo(ByteBuffer &data)
     {
         uint32 addonsCount;
         addonInfo >> addonsCount;                         // addons count
+        DEBUG_LOG("Addon count: %u", addonsCount);
 
         for (uint32 i = 0; i < addonsCount; ++i)
         {
