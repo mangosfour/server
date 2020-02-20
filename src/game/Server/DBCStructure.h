@@ -2091,14 +2091,15 @@ struct SpellMiscEntry
     uint32 AttributesEx10;                                  // 13
     uint32 AttributesEx11;                                  // 14
     uint32 AttributesEx12;                                  // 15
-    uint32 CastingTimeIndex;                                // 16       m_castingTimeIndex
-    uint32 DurationIndex;                                   // 17       m_durationIndex
-    uint32 rangeIndex;                                      // 18       m_rangeIndex
-    float  speed;                                           // 19       m_speed
-    uint32 SpellVisual[2];                                  // 20-21    m_spellVisualID
-    uint32 SpellIconID;                                     // 22       m_spellIconID
-    uint32 activeIconID;                                    // 23       m_activeIconID
-    uint32 SchoolMask;                                      // 24       m_schoolMask
+    uint32 AttributesEx13;                                  // 16
+    uint32 CastingTimeIndex;                                // 17       m_castingTimeIndex
+    uint32 DurationIndex;                                   // 18       m_durationIndex
+    uint32 rangeIndex;                                      // 19       m_rangeIndex
+    float  speed;                                           // 20       m_speed
+    uint32 SpellVisual[2];                                  // 21-22    m_spellVisualID
+    uint32 SpellIconID;                                     // 23       m_spellIconID
+    uint32 activeIconID;                                    // 24       m_activeIconID
+    uint32 SchoolMask;                                      // 25       m_schoolMask
 };
 
 struct SpellReagentsEntry;
@@ -2242,6 +2243,7 @@ struct SpellEntry
     uint32 GetAttributesEx10() const;
     uint32 GetAttributesEx11() const;
     uint32 GetAttributesEx12() const;
+    uint32 GetAttributesEx13() const;
     inline bool HasAttribute(SpellAttributes attribute) const { return GetAttributes() & attribute; }
     inline bool HasAttribute(SpellAttributesEx attribute) const { return GetAttributesEx() & attribute; }
     inline bool HasAttribute(SpellAttributesEx2 attribute) const { return GetAttributesEx2() & attribute; }
@@ -2255,6 +2257,7 @@ struct SpellEntry
     inline bool HasAttribute(SpellAttributesEx10 attribute) const { return GetAttributesEx10() & attribute; }
     inline bool HasAttribute(SpellAttributesEx11 attribute) const { return GetAttributesEx11() & attribute; }
     inline bool HasAttribute(SpellAttributesEx12 attribute) const { return GetAttributesEx12() & attribute; }
+    inline bool HasAttribute(SpellAttributesEx13 attribute) const { return GetAttributesEx13() & attribute; }
 
     private:
         // prevent creating custom entries (copy data from original in fact)
