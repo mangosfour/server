@@ -243,7 +243,7 @@ enum Opcodes
     SMSG_READ_ITEM_OK                                     = 0x2605, // 4.3.4 15595
     SMSG_READ_ITEM_FAILED                                 = 0x0F16, // 4.3.4 15595
     SMSG_ITEM_COOLDOWN                                    = 0x4D14, // 4.3.4 15595
-    CMSG_GAMEOBJ_USE                                      = 0x4E17, // 4.3.4 15595
+    CMSG_GAMEOBJ_USE                                      = 0x06D8, // 5.4.8 18414
     CMSG_DESTROY_ITEMS                                    = 0x10B3,
     SMSG_GAMEOBJECT_CUSTOM_ANIM                           = 0x4936, // 4.3.4 15595
     CMSG_AREATRIGGER                                      = 0x155A, // 5.4.7 18019
@@ -509,7 +509,7 @@ enum Opcodes
     SMSG_PLAYERBINDERROR                                  = 0x6A24, // 4.3.4 15595
     CMSG_BANKER_ACTIVATE                                  = 0x0005, // 4.3.4 15595
     SMSG_SHOW_BANK                                        = 0x2627, // 4.3.4 15595
-    CMSG_BUY_BANK_SLOT                                    = 0x00FE, // 5.4.7 18019
+    CMSG_BUY_BANK_SLOT                                    = 0x12F2, // 5.4.8 18414
     CMSG_PETITION_SHOWLIST                                = 0x4617, // 4.3.4 15595
     SMSG_PETITION_SHOWLIST                                = 0x6405, // 4.3.4 15595
     CMSG_PETITION_BUY                                     = 0x4E05, // 4.3.4 15595
@@ -1086,7 +1086,7 @@ enum Opcodes
     SMSG_GOGOGO_OBSOLETE                                  = 0x13F6,
     SMSG_ECHO_PARTY_SQUELCH                               = 0x0814, // 4.3.4 15595
     CMSG_SET_TITLE_SUFFIX                                 = 0x13F8,
-    CMSG_SPELLCLICK                                       = 0x0805, // 4.3.4 15595
+    CMSG_SPELLCLICK                                       = 0x067A, // 5.4.8 18414
     SMSG_LOOT_LIST                                        = 0x1199, // 5.3.0 17128
     CMSG_GM_CHARACTER_RESTORE                             = 0x13FB,
     CMSG_GM_CHARACTER_SAVE                                = 0x13FC,
@@ -1227,7 +1227,7 @@ enum Opcodes
     CMSG_FORCE_SAY_CHEAT                                  = 0x147F,
     SMSG_HEALTH_UPDATE                                    = 0x4734, // 4.3.4 15595
     SMSG_POWER_UPDATE                                     = 0x4A07, // 4.3.4 15595
-    CMSG_GAMEOBJ_REPORT_USE                               = 0x4827, // 4.3.4 15595
+    CMSG_GAMEOBJ_REPORT_USE                               = 0x06D9, // 5.4.8 18414
     SMSG_HIGHEST_THREAT_UPDATE                            = 0x4104, // 4.3.4 15595
     SMSG_THREAT_UPDATE                                    = 0x1080, // 5.3.0 17128
     SMSG_THREAT_REMOVE                                    = 0x0EC0, // 5.3.0 17128
