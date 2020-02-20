@@ -585,9 +585,9 @@ enum Opcodes
     CMSG_GMTICKET_UPDATETEXT                              = 0x0636, // 4.3.4 15595
     SMSG_GMTICKET_UPDATETEXT                              = 0x6535, // 4.3.4 15595
     SMSG_ACCOUNT_DATA_TIMES                               = 0x162B, // 5.4.8 18414
-    CMSG_REQUEST_ACCOUNT_DATA                             = 0x6505, // 4.3.4 15595
-    CMSG_UPDATE_ACCOUNT_DATA                              = 0x4736, // 4.3.4 15595
-    SMSG_UPDATE_ACCOUNT_DATA                              = 0x0684, // 5.3.0 17128
+    CMSG_REQUEST_ACCOUNT_DATA                             = 0x1D8A, // 5.4.8 18414
+    CMSG_UPDATE_ACCOUNT_DATA                              = 0x0800, // 5.3.0 17128
+    SMSG_UPDATE_ACCOUNT_DATA                              = 0x0AAE, // 5.4.8 18414
     SMSG_CLEAR_FAR_SIGHT_IMMEDIATE                        = 0x2A04, // 4.3.4 15595
     SMSG_CHANGEPLAYER_DIFFICULTY_RESULT                   = 0x2217, // 4.3.4 15595
     CMSG_GM_TEACH                                         = 0x1210,
