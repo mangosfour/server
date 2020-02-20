@@ -847,20 +847,18 @@ void WorldSession::SendAuthWaitQue(uint32 position)
     if (position == 0)
     {
         WorldPacket packet(SMSG_AUTH_RESPONSE, 1);
-        packet.WriteBit(0);
-        packet.WriteBit(0);
+        packet.WriteBit(false);
+        packet.WriteBit(false);
         packet << uint8(AUTH_OK);
-        packet.FlushBits();
         SendPacket(&packet);
     }
     else
     {
         WorldPacket packet(SMSG_AUTH_RESPONSE, 6);
-        packet.WriteBit(0);
-        packet.WriteBit(1);
-        packet.WriteBit(0);
+        packet.WriteBit(false);
+        packet.WriteBit(true);
+        packet.WriteBit(false);
         packet << uint8(AUTH_WAIT_QUEUE);
-        packet.FlushBits();
         packet << uint32(position);
         SendPacket(&packet);
     }
@@ -929,8 +927,6 @@ void WorldSession::SendAuthResponse(uint8 code, bool queued, uint32 queuePos)
 
         if (queued)
             packet.WriteBit(1);
-
-        packet.FlushBits();
 
         if (queued)
             packet << uint32(queuePos);
