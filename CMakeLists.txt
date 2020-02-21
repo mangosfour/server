@@ -21,7 +21,7 @@ project(MaNGOS)
 cmake_minimum_required(VERSION 3.0)
 
 set(MANGOS_VERSION 0.21)
-set(MANGOS_EXP "MOP")
+set(MANGOS_EXP "MISTS")
 
 # Set the correct macro directory path
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -106,7 +106,7 @@ endif()
 #Include platform/compiler-specific definitions
 include(${CMAKE_SOURCE_DIR}/cmake/SetDefinitions.cmake)
 
-add_definitions(-DCATA)
+add_definitions(-DMISTS)
 
 message(STATUS "Install server to     : ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "Install configs to    : ${CONF_INSTALL_DIR}")
