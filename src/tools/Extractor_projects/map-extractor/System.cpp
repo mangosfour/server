@@ -79,6 +79,7 @@ char output_path[128] = ".";
 char input_path[128] = ".";
 uint32 maxAreaId = 0;
 uint32 CONF_max_build = 0;
+int iCoreNumber = 0;
 
 //**************************************************
 // Extractor options
@@ -103,7 +104,7 @@ float CONF_float_to_int16_limit = 2048.0f;   // Max accuracy = val/65536
 float CONF_flat_height_delta_limit = 0.005f; // If max - min less this value - surface is flat
 float CONF_flat_liquid_delta_limit = 0.001f; // If max - min less this value - liquid surface is flat
 
-#define MIN_SUPPORTED_BUILD 18414                           // code expect mpq files and mpq content files structure for this build or later
+#define MIN_SUPPORTED_BUILD 18273                           // code expect mpq files and mpq content files structure for this build or later
 #define EXPANSION_COUNT 4
 #define WORLD_COUNT 1
 
@@ -1187,9 +1188,9 @@ void ExtractMapsFromMpq(uint32 build, const int locale)
 
     printf("\nExtracting maps...\n");
     if (build==17520)
-	{
-		build = 18273;
-	}
+    {
+        build = 18273;
+    }
 
     uint32 map_count = ReadMapDBC(locale);
 
@@ -1203,7 +1204,7 @@ void ExtractMapsFromMpq(uint32 build, const int locale)
     printf("\n Converting map files\n");
     for (uint32 z = 0; z < map_count; ++z)
     {
-        printf("System.cpp:ExtractMapsFromMpq( ) - Extract %s (%d/%d)                  \n", map_ids[z].name, z + 1, map_count);
+        printf(" Extract %s (%d/%d)                  \n", map_ids[z].name, z + 1, map_count);
         // Loadup map grid data
         sprintf(mpq_map_name, "World\\Maps\\%s\\%s.wdt", map_ids[z].name, map_ids[z].name);
         WDT_file wdt;
@@ -1371,17 +1372,17 @@ void LoadLocaleMPQFiles(int const locale)
     // now update to newer view, root
     AppendPatchMPQFilesToList(NULL, NULL, Locales[locale], updates);
 
-    // ./Data wow-update-base files
-    for (int i = 0; Builds[i] && Builds[i] <= CONF_TargetBuild; ++i)
-    {
-        sprintf(filename, "%s/Data/wow-update-base-%u.MPQ", input_path, Builds[i]);
-
-        printf("\nPatching : %s\n", filename);
-
-        //if (!OpenArchive(filename))
-        if (!SFileOpenPatchArchive(localeMpqHandle, filename, "", 0))
-            printf("Error open patch archive: %s\n\n", filename);
-    }
+//    // ./Data wow-update-base files
+//    for (int i = 0; Builds[i] && Builds[i] <= CONF_TargetBuild; ++i)
+//    {
+//        sprintf(filename, "%s/Data/wow-update-base-%u.MPQ", input_path, Builds[i]);
+//
+//        printf("\nPatching : %s\n", filename);
+//
+//        //if (!OpenArchive(filename))
+//        if (!SFileOpenPatchArchive(localeMpqHandle, filename, "", 0))
+//            printf("Error open patch archive: %s\n\n", filename);
+//    }
 
     for (Updates::const_iterator itr = updates.begin(); itr != updates.end(); ++itr)
     {
@@ -1390,36 +1391,36 @@ void LoadLocaleMPQFiles(int const locale)
         else
             sprintf(filename, "%s/Data/%s", input_path, itr->second.first.c_str());
 
-        printf("\nPatching : %s\n", filename);
+//        printf("\nPatching : %s\n", filename);
 
         //if (!OpenArchive(filename))
         if (!SFileOpenPatchArchive(localeMpqHandle, filename, itr->second.second ? itr->second.second : "", 0))
             printf("Error open patch archive: %s\n\n", filename);
     }
 
-    // ./Data/Cache patch-base files
-    for (int i = 0; Builds[i] && Builds[i] <= CONF_TargetBuild; ++i)
-    {
-        sprintf(filename, "%s/Data/Cache/patch-base-%u.MPQ", input_path, Builds[i]);
-
-        printf("\nPatching : %s\n", filename);
-
-        //if (!OpenArchive(filename))
-        if (!SFileOpenPatchArchive(localeMpqHandle, filename, "", 0))
-            printf("Error open patch archive: %s\n\n", filename);
-    }
-
-    // ./Data/Cache/<locale> patch files
-    for (int i = 0; Builds[i] && Builds[i] <= CONF_TargetBuild; ++i)
-    {
-        sprintf(filename, "%s/Data/Cache/%s/patch-%s-%u.MPQ", input_path, Locales[locale], Locales[locale], Builds[i]);
-
-        printf("\nPatching : %s\n", filename);
-
-        //if (!OpenArchive(filename))
-        if (!SFileOpenPatchArchive(localeMpqHandle, filename, "", 0))
-            printf("Error open patch archive: %s\n\n", filename);
-    }
+//    // ./Data/Cache patch-base files
+//    for (int i = 0; Builds[i] && Builds[i] <= CONF_TargetBuild; ++i)
+//    {
+//        sprintf(filename, "%s/Data/Cache/patch-base-%u.MPQ", input_path, Builds[i]);
+//
+//        printf("\nPatching : %s\n", filename);
+//
+//        //if (!OpenArchive(filename))
+//        if (!SFileOpenPatchArchive(localeMpqHandle, filename, "", 0))
+//            printf("Error open patch archive: %s\n\n", filename);
+//    }
+//
+//    // ./Data/Cache/<locale> patch files
+//    for (int i = 0; Builds[i] && Builds[i] <= CONF_TargetBuild; ++i)
+//    {
+//        sprintf(filename, "%s/Data/Cache/%s/patch-%s-%u.MPQ", input_path, Locales[locale], Locales[locale], Builds[i]);
+//
+//        printf("\nPatching : %s\n", filename);
+//
+//        //if (!OpenArchive(filename))
+//        if (!SFileOpenPatchArchive(localeMpqHandle, filename, "", 0))
+//            printf("Error open patch archive: %s\n\n", filename);
+//    }
 }
 
 void LoadBaseMPQFiles()
@@ -1485,23 +1486,24 @@ void LoadBaseMPQFiles()
         }
     }
 
-    // ./Data/Cache patch-base files
-    for (int i = 0; Builds[i] && Builds[i] <= CONF_TargetBuild; ++i)
-    {
-        sprintf(filename, "%s/Data/Cache/patch-base-%u.MPQ", input_path, Builds[i]);
-
-        printf("\nPatching : %s\n", filename);
-
-        //if (!OpenArchive(filename))
-        if (!SFileOpenPatchArchive(worldMpqHandle, filename, "", 0))
-            printf("Error open patch archive: %s\n\n", filename);
-    }
+//    // ./Data/Cache patch-base files
+//    for (int i = 0; Builds[i] && Builds[i] <= CONF_TargetBuild; ++i)
+//    {
+//        sprintf(filename, "%s/Data/Cache/patch-base-%u.MPQ", input_path, Builds[i]);
+//
+//        printf("\nPatching : %s\n", filename);
+//
+//        //if (!OpenArchive(filename))
+//        if (!SFileOpenPatchArchive(worldMpqHandle, filename, "", 0))
+//            printf("Error open patch archive: %s\n\n", filename);
+//    }
 }
 
 int main(int argc, char* arg[])
 {
-    printf("Map & DBC Extractor\n");
-    printf("===================\n\n");
+    int thisBuild = getBuildNumber();
+    iCoreNumber = getCoreNumberFromBuild(thisBuild);
+    showBanner("DBC Extractor & Map Generator", iCoreNumber, thisBuild);
 
     HandleArgs(argc, arg);
 

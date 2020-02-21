@@ -89,7 +89,7 @@ TCHAR const* LocalesT[] =
     _T("esMX"), _T("ruRU"),
 };
 
-#define LOCALES_COUNT 12
+//#define LOCALES_COUNT 12
 
 typedef struct
 {
