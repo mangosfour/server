@@ -632,7 +632,7 @@ struct BarberShopStyleEntry
 struct BattlemasterListEntry
 {
     uint32  id;                                             // 0        m_ID
-    int32   mapid[16];                                      // 1-16     m_mapID[10]
+    int32   mapid[16];                                      // 1-16     m_mapID[16]
     uint32  type;                                           // 17       m_instanceType
     //uint32 unkName;                                       // 18
     DBCString name;                                         // 19       m_name_lang
