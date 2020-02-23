@@ -10471,32 +10471,32 @@ int32 Unit::CalculateSpellDamage(Unit const* target, SpellEntry const* spellProt
 
     SpellScalingEntry const* scalingEntry = spellProto->GetSpellScaling();
     GtSpellScalingEntry const* gtScalingEntry = NULL;
-    if (scalingEntry && scalingEntry->IsScalableEffect(effect_index))
-    {
-        if (target && IsAuraApplyEffect(spellProto, effect_index) && IsPositiveEffect(spellProto, effect_index))
-            level = target->getLevel();
+    //if (scalingEntry && scalingEntry->IsScalableEffect(effect_index))
+    //{
+    //    if (target && IsAuraApplyEffect(spellProto, effect_index) && IsPositiveEffect(spellProto, effect_index))
+    //        level = target->getLevel();
 
-        uint32 gtSpellScalingId = level - 1;
-        if (scalingEntry->playerClass == -1)
-            gtSpellScalingId += (MAX_CLASSES - 1) * GT_MAX_LEVEL;
-        else
-            gtSpellScalingId += (scalingEntry->playerClass - 1) * GT_MAX_LEVEL;
+    //    uint32 gtSpellScalingId = level - 1;
+    //    if (scalingEntry->playerClass == -1)
+    //        gtSpellScalingId += (MAX_CLASSES - 1) * GT_MAX_LEVEL;
+    //    else
+    //        gtSpellScalingId += (scalingEntry->playerClass - 1) * GT_MAX_LEVEL;
 
-        gtScalingEntry = sGtSpellScalingStore.LookupEntry(gtSpellScalingId);
-    }
+    //    gtScalingEntry = sGtSpellScalingStore.LookupEntry(gtSpellScalingId);
+    //}
 
     if (gtScalingEntry)
     {
         float Scale = gtScalingEntry->value;
         if (uint32(scalingEntry->castTimeMax) > 0 && uint32(scalingEntry->castScalingMaxLevel) > level)
             Scale *= float(scalingEntry->castTimeMin + float(level - 1) * (scalingEntry->castTimeMax - scalingEntry->castTimeMin) / (scalingEntry->castScalingMaxLevel - 1)) / float(scalingEntry->castTimeMax);
-        if (uint32(scalingEntry->coefLevelBase) > level)
-            Scale *= (1.0f - scalingEntry->coefBase) * (level - 1) / (scalingEntry->coefLevelBase - 1) + scalingEntry->coefBase;
+        //if (uint32(scalingEntry->coefLevelBase) > level)
+        //    Scale *= (1.0f - scalingEntry->coefBase) * (level - 1) / (scalingEntry->coefLevelBase - 1) + scalingEntry->coefBase;
 
-        basePoints = int32(scalingEntry->coeff1[effect_index] * Scale);
-        int32 randomPoints = int32(scalingEntry->coeff1[effect_index] * Scale * scalingEntry->coeff2[effect_index]);
-        basePoints += irand(-randomPoints, randomPoints) / 2;
-        comboDamage = uint32(scalingEntry->coeff3[effect_index] * Scale);
+        //basePoints = int32(scalingEntry->coeff1[effect_index] * Scale);
+        //int32 randomPoints = int32(scalingEntry->coeff1[effect_index] * Scale * scalingEntry->coeff2[effect_index]);
+        //basePoints += irand(-randomPoints, randomPoints) / 2;
+        //comboDamage = uint32(scalingEntry->coeff3[effect_index] * Scale);
     }
     else
     {
