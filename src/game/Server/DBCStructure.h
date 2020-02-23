@@ -632,7 +632,12 @@ struct BarberShopStyleEntry
 struct BattlemasterListEntry
 {
     uint32  id;                                             // 0        m_ID
-    int32   mapid[16];                                      // 1-16     m_mapID[16]
+    int32   mapid[11];                                      // 1-11     m_mapID[11]
+	//unk
+	//unk
+	//unk
+	//unk
+	//unk
     uint32  type;                                           // 17       m_instanceType
     //uint32 unkName;                                       // 18
     DBCString name;                                         // 19       m_name_lang
@@ -645,7 +650,7 @@ struct BattlemasterListEntry
     uint32 maxPlayers;                                      // 26       4.0.1
     uint32 rated;                                           // 27       4.0.3, value 2 for Rated Battlegrounds
     //uint32                                                // 28       5.4.x
-    //uint32                                                // 29       5.4.x
+    //uint32                                                // 29       5.4.x BG TypeNames ctf,domination, etc
 };
 
 /*struct Cfg_CategoriesEntry
@@ -1233,8 +1238,6 @@ struct ItemClassEntry
 {
     uint32   ID;                                            // 0        m_ID
     uint32 Class;                                           // 1
-    //uint32 unk2;                                          // 2 looks like second class
-    //uint32 unk3;                                          // 3 1 for weapons
     float PriceFactor;                                       // 4
     DBCString name;                                         // 5        m_name_lang
 };
@@ -1477,7 +1480,7 @@ struct MapDifficultyEntry
     DBCString   areaTriggerText;                            // 3        m_message_lang (text showed when transfer to map failed)
     uint32      resetTime;                                  // 4,       m_raidDuration in secs, 0 if no fixed reset time
     uint32      maxPlayers;                                 // 5,       m_maxPlayers some heroic versions have 0 when expected same amount as in normal version
-    DBCString   difficultyString;                           // 6        m_difficultystring
+    //DBCString   difficultyString;                           // 6,       m_difficultystring (always 0) ?
 };
 
 struct MovieEntry
