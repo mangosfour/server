@@ -891,13 +891,45 @@ void LoadDBCStores(const std::string& dataPath)
     }
 
     // Check loaded DBC files proper version
-    if (!sAreaStore.LookupEntry(5491)              ||       // last area (areaflag) added in 5.4.8 (18414)
-        !sCharTitlesStore.LookupEntry(389)         ||       // last char title added in 5.4.8 (18414)
-        !sGemPropertiesStore.LookupEntry(2467)     ||       // last gem property added in 5.4.8 (18414)
-        !sMapStore.LookupEntry(1173)               ||       // last map added in 5.4.8 (18414)
-        !sSpellStore.LookupEntry(163227)           )        // last added spell in 5.4.8 (18414)
+    std::string failedModules = "";
+    bool startupFailed=false;
+
+    // last area (areaflag) added in 5.4.8 (18414)
+    //if (!sAreaStore.LookupEntry(5491))
+    //{
+    //    startupFailed=true;
+    //    failedModules += "AreaTable.dbc";
+    //}
+
+    // last char title added in 5.4.8 (18414)
+    //if (!sCharTitlesStore.LookupEntry(389))
+    //{
+    //    startupFailed=true;
+    //    failedModules += ",CharTitles.dbc";
+    //}
+    //// last gem property added in 5.4.8 (18414)
+    //if (!sGemPropertiesStore.LookupEntry(2467))
+    //{
+    //    startupFailed=true;
+    //    failedModules += ",GemProperties.dbc";
+    //}
+    // last map added in 5.4.8 (18414)
+    if (!sMapStore.LookupEntry(1173))
+    {
+        startupFailed=true;
+        failedModules += ",Map.dbc";
+    }
+    // last added spell in 5.4.8 (18414)
+    if (!sSpellStore.LookupEntry(163227))
+    {
+        startupFailed=true;
+        failedModules += ",SpellStore.dbc";
+    }
+
+    if(startupFailed)
     {
         sLog.outError("\nYou have mixed version DBC files. Please re-extract DBC files for one from client build: %s", AcceptableClientBuildsListStr().c_str());
+        sLog.outError("\nThe Following modules failed the checksum: %s", failedModules);
         Log::WaitBeforeContinueIfNeed();
         exit(1);
     }

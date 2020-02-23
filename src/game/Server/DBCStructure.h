@@ -2001,22 +2001,21 @@ struct SpellPowerEntry
                                                             // 12       5.x
 };
 
-
 // SpellScaling.dbc
 struct SpellScalingEntry
 {
     //uint32    Id;                                         // 0        m_ID
-    uint32    castTimeMin;                                  // 1
-    uint32    castTimeMax;                                  // 2
-    uint32    castScalingMaxLevel;                          // 3
-    uint32    playerClass;                                  // 4        (index * 100) + charLevel => gtSpellScaling.dbc
-    float     coeff1[3];                                    // 5-7
-    float     coeff2[3];                                    // 8-10
-    float     coeff3[3];                                    // 11-13
-    float     coefBase;                                     // 14       some coefficient, mostly 1.0f
-    uint32    coefLevelBase;                                // 15       some level
+    int32     castTimeMin;                                  // 1
+    int32     castTimeMax;                                  // 2
+    int32     castScalingMaxLevel;                          // 3
+    int32     playerClass;                                  // 4        (index * 100) + charLevel => gtSpellScaling.dbc
+    float     coeff1;                                       // 5-7
+    float     coeff2;                                       // 8-10
+    float     coeff3;                                       // 11-13
+    //float     coefBase;                                    // 14       some coefficient, mostly 1.0f
+    int32     coefLevelBase;                                // 15       some level
 
-    bool IsScalableEffect(SpellEffectIndex i) const { return coeff1[i] != 0.0f; };
+//    bool IsScalableEffect(SpellEffectIndex i) const { return coeff1[i] != 0.0f; };
 };
 
 // SpellShapeshift.dbc
