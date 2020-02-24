@@ -10485,19 +10485,20 @@ int32 Unit::CalculateSpellDamage(Unit const* target, SpellEntry const* spellProt
         gtScalingEntry = sGtSpellScalingStore.LookupEntry(gtSpellScalingId);
     }
 
-    if (gtScalingEntry)
-    {
-        float Scale = gtScalingEntry->value;
-        if (uint32(scalingEntry->castTimeMax) > 0 && uint32(scalingEntry->castScalingMaxLevel) > level)
-            Scale *= float(scalingEntry->castTimeMin + float(level - 1) * (scalingEntry->castTimeMax - scalingEntry->castTimeMin) / (scalingEntry->castScalingMaxLevel - 1)) / float(scalingEntry->castTimeMax);
-        if (uint32(scalingEntry->coefLevelBase) > level)
-            Scale *= (1.0f - scalingEntry->coefBase) * (level - 1) / (scalingEntry->coefLevelBase - 1) + scalingEntry->coefBase;
+ //* if (gtScalingEntry)
+ //   {
+ //       float Scale = gtScalingEntry->value;
+ //       if (uint32(scalingEntry->castTimeMax) > 0 && uint32(scalingEntry->castScalingMaxLevel) > level)
+ //           Scale *= float(scalingEntry->castTimeMin + float(level - 1) * (scalingEntry->castTimeMax - scalingEntry->castTimeMin) / (scalingEntry->castScalingMaxLevel - 1)) / float(scalingEntry->castTimeMax);
+ //       if (uint32(scalingEntry->coefLevelBase) > level)
+ //           Scale *= (1.0f - scalingEntry->coefBase) * (level - 1) / (scalingEntry->coefLevelBase - 1) + scalingEntry->coefBase;
+//
+ //       basePoints = int32(scalingEntry->coefBase[effect_index] * Scale);
+ //       int32 randomPoints = int32(scalingEntry->coefBase[effect_index] * Scale * scalingEntry->coeff2[effect_index]);
+ //       basePoints += irand(-randomPoints, randomPoints) / 2;
+ //       comboDamage = uint32(scalingEntry->coeff3[effect_index] * Scale);
+ //   }
 
-        basePoints = int32(scalingEntry->coeff1[effect_index] * Scale);
-        int32 randomPoints = int32(scalingEntry->coeff1[effect_index] * Scale * scalingEntry->coeff2[effect_index]);
-        basePoints += irand(-randomPoints, randomPoints) / 2;
-        comboDamage = uint32(scalingEntry->coeff3[effect_index] * Scale);
-    }
     else
     {
         spellLevel = spellProto->GetSpellLevel();
