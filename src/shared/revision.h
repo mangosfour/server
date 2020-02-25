@@ -38,6 +38,6 @@
 
     #define WORLD_DB_VERSION_NR 21
     #define WORLD_DB_STRUCTURE_NR 11
-    #define WORLD_DB_CONTENT_NR 012
-    #define WORLD_DB_UPDATE_DESCRIPTION "gossip_option_condition"
+    #define WORLD_DB_CONTENT_NR 041
+    #define WORLD_DB_UPDATE_DESCRIPTION "initial_cleanup_part3"
 #endif // __REVISION_H__
