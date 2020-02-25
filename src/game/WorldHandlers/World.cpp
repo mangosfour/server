@@ -1060,7 +1060,7 @@ void World::SetInitialWorldSettings()
               !MapManager::ExistMapAndVMap(609, 2355.84f, -5664.77f))) ||           // Death Knight
             (m_configUint32Values[CONFIG_UINT32_EXPANSION] >= EXPANSION_MOP &&
               !MapManager::ExistMapAndVMap(870, 3001.38f, -542.47f)))                // Pandaren
-	{
+    {
         sLog.outError("Correct *.map files not found in path '%smaps' or *.vmtree/*.vmtile files in '%svmaps'. Please place *.map and vmap files in appropriate directories or correct the DataDir value in the mangosd.conf file.", m_dataPath.c_str(), m_dataPath.c_str());
         Log::WaitBeforeContinueIfNeed();
         exit(1);
@@ -1427,11 +1427,13 @@ void World::SetInitialWorldSettings()
     sLog.outString("Loading GameObjects for quests...");
     sObjectMgr.LoadGameObjectForQuests();
 
-    sLog.outString("Loading BattleMasters...");
-    sBattleGroundMgr.LoadBattleMastersEntry();
+    sLog.outString("Loading BattleMasters..Broken.");
+    // TODO: Broken ATM
+    //sBattleGroundMgr.LoadBattleMastersEntry();
 
-    sLog.outString("Loading BattleGround event indexes...");
-    sBattleGroundMgr.LoadBattleEventIndexes();
+    sLog.outString("Loading BattleGround event indexes...Broken");
+    // TODO: Broken ATM
+    //sBattleGroundMgr.LoadBattleEventIndexes();
 
     sLog.outString("Loading GameTeleports...");
     sObjectMgr.LoadGameTele();
@@ -1562,13 +1564,15 @@ void World::SetInitialWorldSettings()
     sLog.outString();
 
     ///- Initialize Battlegrounds
-    sLog.outString("Starting BattleGround System");
-    sBattleGroundMgr.CreateInitialBattleGrounds();
-    sBattleGroundMgr.InitAutomaticArenaPointDistribution();
+    sLog.outString("Starting BattleGround System... BROKEN");
+    // TODO: Fix these
+    //sBattleGroundMgr.CreateInitialBattleGrounds();
+    //sBattleGroundMgr.InitAutomaticArenaPointDistribution();
 
     ///- Initialize Outdoor PvP
-    sLog.outString("Starting Outdoor PvP System");
-    sOutdoorPvPMgr.InitOutdoorPvP();
+    sLog.outString("Starting Outdoor PvP System ... BROKEN");
+    // TODO: Fix these
+    //sOutdoorPvPMgr.InitOutdoorPvP();
 
     // Not sure if this can be moved up in the sequence (with static data loading) as it uses MapManager
     sLog.outString("Loading Transports...");
