@@ -1603,9 +1603,10 @@ void World::SetInitialWorldSettings()
     sLog.outString("Calculate random battleground reset time...");
     InitRandomBGResetTime();
 
-    sLog.outString("Starting Game Event system...");
-    uint32 nextGameEvent = sGameEventMgr.Initialize();
-    m_timers[WUPDATE_EVENTS].SetInterval(nextGameEvent);    // depend on next event
+    sLog.outString("Starting Game Event system...BROKEN");
+    // TODO: Needs Fixing
+    // uint32 nextGameEvent = sGameEventMgr.Initialize();
+    // m_timers[WUPDATE_EVENTS].SetInterval(nextGameEvent);    // depend on next event
 
     // ToDo: requires fix after the latest updates
     //sLog.outString("Loading grids for active creatures or transports...");

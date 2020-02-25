@@ -5289,43 +5289,43 @@ bool SpellArea::IsFitToRequirements(Player const* player, uint32 newZone, uint32
         }
     }
     else                                                    // This block will be removed
- {
-    if (gender != GENDER_NONE)
     {
-        // not in expected gender
-        if (!player || gender != player->getGender())
+        if (gender != GENDER_NONE)
         {
-            return false;
+            // not in expected gender
+            if (!player || gender != player->getGender())
+            {
+                return false;
+            }
         }
-    }
 
-    if (raceMask)
-    {
-        // not in expected race
-        if (!player || !(raceMask & player->getRaceMask()))
+        if (raceMask)
         {
-            return false;
+            // not in expected race
+            if (!player || !(raceMask & player->getRaceMask()))
+            {
+                return false;
+            }
         }
-    }
 
-    if (questStart)
-    {
-        // not in expected required quest state
-        if (!player || (!questStartCanActive || !player->IsActiveQuest(questStart)) && !player->GetQuestRewardStatus(questStart))
+        if (questStart)
         {
-            return false;
+            // not in expected required quest state
+            if (!player || (!questStartCanActive || !player->IsActiveQuest(questStart)) && !player->GetQuestRewardStatus(questStart))
+            {
+                return false;
+            }
         }
-    }
 
-    if (questEnd)
-    {
-        // not in expected forbidden quest state
-        if (!player || player->GetQuestRewardStatus(questEnd))
+        if (questEnd)
         {
-            return false;
+            // not in expected forbidden quest state
+            if (!player || player->GetQuestRewardStatus(questEnd))
+            {
+                return false;
+            }
         }
     }
- }
 
     if (areaId)
     {

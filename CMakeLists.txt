@@ -39,7 +39,7 @@ option(BUILD_MANGOSD        "Build the main server"                         ON)
 option(BUILD_REALMD         "Build the login server"                        ON)
 option(BUILD_TOOLS          "Build the map/vmap/mmap extractors"            ON)
 option(SCRIPT_LIB_ELUNA     "Compile with support for Eluna scripts"        OFF)
-option(SCRIPT_LIB_SD3       "Compile with support for ScriptDev3 scripts"   ON)
+option(SCRIPT_LIB_SD3       "Compile with support for ScriptDev3 scripts"   OFF)
 #option(PLAYERBOTS           "Enable Player Bots"                            OFF)
 option(SOAP                 "Enable remote access via SOAP"                 OFF)
 # Hidden option to enable/disable PCH. DEV ONLY!
