@@ -895,24 +895,24 @@ void LoadDBCStores(const std::string& dataPath)
     bool startupFailed=false;
 
     // last area (areaflag) added in 5.4.8 (18414)
-    //if (!sAreaStore.LookupEntry(5491))
-    //{
-    //    startupFailed=true;
-    //    failedModules += "AreaTable.dbc";
-    //}
+    if (!sAreaStore.LookupEntry(5401))
+    {
+        startupFailed=true;
+        failedModules += "AreaTable.dbc";
+    }
 
     // last char title added in 5.4.8 (18414)
-    //if (!sCharTitlesStore.LookupEntry(389))
-    //{
-    //    startupFailed=true;
-    //    failedModules += ",CharTitles.dbc";
-    //}
-    //// last gem property added in 5.4.8 (18414)
-    //if (!sGemPropertiesStore.LookupEntry(2467))
-    //{
-    //    startupFailed=true;
-    //    failedModules += ",GemProperties.dbc";
-    //}
+    if (!sCharTitlesStore.LookupEntry(351))
+    {
+        startupFailed=true;
+        failedModules += ",CharTitles.dbc";
+    }
+    // last gem property added in 5.4.8 (18414)
+    if (!sGemPropertiesStore.LookupEntry(2450))
+    {
+        startupFailed=true;
+        failedModules += ",GemProperties.dbc";
+    }
     // last map added in 5.4.8 (18414)
     if (!sMapStore.LookupEntry(1173))
     {
