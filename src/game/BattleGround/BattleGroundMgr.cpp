@@ -2419,7 +2419,7 @@ void BattleGroundMgr::LoadBattleMastersEntry()
         Field* fields = result->Fetch();
 
         uint32 entry = fields[0].GetUInt32();
-        uint32 bgTypeId  = fields[1].GetUInt32();
+        uint32 bgTypeId = BattleGroundTypeId(bgTypeId);
         if (!sBattlemasterListStore.LookupEntry(bgTypeId))
         {
             sLog.outErrorDb("Table `battlemaster_entry` contain entry %u for nonexistent battleground type %u, ignored.", entry, bgTypeId);

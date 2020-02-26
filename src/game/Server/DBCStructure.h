@@ -644,8 +644,8 @@ struct BattlemasterListEntry
 	uint32 minPlayers;                                      // 25       4.0.6.13596
 	uint32 maxPlayers;                                      // 26       4.0.1
 	uint32 rated;                                           // 27       4.0.3, value 2 for Rated Battlegrounds
-	//uint32                                                // 28       5.4.x
-	//uint32                                                // 29       5.4.x
+	//uint32 unk1;                                            // 28       5.4.x
+	//DBCString typeName;                                     // 29       5.4.x
 };
 
 /*struct Cfg_CategoriesEntry
