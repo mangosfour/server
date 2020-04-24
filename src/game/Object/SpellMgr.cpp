@@ -1266,7 +1266,7 @@ void SpellMgr::LoadSpellTargetPositions()
     uint32 count = 0;
 
     //                                                0   1           2                  3                  4                  5
-    QueryResult* result = WorldDatabase.Query("SELECT id, target_map, target_position_x, target_position_y, target_position_z, target_orientation FROM spell_target_position");
+    QueryResult* result = WorldDatabase.Query("SELECT `id`, `target_map`, `target_position_x`, `target_position_y`, `target_position_z`, `target_orientation` FROM `spell_target_position`");
     if (!result)
     {
         BarGoLink bar(1);
@@ -1533,52 +1533,52 @@ void SpellMgr::LoadSpellProcEvents()
 {
     mSpellProcEventMap.clear();                             // need for reload case
 
-    //                                                0      1           2
-    QueryResult* result = WorldDatabase.Query("SELECT entry, SchoolMask, SpellFamilyName, "
+    //                                                 0        1             2
+    QueryResult* result = WorldDatabase.Query("SELECT `entry`, `SchoolMask`, `SpellFamilyName`, "
     //                                       3                  4                  5
-                                            "SpellFamilyMaskA0, SpellFamilyMaskA1, SpellFamilyMaskA2, "
+                                            "`SpellFamilyMaskA0`, `SpellFamilyMaskA1`, `SpellFamilyMaskA2`, "
     //                                       6                  7                  8
-                                            "SpellFamilyMaskB0, SpellFamilyMaskB1, SpellFamilyMaskB2, "
+                                            "`SpellFamilyMaskB0`, `SpellFamilyMaskB1`, `SpellFamilyMaskB2`, "
     //                                       9                  10                 11
-                                            "SpellFamilyMaskC0, SpellFamilyMaskC1, SpellFamilyMaskC2, "
+                                            "`SpellFamilyMaskC0`, `SpellFamilyMaskC1`, `SpellFamilyMaskC2`, "
     //                                       12                 13                 14
-                                            "SpellFamilyMaskD0, SpellFamilyMaskD1, SpellFamilyMaskD2, "
+                                            "`SpellFamilyMaskD0`, `SpellFamilyMaskD1`, `SpellFamilyMaskD2`, "
     //                                       15                 16                 17
-                                            "SpellFamilyMaskE0, SpellFamilyMaskE1, SpellFamilyMaskE2, "
+                                            "`SpellFamilyMaskE0`, `SpellFamilyMaskE1`, `SpellFamilyMaskE2`, "
     //                                       18                 19                 20
-                                            "SpellFamilyMaskF0, SpellFamilyMaskF1, SpellFamilyMaskF2, "
+                                            "`SpellFamilyMaskF0`, `SpellFamilyMaskF1`, `SpellFamilyMaskF2`, "
     //                                       21                 22                 23
-                                            "SpellFamilyMaskG0, SpellFamilyMaskG1, SpellFamilyMaskG2, "
+                                            "`SpellFamilyMaskG0`, `SpellFamilyMaskG1`, `SpellFamilyMaskG2`, "
     //                                       24                 25                 26
-                                            "SpellFamilyMaskH0, SpellFamilyMaskH1, SpellFamilyMaskH2, "
+                                            "`SpellFamilyMaskH0`, `SpellFamilyMaskH1`, `SpellFamilyMaskH2`, "
     //                                       27                 28                 29
-                                            "SpellFamilyMaskI0, SpellFamilyMaskI1, SpellFamilyMaskI2, "
+                                            "`SpellFamilyMaskI0`, `SpellFamilyMaskI1`, `SpellFamilyMaskI2`, "
     //                                       30                 31                 32
-                                            "SpellFamilyMaskJ0, SpellFamilyMaskJ1, SpellFamilyMaskJ2, "
+                                            "`SpellFamilyMaskJ0`, `SpellFamilyMaskJ1`, `SpellFamilyMaskJ2`, "
     //                                       33                 34                 35
-                                            "SpellFamilyMaskK0, SpellFamilyMaskK1, SpellFamilyMaskK2, "
+                                            "`SpellFamilyMaskK0`, `SpellFamilyMaskK1`, `SpellFamilyMaskK2`, "
     //                                       36                 37                 38
-                                            "SpellFamilyMaskL0, SpellFamilyMaskL1, SpellFamilyMaskL2, "
+                                            "`SpellFamilyMaskL0`, `SpellFamilyMaskL1`, `SpellFamilyMaskL2`, "
     //                                       39                 40                 41
-                                            "SpellFamilyMaskM0, SpellFamilyMaskM1, SpellFamilyMaskM2, "
+                                            "`SpellFamilyMaskM0`, `SpellFamilyMaskM1`, `SpellFamilyMaskM2`, "
     //                                       42                 43                 44
-                                            "SpellFamilyMaskN0, SpellFamilyMaskN1, SpellFamilyMaskN2, "
+                                            "`SpellFamilyMaskN0`, `SpellFamilyMaskN1`, `SpellFamilyMaskN2`, "
     //                                       45                 46                 47
-                                            "SpellFamilyMaskO0, SpellFamilyMaskO1, SpellFamilyMaskO2, "
+                                            "`SpellFamilyMaskO0`, `SpellFamilyMaskO1`, `SpellFamilyMaskO2`, "
     //                                       48                 49                 50
-                                            "SpellFamilyMaskP0, SpellFamilyMaskP1, SpellFamilyMaskP2, "
+                                            "`SpellFamilyMaskP0`, `SpellFamilyMaskP1`, `SpellFamilyMaskP2`, "
     //                                       51                 52                 53
-                                            "SpellFamilyMaskQ0, SpellFamilyMaskQ1, SpellFamilyMaskQ2, "
+                                            "`SpellFamilyMaskQ0`, `SpellFamilyMaskQ1`, `SpellFamilyMaskQ2`, "
     //                                       54                 55                 56
-                                            "SpellFamilyMaskR0, SpellFamilyMaskR1, SpellFamilyMaskR2, "
+                                            "`SpellFamilyMaskR0`, `SpellFamilyMaskR1`, `SpellFamilyMaskR2`, "
     //                                       57                 58                 59
-                                            "SpellFamilyMaskS0, SpellFamilyMaskS1, SpellFamilyMaskS2, "
+                                            "`SpellFamilyMaskS0`, `SpellFamilyMaskS1`, `SpellFamilyMaskS2`, "
     //                                       60                 61                 62
-                                            "SpellFamilyMaskT0, SpellFamilyMaskT1, SpellFamilyMaskT2, "
+                                            "`SpellFamilyMaskT0`, `SpellFamilyMaskT1`, `SpellFamilyMaskT2`, "
     //                                       63                 64                 65
-                                            "SpellFamilyMaskU0, SpellFamilyMaskU1, SpellFamilyMaskU2, "
+                                            "`SpellFamilyMaskU0`, `SpellFamilyMaskU1`, `SpellFamilyMaskU2`, "
     //                                       66         67      68       69            70
-                                            "procFlags, procEx, ppmRate, CustomChance, Cooldown FROM spell_proc_event");
+                                            "`procFlags`, `procEx`, `ppmRate`, `CustomChance`, `Cooldown` FROM `spell_proc_event`");
     if (!result)
     {
         BarGoLink bar(1);
@@ -1644,7 +1644,7 @@ void SpellMgr::LoadSpellProcItemEnchant()
     uint32 count = 0;
 
     //                                                0      1
-    QueryResult* result = WorldDatabase.Query("SELECT entry, ppmRate FROM spell_proc_item_enchant");
+    QueryResult* result = WorldDatabase.Query("SELECT `entry`, `ppmRate` FROM `spell_proc_item_enchant`");
     if (!result)
     {
 
@@ -1758,8 +1758,8 @@ void SpellMgr::LoadSpellBonuses()
 {
     mSpellBonusMap.clear();                             // need for reload case
     uint32 count = 0;
-    //                                                0      1             2          3
-    QueryResult* result = WorldDatabase.Query("SELECT entry, direct_bonus, dot_bonus, ap_bonus, ap_dot_bonus FROM spell_bonus_data");
+    QueryResult* result = WorldDatabase.Query("SELECT entry, direct_bonus, \
+        `dot_bonus`, `ap_bonus`, `ap_dot_bonus` FROM `spell_bonus_data`");
     if (!result)
     {
         BarGoLink bar(1);
@@ -2007,7 +2007,7 @@ void SpellMgr::LoadSpellElixirs()
     uint32 count = 0;
 
     //                                                0      1
-    QueryResult* result = WorldDatabase.Query("SELECT entry, mask FROM spell_elixir");
+    QueryResult* result = WorldDatabase.Query("SELECT `entry`, `mask` FROM `spell_elixir`");
     if (!result)
     {
 
@@ -2111,7 +2111,7 @@ void SpellMgr::LoadSpellThreats()
     mSpellThreatMap.clear();                                // need for reload case
 
     //                                                0      1       2           3
-    QueryResult* result = WorldDatabase.Query("SELECT entry, Threat, multiplier, ap_bonus FROM spell_threat");
+    QueryResult* result = WorldDatabase.Query("SELECT `entry`, `Threat`, `multiplier`, `ap_bonus` FROM `spell_threat`");
     if (!result)
     {
         BarGoLink bar(1);
@@ -3430,7 +3430,7 @@ void SpellMgr::LoadSpellChains()
     }
 
     // load custom case
-    QueryResult* result = WorldDatabase.Query("SELECT spell_id, prev_spell, first_spell, rank, req_spell FROM spell_chain");
+    QueryResult* result = WorldDatabase.Query("SELECT `spell_id`, `prev_spell`, `first_spell`, `rank`, `req_spell` FROM `spell_chain`");
     if (!result)
     {
         BarGoLink bar(1);
@@ -3731,7 +3731,7 @@ void SpellMgr::LoadSpellLearnSpells()
     mSpellLearnSpells.clear();                              // need for reload case
 
     //                                                0      1        2
-    QueryResult* result = WorldDatabase.Query("SELECT entry, SpellID, Active FROM spell_learn_spell");
+    QueryResult* result = WorldDatabase.Query("SELECT `entry`, `SpellID`, `Active` FROM `spell_learn_spell`");
     if (!result)
     {
         BarGoLink bar(1);
@@ -3977,8 +3977,8 @@ void SpellMgr::LoadSpellPetAuras()
 
     uint32 count = 0;
 
-    //                                                0      1         2    3
-    QueryResult* result = WorldDatabase.Query("SELECT spell, effectId, pet, aura FROM spell_pet_auras");
+    //                                                 0        1           2      3
+    QueryResult* result = WorldDatabase.Query("SELECT `spell`, `effectId`, `pet`, `aura` FROM `spell_pet_auras`");
     if (!result)
     {
 
@@ -4341,7 +4341,7 @@ void SpellMgr::LoadSpellAreas()
     uint32 count = 0;
 
     //                                                0      1     2            3                   4          5             6           7         8       9
-    QueryResult* result = WorldDatabase.Query("SELECT spell, area, quest_start, quest_start_active, quest_end, condition_id, aura_spell, racemask, gender, autocast FROM spell_area");
+    QueryResult* result = WorldDatabase.Query("SELECT `spell`, `area`, `quest_start`, `quest_start_active`, `quest_end`, `condition_id`, `aura_spell`, `racemask`, `gender`, `autocast` FROM `spell_area`");
 
     if (!result)
     {
@@ -4765,8 +4765,8 @@ void SpellMgr::CheckUsedSpells(char const* table)
     uint32 countSpells = 0;
     uint32 countMasks = 0;
 
-    //                                                 0       1               2                3                4         5           6             7          8          9         10   11
-    QueryResult* result = WorldDatabase.PQuery("SELECT spellid,SpellFamilyName,SpellFamilyMaskA,SpellFamilyMaskB,SpellIcon,SpellVisual,SpellCategory,EffectType,EffectAura,EffectIdx,Name,Code FROM %s", table);
+    //                                                  0         1                 2                  3                  4           5             6               7            8            9           10     11
+    QueryResult* result = WorldDatabase.PQuery("SELECT `spellid`,`SpellFamilyName`,`SpellFamilyMaskA`,`SpellFamilyMaskB`,`SpellIcon`,`SpellVisual`,`SpellCategory`,`EffectType`,`EffectAura`,`EffectIdx`,`Name`,`Code` FROM `%s`", table);
 
     if (!result)
     {
