@@ -1371,7 +1371,7 @@ void WorldSession::HandleCharCustomizeOpcode(WorldPacket& recv_data)
     recv_data.ReadByteSeq(guid[1]);
     recv_data.ReadByteSeq(guid[7]);
 
-    QueryResult* result = CharacterDatabase.PQuery("SELECT at_login FROM characters WHERE guid ='%u'", guid.GetCounter());
+    QueryResult* result = CharacterDatabase.PQuery("SELECT `at_login` FROM `characters` WHERE `guid` = '%u'", guid.GetCounter());
     if (!result)
     {
         WorldPacket data(SMSG_CHAR_CUSTOMIZE, 1);
@@ -1431,8 +1431,8 @@ void WorldSession::HandleCharCustomizeOpcode(WorldPacket& recv_data)
 
     CharacterDatabase.escape_string(newname);
     Player::Customize(guid, gender, skin, face, hairStyle, hairColor, facialHair);
-    CharacterDatabase.PExecute("UPDATE characters set name = '%s', at_login = at_login & ~ %u WHERE guid ='%u'", newname.c_str(), uint32(AT_LOGIN_CUSTOMIZE), guid.GetCounter());
-    CharacterDatabase.PExecute("DELETE FROM character_declinedname WHERE guid ='%u'", guid.GetCounter());
+    CharacterDatabase.PExecute("UPDATE `characters` SET `name` = '%s', `at_login` = `at_login` & ~ %u WHERE `guid` ='%u'", newname.c_str(), uint32(AT_LOGIN_CUSTOMIZE), guid.GetCounter());
+    CharacterDatabase.PExecute("DELETE FROM `character_declinedname` WHERE `guid` ='%u'", guid.GetCounter());
 
     std::string IP_str = GetRemoteAddress();
     sLog.outChar("Account: %d (IP: %s), Character %s customized to: %s", GetAccountId(), IP_str.c_str(), guid.GetString().c_str(), newname.c_str());
