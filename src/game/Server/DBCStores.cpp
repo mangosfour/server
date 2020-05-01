@@ -929,7 +929,8 @@ void LoadDBCStores(const std::string& dataPath)
     if(startupFailed)
     {
         sLog.outError("\nYou have mixed version DBC files. Please re-extract DBC files for one from client build: %s", AcceptableClientBuildsListStr().c_str());
-        sLog.outError("\nThe Following modules failed the checksum: %s", failedModules);
+        // TODO: Need to fix this:
+        // sLog.outError("\nThe Following modules failed the checksum: %s", failedModules);
         Log::WaitBeforeContinueIfNeed();
         exit(1);
     }
