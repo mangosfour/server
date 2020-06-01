@@ -17,7 +17,7 @@ Cataclysm WOW BRANCH
 ### A World of Warcraft server for the Mists of Pandaria Expansion of WoW  
 ----
 *Mangos* is open source project, built in [C++][7], it's fast, runs on multiple
-platforms, can store game data in [MySQL][40] and [PostgreSQL][42]. It also has
+platforms, can store game data in [MySQL][40] and [MariaDB][41]. It also has
 optional support for SOAP, and aims to be 100% compatible with [World of Warcraft][2]
 in its Cataclysm version supporting clients from the [patch 4.3.4][5] branch, 
 specifically patch 4.3.4.
@@ -49,8 +49,7 @@ Currently we support running *Mangos* on these operating systems:
 * **Windows**, 32 bit and 64 bit. [Windows][20] Server 2008 (or newer) or Windows 7 (or newer) is recommended.
 * **Linux**, 32 bit and 64 bit. [Debian 7][21] and [Ubuntu 12.04 LTS][22] are
   recommended. Other distributions with similar package versions will work, too.
-* **BSD**, 32 bit and 64 bit. [FreeBSD][23], [NetBSD][24], [OpenBSD][25] and
-  [DragonFly][26] are recommended.
+* **BSD**, 32 bit and 64 bit. [FreeBSD][23], [NetBSD][24], [OpenBSD][25] are recommended.
 
 Of course, newer versions should work, too. In the case of Windows, matching
 server versions will work, too.
@@ -62,10 +61,8 @@ Building *Mangos* is currently possible with these compilers:
 * **Microsoft Visual Studio (Express[^1])**, 32 bit and 64 bit. Both
   [Visual Studio][30] and the Express editions of [Visual Studio][31] are
   supported. Only Visual Studio 2012 and above are now officially supported.
-
-* **Microsoft Windows SDK**, 32 bit and 64 bit. The [Windows 7 SDK][32] is
-  recommended, as older versions lack compiler features required to build
-  the server.
+* **Microsoft Visual Studio 32 bit and 64 bit.** All editions of [Visual Studio][31]
+  are supported. Only Visual Studio 2015 and above are now officially supported.
 * **Clang**, 32 bit and 64 bit. The [Clang compiler][33] can be used on any
   supported operating system.[^2]
 
@@ -144,8 +141,6 @@ the linked executables. You must obey the GNU General Public License in all
 respects for all of the code used other than [OpenSSL][48].
 
 
-[^1]: Visual Studio Express versions prior to the 2012 release can only
-      build 32 bit applications, unless you install the Windows SDK.
 [^2]: Clang support for Windows is experimental. Failure to compile Mangos
       may also relate to the experimental state of the port.
 
@@ -162,7 +157,7 @@ respects for all of the code used other than [OpenSSL][48].
 [17]: https://scan.coverity.com/ "Coverity Scan · Static Code Analysis"
 
 [19]: http://www.cmake.org/ "CMake · Cross Platform Make"
-[20]: http://windows.microsoft.com/ "Microsoft Windows · that OS, yes."
+[20]: http://windows.microsoft.com/ "Microsoft Windows"
 [21]: http://www.debian.org/ "Debian · The Universal Operating System"
 [22]: http://www.ubuntu.com/ "Ubuntu · The world's most popular free OS"
 [23]: http://www.freebsd.org/ "FreeBSD · The Power To Serve"
