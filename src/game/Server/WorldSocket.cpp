@@ -881,7 +881,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     recvPacket >> digest[5];
     recvPacket >> digest[6];
     recvPacket >> digest[8];
-    recvPacket >> clientBuild;
+    recvPacket >> BuiltNumberClient;
     recvPacket >> digest[17];
     recvPacket >> digest[7];
     recvPacket >> digest[13];
