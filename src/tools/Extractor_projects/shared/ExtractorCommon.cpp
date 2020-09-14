@@ -77,10 +77,14 @@ FILE* openWoWExe()
     {
 #ifdef WIN32
         if (fopen_s(&pFile, ExeFileName[iFileCount], "rb") == 0)
+        {
             return pFile; ///< successfully located the WoW executable
+        }
 #else
         if ((pFile = fopen(ExeFileName[iFileCount], "rb")))
+        {
             return pFile; ///< successfully located the WoW executable
+        }
 #endif
     }
 

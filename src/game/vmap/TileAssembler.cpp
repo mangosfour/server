@@ -424,7 +424,9 @@ namespace VMAP
         {
             if (fread(&displayId, sizeof(uint32), 1, model_list) != 1)
                 if (feof(model_list))   // EOF flag is only set after failed reading attempt
+                {
                     break;
+                }
 
             if (fread(&name_length, sizeof(uint32), 1, model_list) != 1
                 || name_length >= sizeof(buff)

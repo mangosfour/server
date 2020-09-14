@@ -139,7 +139,10 @@ class CharacterHandler
         }
         void HandlePlayerLoginCallback(QueryResult * /*dummy*/, SqlQueryHolder* holder)
         {
-            if (!holder) return;
+            if (!holder)
+            {
+                return;
+            }
             WorldSession* session = sWorld.FindSession(((LoginQueryHolder*)holder)->GetAccountId());
             if (!session)
             {
@@ -228,7 +231,9 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket& recvData)
     std::string name = recvData.ReadString(nameLength);
 
     if (unk)
+    {
         recvData.read_skip<uint32>();
+    }
 
     WorldPacket data(SMSG_CHAR_CREATE, 1);                  // returned with diff.values in all cases
 
@@ -392,7 +397,9 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket& recvData)
                 if (acc_class == CLASS_DEATH_KNIGHT)
                 {
                     if (heroic_free_slots > 0)
+                    {
                         --heroic_free_slots;
+                    }
 
                     if (heroic_free_slots == 0)
                     {
@@ -407,7 +414,9 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket& recvData)
                 {
                     uint32 acc_level = field[0].GetUInt32();
                     if (acc_level >= req_level_for_heroic)
+                    {
                         have_req_level_for_heroic = true;
+                    }
                 }
             }
 
@@ -429,13 +438,17 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket& recvData)
             while ((skipCinematics == CINEMATICS_SKIP_SAME_RACE && !have_same_race) || class_ == CLASS_DEATH_KNIGHT)
             {
                 if (!result2->NextRow())
+                {
                     break;
+                }
 
                 field = result2->Fetch();
                 acc_race = field[1].GetUInt32();
 
                 if (!have_same_race)
+                {
                     have_same_race = race_ == acc_race;
+                }
 
                 if (GetSecurity() == SEC_PLAYER && class_ == CLASS_DEATH_KNIGHT)
                 {
@@ -443,7 +456,9 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket& recvData)
                     if (acc_class == CLASS_DEATH_KNIGHT)
                     {
                         if (heroic_free_slots > 0)
+                        {
                             --heroic_free_slots;
+                        }
 
                         if (heroic_free_slots == 0)
                         {
@@ -458,7 +473,9 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket& recvData)
                     {
                         uint32 acc_level = field[0].GetUInt32();
                         if (acc_level >= req_level_for_heroic)
+                        {
                             have_req_level_for_heroic = true;
+                        }
                     }
                 }
             }
@@ -486,7 +503,9 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket& recvData)
     }
 
     if ((have_same_race && skipCinematics == CINEMATICS_SKIP_SAME_RACE) || skipCinematics == CINEMATICS_SKIP_ALL)
+    {
         pNewChar->setCinematic(1);                          // not show intro
+    }
 
     pNewChar->SetAtLoginFlag(AT_LOGIN_FIRST);               // First login
 
@@ -846,33 +865,47 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
         if (ChrClassesEntry const* cEntry = sChrClassesStore.LookupEntry(pCurrChar->getClass()))
         {
             if (cEntry->CinematicSequence)
+            {
                 pCurrChar->SendCinematicStart(cEntry->CinematicSequence);
+            }
             else if (ChrRacesEntry const* rEntry = sChrRacesStore.LookupEntry(pCurrChar->getRace()))
+            {
                 pCurrChar->SendCinematicStart(rEntry->CinematicSequence);
+            }
         }
     }
 
     uint32 miscRequirement = 0;
     AreaLockStatus lockStatus = AREA_LOCKSTATUS_OK;
     if (AreaTrigger const* at = sObjectMgr.GetMapEntranceTrigger(pCurrChar->GetMapId()))
+    {
         lockStatus = pCurrChar->GetAreaTriggerLockStatus(at, pCurrChar->GetDifficulty(pCurrChar->GetMap()->IsRaid()), miscRequirement);
+    }
     else
     {
         // Some basic checks in case of a map without areatrigger
         MapEntry const* mapEntry = sMapStore.LookupEntry(pCurrChar->GetMapId());
         if (!mapEntry)
+        {
             lockStatus = AREA_LOCKSTATUS_UNKNOWN_ERROR;
+        }
         else if (pCurrChar->GetSession()->Expansion() < mapEntry->Expansion())
+        {
             lockStatus = AREA_LOCKSTATUS_INSUFFICIENT_EXPANSION;
+        }
     }
     if (lockStatus != AREA_LOCKSTATUS_OK || !pCurrChar->GetMap()->Add(pCurrChar))
     {
         // normal delayed teleport protection not applied (and this correct) for this case (Player object just created)
         AreaTrigger const* at = sObjectMgr.GetGoBackTrigger(pCurrChar->GetMapId());
         if (at)
+        {
             lockStatus = pCurrChar->GetAreaTriggerLockStatus(at, pCurrChar->GetDifficulty(pCurrChar->GetMap()->IsRaid()), miscRequirement);
+        }
         if (!at || lockStatus != AREA_LOCKSTATUS_OK || !pCurrChar->TeleportTo(at->target_mapId, at->target_X, at->target_Y, at->target_Z, pCurrChar->GetOrientation()))
+        {
             pCurrChar->TeleportToHomebind();
+        }
     }
 
     sObjectAccessor.AddObject(pCurrChar);
@@ -893,7 +926,9 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
 
     // announce group about member online (must be after add to player list to receive announce to self)
     if (Group* group = pCurrChar->GetGroup())
+    {
         group->SendUpdate();
+    }
 
     // friend status
     sSocialMgr.SendFriendStatus(pCurrChar, FRIEND_ONLINE, pCurrChar->GetObjectGuid(), true);
@@ -906,7 +941,9 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     {
         // not blizz like, we must correctly save and load player instead...
         if (pCurrChar->getRace() == RACE_NIGHTELF)
+        {
             pCurrChar->CastSpell(pCurrChar, 20584, true);   // auras SPELL_AURA_INCREASE_SPEED(+speed in wisp form), SPELL_AURA_INCREASE_SWIM_SPEED(+swim speed in wisp form), SPELL_AURA_TRANSFORM (to wisp form)
+        }
         pCurrChar->CastSpell(pCurrChar, 8326, true);        // auras SPELL_AURA_GHOST, SPELL_AURA_INCREASE_SPEED(why?), SPELL_AURA_INCREASE_SWIM_SPEED(why?)
 
         pCurrChar->SetWaterWalk(true);
@@ -916,17 +953,23 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
 
     // reset for all pets before pet loading
     if (pCurrChar->HasAtLoginFlag(AT_LOGIN_RESET_PET_TALENTS))
+    {
         Pet::resetTalentsForAllPetsOf(pCurrChar);
+    }
 
     // Load pet if any (if player not alive and in taxi flight or another then pet will remember as temporary unsummoned)
     pCurrChar->LoadPet();
 
     // Set FFA PvP for non GM in non-rest mode
     if (sWorld.IsFFAPvPRealm() && !pCurrChar->isGameMaster() && !pCurrChar->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_RESTING))
+    {
         pCurrChar->SetFFAPvP(true);
+    }
 
     if (pCurrChar->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_CONTESTED_PVP))
+    {
         pCurrChar->SetContestedPvP();
+    }
 
     // Apply at_login requests
     if (pCurrChar->HasAtLoginFlag(AT_LOGIN_RESET_SPELLS))
@@ -945,7 +988,9 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
     // Used by Eluna
 #ifdef ENABLE_ELUNA
     if (pCurrChar->HasAtLoginFlag(AT_LOGIN_FIRST))
+    {
         sEluna->OnFirstLogin(pCurrChar);
+    }
 #endif /* ENABLE_ELUNA */
 
 
@@ -957,20 +1002,28 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
 
     /* If the server is shutting down, show shutdown time remaining */
     if (sWorld.IsShutdowning())
+    {
         sWorld.ShutdownMsg(true, pCurrChar);
+    }
 
     if (sWorld.getConfig(CONFIG_BOOL_ALL_TAXI_PATHS))
+    {
         pCurrChar->SetTaxiCheater(true);
+    }
 
     if (pCurrChar->isGameMaster())
+    {
         SendNotification(LANG_GM_ON);
+    }
 
     if (!pCurrChar->isGMVisible())
     {
         SendNotification(LANG_INVISIBLE_INVISIBLE);
         SpellEntry const* invisibleAuraInfo = sSpellStore.LookupEntry(sWorld.getConfig(CONFIG_UINT32_GM_INVISIBLE_AURA));
         if (invisibleAuraInfo && IsSpellAppliesAura(invisibleAuraInfo))
+        {
             pCurrChar->CastSpell(pCurrChar, invisibleAuraInfo, true);
+        }
     }
 
     std::string IP_str = GetRemoteAddress();
@@ -978,7 +1031,9 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
                  GetAccountId(), IP_str.c_str(), pCurrChar->GetName(), pCurrChar->GetGUIDLow());
 
     if (!pCurrChar->IsStandState() && !pCurrChar->hasUnitState(UNIT_STAT_STUNNED))
+    {
         pCurrChar->SetStandState(UNIT_STAND_STATE_STAND);
+    }
 
     m_playerLoading = false;
 
@@ -1143,7 +1198,9 @@ void WorldSession::HandleChangePlayerNameOpcodeCallBack(QueryResult* result, uin
     if (!session)
     {
         if (result) delete result;
-        return;
+        {
+            return;
+        }
     }
 
     if (!result)
@@ -1316,7 +1373,9 @@ void WorldSession::HandleAlterAppearanceOpcode(WorldPacket& recv_data)
     _player->SetByteValue(PLAYER_BYTES, 3, uint8(Color));
     _player->SetByteValue(PLAYER_BYTES_2, 0, uint8(bs_facialHair->hair_id));
     if (_player->getRace() == RACE_TAUREN)
+    {
         _player->SetByteValue(PLAYER_BYTES, 0, uint8(skinTone_id));
+    }
 
     _player->GetAchievementMgr().UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_VISIT_BARBER_SHOP, 1);
 
@@ -1467,7 +1526,9 @@ void WorldSession::HandleCharCustomizeOpcode(WorldPacket& recv_data)
     data << newname;
 
     if (!RESPONSE_SUCCESS)
+    {
         data << newname;
+    }
 
     SendPacket(&data);
 }
@@ -1558,7 +1619,9 @@ void WorldSession::HandleEquipmentSetUseOpcode(WorldPacket& recv_data)
 
         // check if item slot is set to "ignored" (raw value == 1), must not be unequipped then
         if (itemGuid.GetRawValue() == 1)
+        {
             continue;
+        }
 
         Item* item = _player->GetItemByGuid(itemGuid);
 
@@ -1568,7 +1631,9 @@ void WorldSession::HandleEquipmentSetUseOpcode(WorldPacket& recv_data)
         {
             Item* uItem = _player->GetItemByPos(INVENTORY_SLOT_BAG_0, i);
             if (!uItem)
+            {
                 continue;
+            }
 
             ItemPosCountVec sDest;
             InventoryResult msg = _player->CanStoreItem(NULL_BAG, NULL_SLOT, sDest, uItem, false);
@@ -1578,13 +1643,17 @@ void WorldSession::HandleEquipmentSetUseOpcode(WorldPacket& recv_data)
                 _player->StoreItem(sDest, uItem, true);
             }
             else
+            {
                 _player->SendEquipError(msg, uItem, NULL);
+            }
 
             continue;
         }
 
         if (item->GetPos() == dstpos)
+        {
             continue;
+        }
 
         _player->SwapItem(item->GetPos(), dstpos);
     }

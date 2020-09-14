@@ -149,47 +149,69 @@ void HandleArgs(int argc, char* arg[])
         // f - use float to int conversion
         // h - limit minimum height
         if (arg[c][0] != '-')
+        {
             Usage(arg[0]);
+        }
 
         switch (arg[c][1])
         {
             case 'i':
                 if (c + 1 < argc)                           // all ok
+                {
                     strcpy(input_path, arg[(c++) + 1]);
+                }
                 else
+                {
                     Usage(arg[0]);
+                }
                 break;
             case 'o':
                 if (c + 1 < argc)                           // all ok
+                {
                     strcpy(output_path, arg[(c++) + 1]);
+                }
                 else
+                {
                     Usage(arg[0]);
+                }
                 break;
             case 'f':
                 if (c + 1 < argc)                           // all ok
+                {
                     CONF_allow_float_to_int = atoi(arg[(c++) + 1]) != 0;
+                }
                 else
+                {
                     Usage(arg[0]);
+                }
                 break;
             case 'e':
                 if (c + 1 < argc)                           // all ok
                 {
                     CONF_extract = atoi(arg[(c++) + 1]);
                     if (!(CONF_extract > 0 && CONF_extract < 4))
+                    {
                         Usage(arg[0]);
+                    }
                 }
                 else
+                {
                     Usage(arg[0]);
+                }
                 break;
             case 'b':
                 if (c + 1 < argc)                           // all ok
                 {
                     CONF_max_build = atoi(arg[(c++) + 1]);
                     if (CONF_max_build < MIN_SUPPORTED_BUILD)
+                    {
                         Usage(arg[0]);
+                    }
                 }
                 else
+                {
                     Usage(arg[0]);
+                }
                 break;
             default:
                 Usage(arg[0]);
@@ -535,7 +557,9 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
 {
     ChunkedFile adt;
     if (!adt.loadFile(hWorldMPQ, filename))
+    {
         return false;
+    }
 
     // Prepare map header
     map_fileheader map;
@@ -562,7 +586,9 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
 
         // Area data
         if (mcnk->areaid <= uMaxAreaId && pAreas[mcnk->areaid] != 0xFFFF)
+        {
             area_flags[mcnk->iy][mcnk->ix] = pAreas[mcnk->areaid];
+        }
 
         // Height
         // Height values for triangles stored in order:
@@ -645,7 +671,9 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
                         {
                             liquid_show[cy][cx] = true;
                             if (liquid->flags[y][x] & (1 << 7))
+                            {
                                 liquid_flags[mcnk->iy][mcnk->ix] |= MAP_LIQUID_TYPE_DARK_WATER;
+                            }
                             ++count;
                         }
                     }
@@ -669,7 +697,9 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
                 }
 
                 if (!count && liquid_flags[mcnk->iy][mcnk->ix])
+                {
                     fprintf(stderr, "Wrong liquid detect in MCLQ chunk");
+                }
 
                 for (int y = 0; y <= ADT_CELL_SIZE; ++y)
                 {
@@ -704,7 +734,9 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
             {
                 adt_liquid_header *h = h2o->getLiquidData(i, j);
                 if (!h)
+                {
                     continue;
+                }
 
                 int count = 0;
                 uint64 show = h2o->getLiquidShowMap(h);
@@ -739,11 +771,15 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
                 {
                     uint8* lm = h2o->getLiquidLightMap(h);
                     if (!lm)
+                    {
                         liquid_flags[i][j] |= MAP_LIQUID_TYPE_DARK_WATER;
+                    }
                 }
 
                 if (!count && liquid_flags[i][j])
+                {
                     printf("Wrong liquid detect in MH2O chunk");
+                }
 
                 float* height = h2o->getLiquidHeightMap(h);
                 int pos = 0;
@@ -755,9 +791,13 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
                         int cx = j * ADT_CELL_SIZE + x + h->xOffset;
 
                         if (height)
+                        {
                             liquid_height[cy][cx] = height[pos];
+                        }
                         else
+                        {
                             liquid_height[cy][cx] = h->heightLevel1;
+                        }
 
                         pos++;
                     }
@@ -1059,9 +1099,13 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
     }
 
     if (hasHoles)
+    {
         map.holesSize = sizeof(holes);
+    }
     else
+    {
         map.holesSize = 0;
+    }
 
     // Ok all data prepared - store it
     FILE* output = fopen(filename2, "wb");
@@ -1120,7 +1164,9 @@ bool ConvertADT(HANDLE hWorldMPQ, char *filename, char *filename2, int /*cell_y*
 
     // store hole data
     if (hasHoles)
+    {
         fwrite(holes, map.holesSize, 1, output);
+    }
 
     fclose(output);
 
@@ -1205,7 +1251,9 @@ bool ExtractFile(HANDLE fileInArchive, char const* filename)
     {
         SFileReadFile(fileInArchive, buffer, sizeof(buffer), &readBytes, NULL);
         if (readBytes > 0)
+        {
             fwrite(buffer, 1, readBytes, output);
+        }
     }
 
     fclose(output);
@@ -1261,7 +1309,9 @@ void ExtractDBCFiles(HANDLE localeMpqHandle, int locale, bool basicLocale)
         }
 
         if (ExtractFile(dbcFile, filename.c_str()))
+        {
             ++count;
+        }
 
         if (!FileExists(filename.c_str()))
         {
@@ -1276,23 +1326,35 @@ void AppendPatchMPQFilesToList(char const* subdir, char const* suffix, char cons
 {
     char dirname[512];
     if (subdir)
+    {
         sprintf(dirname, "%s/Data/%s", input_path, subdir);
+    }
     else
+    {
         sprintf(dirname, "%s/Data", input_path);
+    }
 
     char scanname[512];
     if (suffix)
+    {
         sprintf(scanname, "wow-update-%s-%%u.MPQ", suffix);
+    }
     else
+    {
         sprintf(scanname, "wow-update-%%u.MPQ");
+    }
 
 #ifdef WIN32
 
     char maskname[512];
     if (suffix)
+    {
         sprintf(maskname, "%s/wow-update-%s-*.MPQ", dirname, suffix);
+    }
     else
+    {
         sprintf(maskname, "%s/wow-update-*.MPQ", dirname);
+    }
 
     WIN32_FIND_DATA ffd;
     HANDLE hFind = FindFirstFile(maskname, &ffd);
@@ -1302,11 +1364,15 @@ void AppendPatchMPQFilesToList(char const* subdir, char const* suffix, char cons
         do
         {
             if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+            {
                 continue;
+            }
 
             uint32 ubuild = 0;
             if (sscanf(ffd.cFileName, scanname, &ubuild) == 1 && (!CONF_max_build || ubuild <= CONF_max_build))
+            {
                 updates[ubuild] = UpdatesPair(ffd.cFileName, section);
+            }
         }
         while (FindNextFile(hFind, &ffd) != 0);
 
@@ -1321,7 +1387,9 @@ void AppendPatchMPQFilesToList(char const* subdir, char const* suffix, char cons
         dirent* dirp;
         while ((dirp = readdir(dp)) != NULL)
             if (sscanf(dirp->d_name, scanname, &ubuild) == 1 && (!CONF_max_build || ubuild <= CONF_max_build))
+            {
                 updates[ubuild] = UpdatesPair(dirp->d_name, section);
+            }
 
         closedir(dp);
     }
@@ -1361,56 +1429,74 @@ void LoadLocaleMPQFiles(HANDLE &localeMpqHandle, int const locale)
     for (int i = 0; Builds[i] <= CONF_TargetBuild; ++i)
     {
         if (Builds[i] == 0 || Builds[i] > CONF_TargetBuild) // should not need to do this, but it's being naughty!
+        {
             continue;
+        }
         sprintf(filename, "%s/Data/wow-update-base-%u.MPQ", input_path, Builds[i]);
 
         printf("\nPatching : %s\n", filename);
 
         //if (!OpenArchive(filename))
         if (!SFileOpenPatchArchive(localeMpqHandle, filename, prefix, 0))
+        {
             printf("Error open patch archive: %s\n\n", filename);
+        }
     }
 
     for (Updates::const_iterator itr = updates.begin(); itr != updates.end(); ++itr)
     {
         if (!itr->second.second)
+        {
             sprintf(filename, "%s/Data/%s/%s", input_path, Locales[locale], itr->second.first.c_str());
+        }
         else
+        {
             sprintf(filename, "%s/Data/%s", input_path, itr->second.first.c_str());
+        }
 
         printf("\nPatching : %s\n", filename);
 
         //if (!OpenArchive(filename))
         if (!SFileOpenPatchArchive(localeMpqHandle, filename, itr->second.second ? itr->second.second : "", 0))
+        {
             printf("Error open patch archive: %s\n\n", filename);
+        }
     }
 
     // ./Data/Cache patch-base files
     for (int i = 0; Builds[i] <= CONF_TargetBuild; ++i)
     {
         if (Builds[i] == 0 || Builds[i] > CONF_TargetBuild) // should not need to do this, but it's being naughty!
+        {
             continue;
+        }
         sprintf(filename, "%s/Data/Cache/patch-base-%u.MPQ", input_path, Builds[i]);
 
         printf("\nPatching : %s\n", filename);
 
         //if (!OpenArchive(filename))
         if (!SFileOpenPatchArchive(localeMpqHandle, filename, prefix, 0))
+        {
             printf("Error open patch archive: %s\n\n", filename);
+        }
     }
 
     // ./Data/Cache/<locale> patch files
     for (int i = 0; Builds[i] <= CONF_TargetBuild; ++i)
     {
         if (Builds[i] == 0 || Builds[i] > CONF_TargetBuild) // should not need to do this, but it's being naughty!
+        {
             continue;
+        }
         sprintf(filename, "%s/Data/Cache/%s/patch-%s-%u.MPQ", input_path, Locales[locale], Locales[locale], Builds[i]);
 
         printf("\nPatching : %s\n", filename);
 
         //if (!OpenArchive(filename))
         if (!SFileOpenPatchArchive(localeMpqHandle, filename, prefix, 0))
+        {
             printf("Error open patch archive: %s\n\n", filename);
+        }
     }
 }
 
@@ -1463,12 +1549,16 @@ void LoadBaseMPQFiles(HANDLE &hWorldMPQ)
     for (int i = 0; Builds[i] <= CONF_TargetBuild; ++i)
     {
         if (Builds[i] == 0 || Builds[i] > CONF_TargetBuild) // should not need to do this, but it's being naughty!
+        {
             continue;
+        }
         sprintf(filename, "%s/Data/wow-update-base-%u.MPQ", input_path, Builds[i]);
 
         //if (!OpenArchive(filename))
         if (!SFileOpenPatchArchive(hWorldMPQ, filename, "", 0))
+        {
             printf("Error open patch archive: %s\n\n", filename);
+        }
     }
 
     printf("update-base files loaded\n");
@@ -1477,12 +1567,16 @@ void LoadBaseMPQFiles(HANDLE &hWorldMPQ)
     for (int i = 0; Builds[i] <= CONF_TargetBuild; ++i)
     {
         if (Builds[i] == 0 || Builds[i] > CONF_TargetBuild) // should not need to do this, but it's being naughty!
+        {
             continue;
+        }
         sprintf(filename, "%s/Data/Cache/patch-base-%u.MPQ", input_path, Builds[i]);
 
         //if (!OpenArchive(filename))
         if (!SFileOpenPatchArchive(hWorldMPQ, filename, "", 0))
+        {
             printf("Error open patch archive: %s\n\n", filename);
+        }
     }
     setvbuf (stdout, NULL, _IONBF, 0);
     printf("  patch-base files loaded\n");
@@ -1539,7 +1633,9 @@ int main(int argc, char* arg[])
                 ExtractDBCFiles(hLocaleMpqHandle, i, true);
             }
             else
+            {
                 ExtractDBCFiles(hLocaleMpqHandle, i, false);
+            }
         }
     }
 

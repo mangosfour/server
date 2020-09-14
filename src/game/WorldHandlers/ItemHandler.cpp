@@ -51,7 +51,9 @@ void WorldSession::HandleSplitItemOpcode(WorldPacket& recv_data)
     }
 
     if (count == 0)
+    {
         return;                                             // check count - if zero it's fake packet
+    }
 
     if (!_player->IsValidPos(srcbag, srcslot, true))
     {
@@ -165,7 +167,9 @@ void WorldSession::HandleAutoEquipItemOpcode(WorldPacket& recv_data)
 
     Item* pSrcItem  = _player->GetItemByPos(srcbag, srcslot);
     if (!pSrcItem)
+    {
         return;                                             // only at cheat
+    }
 
     uint16 dest;
     InventoryResult msg = _player->CanEquipItem(NULL_SLOT, dest, pSrcItem, !pSrcItem->IsBag());
@@ -207,23 +211,33 @@ void WorldSession::HandleAutoEquipItemOpcode(WorldPacket& recv_data)
         {
             msg = _player->CanStoreItem(srcbag, srcslot, sSrc, pDstItem, true);
             if (msg != EQUIP_ERR_OK)
+            {
                 msg = _player->CanStoreItem(srcbag, NULL_SLOT, sSrc, pDstItem, true);
+            }
             if (msg != EQUIP_ERR_OK)
+            {
                 msg = _player->CanStoreItem(NULL_BAG, NULL_SLOT, sSrc, pDstItem, true);
+            }
         }
         else if (_player->IsBankPos(src))
         {
             msg = _player->CanBankItem(srcbag, srcslot, sSrc, pDstItem, true);
             if (msg != EQUIP_ERR_OK)
+            {
                 msg = _player->CanBankItem(srcbag, NULL_SLOT, sSrc, pDstItem, true);
+            }
             if (msg != EQUIP_ERR_OK)
+            {
                 msg = _player->CanBankItem(NULL_BAG, NULL_SLOT, sSrc, pDstItem, true);
+            }
         }
         else if (_player->IsEquipmentPos(src))
         {
             msg = _player->CanEquipItem(srcslot, eSrc, pDstItem, true);
             if (msg == EQUIP_ERR_OK)
+            {
                 msg = _player->CanUnequipItem(eSrc, true);
+            }
         }
 
         if (msg != EQUIP_ERR_OK)
@@ -241,11 +255,17 @@ void WorldSession::HandleAutoEquipItemOpcode(WorldPacket& recv_data)
 
         // add to src
         if (_player->IsInventoryPos(src))
+        {
             _player->StoreItem(sSrc, pDstItem, true);
+        }
         else if (_player->IsBankPos(src))
+        {
             _player->BankItem(sSrc, pDstItem, true);
+        }
         else if (_player->IsEquipmentPos(src))
+        {
             _player->EquipItem(eSrc, pDstItem, true);
+        }
 
         _player->AutoUnequipOffhandIfNeed();
     }
@@ -294,7 +314,9 @@ void WorldSession::HandleDestroyItemOpcode(WorldPacket& recv_data)
         _player->DestroyItemCount(pItem, i_count, true);
     }
     else
+    {
         _player->DestroyItem(bag, slot, true);
+    }
 }
 
 void WorldSession::HandleReadItemOpcode(WorldPacket& recv_data)
@@ -327,7 +349,9 @@ void WorldSession::HandleReadItemOpcode(WorldPacket& recv_data)
         SendPacket(&data);
     }
     else
+    {
         _player->SendEquipError(EQUIP_ERR_ITEM_NOT_FOUND, NULL, NULL);
+    }
 }
 
 void WorldSession::HandlePageQuerySkippedOpcode(WorldPacket& recv_data)
@@ -424,12 +448,16 @@ void WorldSession::HandleSellItemOpcode(WorldPacket& recv_data)
                     pItem->SetCount(pItem->GetCount() - count);
                     _player->ItemRemovedQuestCheck(pItem->GetEntry(), count);
                     if (_player->IsInWorld())
+                    {
                         pItem->SendCreateUpdateToPlayer(_player);
+                    }
                     pItem->SetState(ITEM_CHANGED, _player);
 
                     _player->AddItemToBuyBackSlot(pNewItem);
                     if (_player->IsInWorld())
+                    {
                         pNewItem->SendCreateUpdateToPlayer(_player);
+                    }
                 }
                 else
                 {
@@ -445,7 +473,9 @@ void WorldSession::HandleSellItemOpcode(WorldPacket& recv_data)
                 _player->GetAchievementMgr().UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_MONEY_FROM_VENDORS, money);
             }
             else
+            {
                 _player->SendSellError(SELL_ERR_CANT_SELL_ITEM, pCreature, itemGuid, 0);
+            }
             return;
         }
     }
@@ -508,11 +538,15 @@ void WorldSession::HandleBuybackItem(WorldPacket& recvData)
             _player->StoreItem(dest, pItem, true);
         }
         else
+        {
             _player->SendEquipError(msg, pItem, NULL);
+        }
         return;
     }
     else
+    {
         _player->SendBuyError(BUY_ERR_CANT_FIND_ITEM, pCreature, 0, 0);
+    }
 }
 
 void WorldSession::HandleBuyItemOpcode(WorldPacket& recvData)
@@ -564,9 +598,13 @@ void WorldSession::HandleBuyItemOpcode(WorldPacket& recvData)
 
     // client side expected counting from 1, and we send to client vendorslot+1 already
     if (slot > 0)
+    {
         --slot;
+    }
     else
+    {
         return;                                             // cheating
+    }
 
     switch (type)
     {
@@ -578,7 +616,9 @@ void WorldSession::HandleBuyItemOpcode(WorldPacket& recvData)
 
             // find bag slot by bag guid
             if (bagGuid == _player->GetObjectGuid())
+            {
                 bag = INVENTORY_SLOT_BAG_0;
+            }
             else
             {
                 for (int i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; ++i)
@@ -678,26 +718,38 @@ void WorldSession::SendListInventory(ObjectGuid vendorguid)
             {
                 ItemPrototype const * pProto = ObjectMgr::GetItemPrototype(crItem->item);
                 if (!pProto)
+                {
                     continue;
+                }
 
                 if (!_player->isGameMaster())
                 {
                     // class wrong item skip only for bindable case
                     if ((pProto->AllowableClass & _player->getClassMask()) == 0 && pProto->Bonding == BIND_WHEN_PICKED_UP)
+                    {
                         continue;
+                    }
 
                     // race wrong item skip always
                     if ((pProto->Flags2 & ITEM_FLAG2_HORDE_ONLY) && _player->GetTeam() != HORDE)
+                    {
                         continue;
+                    }
 
                     if ((pProto->Flags2 & ITEM_FLAG2_ALLIANCE_ONLY) && _player->GetTeam() != ALLIANCE)
+                    {
                         continue;
+                    }
 
                     if ((pProto->AllowableRace & _player->getRaceMask()) == 0)
+                    {
                         continue;
+                    }
 
                     if (crItem->conditionId && !sObjectMgr.IsPlayerMeetToCondition(crItem->conditionId, _player, pCreature->GetMap(), pCreature, CONDITION_FROM_VENDOR))
+                    {
                         continue;
+                    }
                 }
 
                 // possible item coverting for BoA case
@@ -708,13 +760,17 @@ void WorldSession::SendListInventory(ObjectGuid vendorguid)
                     {
                         // checked at convert data loading as existed
                         if (uint32 newItemId = sObjectMgr.GetItemConvert(crItem->item, _player->getRaceMask()))
+                        {
                             pProto = ObjectMgr::GetItemPrototype(newItemId);
+                        }
                     }
                 }
 
                 ++count;
                 if (count >= MAX_VENDOR_ITEMS)
+                {
                     break;
+                }
 
                 // reputation discount
                 maxDurability = pProto->MaxDurability;
@@ -728,14 +784,20 @@ void WorldSession::SendListInventory(ObjectGuid vendorguid)
             {
                 CurrencyTypesEntry const * pCurrency = sCurrencyTypesStore.LookupEntry(crItem->item);
                 if (!pCurrency)
+                {
                     continue;
+                }
 
                 if (pCurrency->Category == CURRENCY_CATEGORY_META)
+                {
                     continue;
+                }
 
                 ++count;
                 if (count >= MAX_VENDOR_ITEMS)
+                {
                     break;
+                }
 
                 maxDurability = 0;
                 price = 0;
@@ -744,7 +806,9 @@ void WorldSession::SendListInventory(ObjectGuid vendorguid)
                 buyCount = crItem->maxcount;
             }
             else
+            {
                 continue;
+            }
 
             bitFlags.push_back(crItem->ExtendedCost == 0);
             bitFlags.push_back(true);                       // unk
@@ -753,7 +817,9 @@ void WorldSession::SendListInventory(ObjectGuid vendorguid)
             buffer << uint32(maxDurability);
 
             if (crItem->ExtendedCost)
+            {
                 buffer << uint32(crItem->ExtendedCost);
+            }
 
             buffer << uint32(crItem->item);
             buffer << uint32(crItem->type);
@@ -1010,9 +1076,13 @@ void WorldSession::HandleSetAmmoOpcode(WorldPacket& recv_data)
     recv_data >> item;
 
     if (!item)
+    {
         GetPlayer()->RemoveAmmo();
+    }
     else
+    {
         GetPlayer()->SetAmmo(item);
+    }
 }
 
 void WorldSession::SendEnchantmentLog(ObjectGuid targetGuid, ObjectGuid casterGuid, uint32 itemId, uint32 enchantId)
@@ -1165,7 +1235,9 @@ void WorldSession::HandleSocketOpcode(WorldPacket& recv_data)
     {
         ObjectGuid gemGuid = gemGuids[i];
         if (!gemGuid)
+        {
             continue;
+        }
 
         if (!gemGuid.IsItem())
         {
@@ -1202,12 +1274,16 @@ void WorldSession::HandleSocketOpcode(WorldPacket& recv_data)
 
     GemPropertiesEntry const* GemProps[MAX_GEM_SOCKETS];
     for (int i = 0; i < MAX_GEM_SOCKETS; ++i)               // get geminfo from dbc storage
+    {
         GemProps[i] = (Gems[i]) ? sGemPropertiesStore.LookupEntry(Gems[i]->GetProto()->GemProperties) : NULL;
+    }
 
     for (int i = 0; i < MAX_GEM_SOCKETS; ++i)               // check for hack maybe
     {
         if (!GemProps[i])
+        {
             continue;
+        }
 
         // tried to put gem in socket where no socket exists (take care about prismatic sockets)
         if (!itemProto->Socket[i].Color)
@@ -1252,7 +1328,9 @@ void WorldSession::HandleSocketOpcode(WorldPacket& recv_data)
     for (int i = 0; i < MAX_GEM_SOCKETS; ++i)
     {
         if (!Gems[i])
+        {
             continue;
+        }
 
         // continue check for case when attempt add 2 similar unique equipped gems in one item.
         ItemPrototype const* iGemProto = Gems[i]->GetProto();
@@ -1263,7 +1341,9 @@ void WorldSession::HandleSocketOpcode(WorldPacket& recv_data)
             for (int j = 0; j < MAX_GEM_SOCKETS; ++j)
             {
                 if (i == j)                                 // skip self
+                {
                     continue;
+                }
 
                 if (Gems[j])
                 {
@@ -1305,12 +1385,16 @@ void WorldSession::HandleSocketOpcode(WorldPacket& recv_data)
                             if (SpellItemEnchantmentEntry const* enchantEntry = sSpellItemEnchantmentStore.LookupEntry(OldEnchants[j]))
                                 if (ItemPrototype const* jProto = ObjectMgr::GetItemPrototype(enchantEntry->GemID))
                                     if (iGemProto->ItemLimitCategory == jProto->ItemLimitCategory)
+                                    {
                                         --limit_newcount;
+                                    }
                         }
 
                         // new gem
                         if (iGemProto->ItemLimitCategory == Gems[j]->GetProto()->ItemLimitCategory)
+                        {
                             ++limit_newcount;
+                        }
                     }
                     // existing gem
                     else if (OldEnchants[j])
@@ -1318,7 +1402,9 @@ void WorldSession::HandleSocketOpcode(WorldPacket& recv_data)
                         if (SpellItemEnchantmentEntry const* enchantEntry = sSpellItemEnchantmentStore.LookupEntry(OldEnchants[j]))
                             if (ItemPrototype const* jProto = ObjectMgr::GetItemPrototype(enchantEntry->GemID))
                                 if (iGemProto->ItemLimitCategory == jProto->ItemLimitCategory)
+                                {
                                     ++limit_newcount;
+                                }
                     }
                 }
 
@@ -1359,7 +1445,9 @@ void WorldSession::HandleSocketOpcode(WorldPacket& recv_data)
             uint32 count = 1;
             itemTarget->SetEnchantment(EnchantmentSlot(SOCK_ENCHANTMENT_SLOT + i), GemEnchants[i], 0, 0, _player->GetObjectGuid());
             if (Item* guidItem = gemGuids[i] ? _player->GetItemByGuid(gemGuids[i]) : NULL)
+            {
                 _player->DestroyItemCount(guidItem, count, true);
+            }
         }
     }
 
@@ -1603,15 +1691,21 @@ void WorldSession::SendItemSparseDb2Reply(uint32 entry)
     std::string name = proto->Name1;
     buff << uint16(name.length());
     if (name.length())
+    {
         buff << name;
+    }
 
     for (uint32 i = 0; i < 3; ++i) // other 3 names
+    {
         buff << uint16(0);
+    }
 
     std::string desc = proto->Description;
     buff << uint16(desc.length());
     if (desc.length())
+    {
         buff << desc;
+    }
 
     buff << uint32(proto->PageText);
     buff << uint32(proto->LanguageID);
@@ -1692,7 +1786,9 @@ void WorldSession::HandleReforgeItemOpcode(WorldPacket& recvData)
     {
         // Reset the item
         if (item->IsEquipped())
+        {
             player->ApplyReforgeEnchantment(item, false);
+        }
 
         item->ClearEnchantment(REFORGE_ENCHANTMENT_SLOT);
         SendReforgeResult(true);
@@ -1724,6 +1820,8 @@ void WorldSession::HandleReforgeItemOpcode(WorldPacket& recvData)
     SendReforgeResult(true);
 
     if (item->IsEquipped())
+    {
         player->ApplyReforgeEnchantment(item, true);
+    }
 }
 

@@ -150,7 +150,9 @@ namespace Movement
         bool hasFullSpline = !move_spline.Finalized();
         data.WriteBit(hasFullSpline);
         if (!hasFullSpline)
+        {
             return;
+        }
 
         MoveSplineFlag splineFlags = move_spline.splineflags;
         uint32 nodes = move_spline.getPath().size();
@@ -207,26 +209,36 @@ namespace Movement
             if (hasUnkSplineCounter)
             {
                 for (int i = 0; i < unkSplineCounter; ++i)
+                {
                     data << float(0.0f) << float(0.0f);
+                }
             }
 
             if (move_spline.splineflags & MoveSplineFlag::Final_Target)
+            {
                 data.WriteGuidBytes<3, 2, 0, 5, 6, 7, 4, 1>(ObjectGuid(move_spline.facing.target));
+            }
 
             data << int32(move_spline.timePassed());
             data << int32(move_spline.Duration());
 
             if (hasSplineVerticalAcceleration)
+            {
                 data << float(move_spline.vertical_acceleration);   // added in 3.1
+            }
 
             data << float(1.f);
             data << float(1.f);
 
             if (move_spline.splineflags & MoveSplineFlag::Final_Point)
+            {
                 data << float(move_spline.facing.f.x) << float(move_spline.facing.f.z) << float(move_spline.facing.f.y);
+            }
 
             if (hasSplineStartTime)
+            {
                 data << int32(move_spline.effect_start_time);   // added in 3.1
+            }
 
             for (uint32 i = 0; i < nodes; ++i)
             {
@@ -236,7 +248,9 @@ namespace Movement
             }
 
             if (move_spline.splineflags & MoveSplineFlag::Final_Angle)
+            {
                 data << float(NormalizeOrientation(move_spline.facing.angle));
+            }
         }
 
         if (!move_spline.isCyclic())
@@ -247,7 +261,9 @@ namespace Movement
             data << float(dest.y);
         }
         else
+        {
             data << Vector3::zero();
+        }
 
         data << uint32(move_spline.GetId());
     }
