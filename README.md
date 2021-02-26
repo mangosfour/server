@@ -161,7 +161,7 @@ World of Warcraft, and all related art, images, and lore are copyright [Blizzard
 
 [1]: http://blizzard.com/ "Blizzard Entertainment Inc. · we love you!"
 [2]: https://worldofwarcraft.com/ "World of Warcraft"
-[45]: http://www.wowpedia.org/Patch_5.4.8 "WoW Mists of Pandaria · Patch 5.4.8 release notes"
+[4]: http://www.wowpedia.org/Patch_5.4.8 "WoW Mists of Pandaria · Patch 5.4.8 release notes"
 [7]: http://www.cppreference.com/ "C / C++ reference"
 [10]: https://getmangos.eu/ "mangos · project site"
 [12]: https://github.com/mangosthree "MaNGOS Three· github organization"
