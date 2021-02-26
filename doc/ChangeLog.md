@@ -1,4 +1,4 @@
-﻿MaNGOS Three Changelog
+﻿MaNGOS Four Changelog
 ======================
 This change log references the relevant changes (bug and security fixes) done
 in recent versions.
