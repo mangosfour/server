@@ -2,7 +2,7 @@
 [<img src='https://www.getmangos.eu/!assets_mangos/logo2.png' border=0>][3]
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Build Status:</b>
- Linux/MAC: [<img src='https://travis-ci.org/mangosfour/server.png' border=0 valign="middle">][10]
+ Linux/MAC: [<img src='https://travis-ci.com/mangosfour/server.png' border=0 valign="middle">][10]
  Windows: [<img src='https://ci.appveyor.com/api/projects/status/github/mangosfour/server?branch=master&svg=true' border=0 valign="middle">][11]
  <br><b>Repository Status:</b> 
 [<img src='https://api.codacy.com/project/badge/Grade/24c2748fb6164216878f28ab4f6cb0f9' border=0 valign="middle"/>][12]
