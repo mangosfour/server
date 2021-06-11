@@ -4085,7 +4085,7 @@ void ObjectMgr::LoadQuests()
                           //   160                    161                       162                       163
                           "`OfferRewardEmoteDelay1`, `OfferRewardEmoteDelay2`, `OfferRewardEmoteDelay3`, `OfferRewardEmoteDelay4`,"
                           //   164         165            166            167
-                          "`SoundAccept`, `SoundTurnIn`, `StartScript`, `CompleteScript`"
+                          "`SoundAccept`, `SoundTurnIn`, `StartScript`, `CompleteScript`,"
                           //   168             169              170               171                  172                  173                   174
                           "`ReqSpellLearned`, `PortraitGiver`, `PortraitTurnIn`, `PortraitGiverName`, `PortraitGiverText`, `PortraitTurnInName`, `PortraitTurnInText`, "
                           //   175            176               177               178               179                  180                  181                  182

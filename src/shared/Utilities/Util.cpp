@@ -761,7 +761,7 @@ int return_iCoreNumber()
     return 2;
 #elif defined(CATA)
     return 3;
-#elif defined(MOP)
+#elif defined(MISTS)
     return 4;
 #elif defined(WOD)
     return 5;
