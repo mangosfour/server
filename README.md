@@ -1,5 +1,9 @@
 [<img src='https://www.getmangos.eu/!assets_mangos/currentlogo.gif' width="48" border=0>][8]
 [<img src='https://www.getmangos.eu/!assets_mangos/logo2.png' border=0>][3]
+[<img alt="Latest GitHub release" src="https://img.shields.io/github/release/mangosfour/server.svg?style=flat-square" border=0 valign="top"/>][60]
+[<img src="https://img.shields.io/github/last-commit/mangosfour/server.svg?style=flat-square&logo=github&logoColor=white"
+alt="GitHub last commit" border=0 valign="top"/>][61]
+[<img alt="Downloads on GitHub" src="https://img.shields.io/github/downloads/mangosfour/server/total.svg?style=flat-square" border=0 valign="top"/>][61]
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Build Status:</b>
  Linux/MAC: [<img src='https://travis-ci.com/mangosfour/server.png' border=0 valign="middle">][10]
@@ -33,7 +37,7 @@ as you can see by the images in the heading above! We do love green builds, and 
 Requirements
 ------------
 The server supports a wide range of operating systems, and various compiler platforms.
-In order to do that, we use various free cross-platform libraries and use [CMake][19] to provide
+In order to do that, we use various free cross-platform libraries and use [CMake][19] (v3.12+) to provide
 a cross-platform build system which adapts to your chosen operating system and compiler.
 
 Operating systems
@@ -53,7 +57,7 @@ Compilers
 Building the server is currently possible with these compilers:
 
 * **[Microsoft Visual Studio][31] 32 bit and 64 bit.** All editions of Visual Studio
-from 2015 upwards are officially supported.
+from 2015 upwards are officially supported (although support for 2015 and 2017 are end of life.)
 
 * **[Clang][33]**, 32 bit and 64 bit. The Clang compiler can be used on any
   supported operating system.
@@ -203,3 +207,6 @@ World of Warcraft, and all related art, images, and lore are copyright [Blizzard
 [53]: http://www.zlib.net/ "Zlib"
 [54]: http://www.bzip.org/ "Bzip2"
 [55]: http://slproweb.com/products/Win32OpenSSL.html "OpenSSL for Windows"
+[60]: https://github.com/mangosfour/server/releases/latest
+[61]: https://github.com/mangosfour/server/releases
+[62]: https://github.com/mangosfour/server/commits/master
